@@ -55,9 +55,8 @@ func add(new_insects: Array[Insect]) -> void:
 ## Kills the input insect and removes it from the manager.
 func kill(insect: Insect) -> void:
 	var index: int = _insects.find(insect)
-	if index == -1:
-		push_warning("Attempted to find and kill %s, but not found in array." % insect.name)
-		return
+
+	assert(index != -1, "Attempted to find and kill %s, but not found in array." % insect.name)
 
 	insect.queue_free()
 	killed.emit(insect)

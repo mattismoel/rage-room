@@ -5,10 +5,7 @@ extends Node
 @export var _spawner_component: SpawnerComponent
 
 func _ready() -> void:
-	if _spawner_component == null:
-		push_error("SpawnComponent on TimedSpawner must be set!")
-		return
-
+	assert(_spawner_component != null, "SpawnComponent on TimedSpawner must be set!")
 	_spawn_timer.timeout.connect(_on_timeout)
 
 func _on_timeout() -> void:

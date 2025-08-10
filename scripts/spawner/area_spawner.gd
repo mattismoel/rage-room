@@ -5,18 +5,11 @@ var _shape: RectangleShape2D
 
 func _ready() -> void:
 	_shape = _find_shape()
-
-	if _shape == null:
-		push_error("No spawner shape set.")
-		return
+	assert(_shape != null, "No spawner shape set.")
 
 ## Spawns the input scene randomly within the area defined by its child 
 ## CollisionShape2D.
 func spawn(_pos: Vector2 = Vector2.ZERO) -> void:
-	if _shape == null:
-		push_error("The spawners shape is not defined!")
-		return
-
 	var size := _shape.size
 
 	var spawn_offset := Vector2(\
@@ -38,5 +31,5 @@ func _find_shape() -> RectangleShape2D:
 
 		return child.shape
 
-	push_error("No CollisionShape defined for AreaSpawnerComponent!")
+	assert(false, "No CollisionShape defined for AreaSpawnerComponent!")
 	return null

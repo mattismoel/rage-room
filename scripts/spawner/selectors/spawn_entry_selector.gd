@@ -5,5 +5,5 @@ extends Node
 ##
 ## This method must be implemented by descendants.
 func get_entry() -> SpawnEntry:
-	push_error("The get_entry() method must be implemented.")
+	assert(false,"The get_entry() method must be implemented.")
 	return null

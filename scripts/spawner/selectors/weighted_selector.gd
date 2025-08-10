@@ -5,8 +5,7 @@ extends SpawnEntrySelector
 @export var _entries: Array[SpawnEntry] = []
 
 func _ready() -> void:
-	if _entries.size() <= 0:
-		push_error("This weighted spawn entry selector has no entries!")
+	assert(_entries.size() > 0, "This weighted spawn entry selector has no entries!")
 
 func get_entry() -> SpawnEntry:
 	var entry := _pick_weighted_entry()
