@@ -29,14 +29,20 @@ func input(event) -> void:
 		elif event.keycode >= KEY_2 and event.keycode <= KEY_9:
 			var digit_pressed: int = -KEY_2 + event.keycode
 			# Switch to equipment state after setting equipment
-			remove_child(loaded_equipment)
 			set_equipment_from_index(digit_pressed)
 
 func set_equipment(equipment: EquipmentEntry) -> void:
+	if loaded_equipment != null:
+		loaded_equipment.queue_free()
+
+	## Istantiate new equipment
 	current_equipment_entry = equipment
 	loaded_equipment = current_equipment_entry.scene.instantiate()
 	add_child(loaded_equipment)
+	
+	print("Set equipment to %s" % current_equipment_entry.name)
 
 func set_equipment_from_index(index: int) -> void:
-	set_equipment(_entries[index])
-	print("Set equipment to %s" % current_equipment_entry.name)
+	# Check that requested equipment index is valid
+	if index < _entries.size():
+		set_equipment(_entries[index])
