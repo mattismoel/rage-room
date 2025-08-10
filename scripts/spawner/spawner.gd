@@ -3,10 +3,11 @@ extends Node2D
 
 signal spawned(entry: SpawnEntry, insect: Insect)
 
+@export_group("References")
 @export var _container: Node2D
 @export var _entry_selector: SpawnEntrySelector
 
-@export_category("Debug")
+@export_group("Debug")
 @export var _debug_spawn: bool = false
 
 ## Spawns the input packed scene into the input container node, at the given 

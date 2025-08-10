@@ -1,6 +1,7 @@
 class_name TimedSpawner
 extends Node
 
+@export_group("References")
 @export var _spawn_timer: SpawnTimer
 @export var _spawner_component: SpawnerComponent
 
