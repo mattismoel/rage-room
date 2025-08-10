@@ -21,7 +21,7 @@ func input(event) -> void:
 	if event.is_action_pressed("interact"):
 		loaded_equipment.use(event.position)
 	
-	if event is InputEventKey and event.pressed:
+	elif event is InputEventKey and event.pressed:
 		## If keycode is 0, go to idle state (no equipment)
 		if event.keycode == KEY_1:
 			change_state.emit(idle_state)
@@ -30,6 +30,11 @@ func input(event) -> void:
 			var digit_pressed: int = -KEY_2 + event.keycode
 			# Switch to equipment state after setting equipment
 			set_equipment_from_index(digit_pressed)
+			
+	elif event.is_action_pressed("next_equipment"):
+		next_in_equipment_cycle(1)
+	elif event.is_action_pressed("prev_equipment"):
+		next_in_equipment_cycle(-1)
 
 func set_equipment(equipment: EquipmentEntry) -> void:
 	if loaded_equipment != null:
@@ -41,6 +46,13 @@ func set_equipment(equipment: EquipmentEntry) -> void:
 	add_child(loaded_equipment)
 	
 	print("Set equipment to %s" % current_equipment_entry.name)
+
+func next_in_equipment_cycle(steps: int) -> void:
+	var index := _entries.find(current_equipment_entry) + steps
+	
+	## Restart the loop when last equipment entry is reached
+	index = index - _entries.size() if index >= _entries.size() else index
+	set_equipment_from_index(index)
 
 func set_equipment_from_index(index: int) -> void:
 	# Check that requested equipment index is valid
