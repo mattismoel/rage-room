@@ -1,12 +1,42 @@
 class_name EquipmentState
 extends State
 
-var current_equipment: Equipment
-@export var _entries: Array[Equipment] = []
+@export var idle_state: State
 
-func _ready() -> void:
+var current_equipment_entry: EquipmentEntry
+@export var _entries: Array[EquipmentEntry] = []
+
+var loaded_equipment: Equipment
+
+func enter() -> void:
+	visible = true
 	if _entries.size() <= 0:
 		push_error("This weighted spawn entry selector has no entries!")
 
-func set_equipment(equipment: Equipment) -> void:
-	current_equipment = equipment
+func exit() -> void:
+	remove_child(loaded_equipment)
+	visible = false
+
+func input(event) -> void:
+	if event.is_action_pressed("interact"):
+		loaded_equipment.use(event.position)
+	
+	if event is InputEventKey and event.pressed:
+		## If keycode is 0, go to idle state (no equipment)
+		if event.keycode == KEY_1:
+			change_state.emit(idle_state)
+		
+		elif event.keycode >= KEY_2 and event.keycode <= KEY_9:
+			var digit_pressed: int = -KEY_2 + event.keycode
+			# Switch to equipment state after setting equipment
+			remove_child(loaded_equipment)
+			set_equipment_from_index(digit_pressed)
+
+func set_equipment(equipment: EquipmentEntry) -> void:
+	current_equipment_entry = equipment
+	loaded_equipment = current_equipment_entry.scene.instantiate()
+	add_child(loaded_equipment)
+
+func set_equipment_from_index(index: int) -> void:
+	set_equipment(_entries[index])
+	print("Set equipment to %s" % current_equipment_entry.name)

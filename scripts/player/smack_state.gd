@@ -2,7 +2,7 @@ extends State
 @export var selection_area: CollisionObject2D
 
 func enter() -> void:
-	print("smack")
+	print("SMACK!")
 	visible = true
 	
 	var overlapping_areas: Array[Area2D] = selection_area.get_overlapping_areas()

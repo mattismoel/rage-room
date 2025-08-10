@@ -1,12 +1,6 @@
 class_name Equipment
-extends Resource
+extends Node2D
 
-## The scene to be spawned.
-@export var scene: PackedScene
-@export var name: String
-
-## To use in unlocking new weapons later in game
-@export var value: int
-
-func use() -> void:
+func use(pos: Vector2) -> void:
+	print("Equipment used at: %v!" % pos)
 	pass

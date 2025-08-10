@@ -1,8 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://ytos3fkkwwof"]
+[gd_scene load_steps=3 format=3 uid="uid://ytos3fkkwwof"]
 
 [ext_resource type="Texture2D" uid="uid://bx5l7h32g5k41" path="res://assets/equipment/bug_zapper.png" id="1_4nidy"]
+[ext_resource type="Script" uid="uid://cvdjel4swb1ht" path="res://scenes/equipment/bug_zapper.gd" id="1_fokec"]
 
 [node name="BugZapper" type="Node2D"]
+rotation = -0.553565
+script = ExtResource("1_fokec")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(5, -88)
