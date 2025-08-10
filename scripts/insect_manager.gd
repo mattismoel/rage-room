@@ -2,11 +2,11 @@ extends Node
 
 ## Emmitted whenever insects are added. It includes the insects that have been 
 ## added.
-signal added(insects: Array[Node2D])
+signal added(insects: Array[Insect])
 
 ## Emitted whenever an insect is killed. It includes the insect that has been
 ## killed.
-signal killed(insect: Node2D)
+signal killed(insect: Insect)
 
 ## Emitted whenever the insect count changes. It includes the total amount of 
 ## insects.
@@ -27,11 +27,11 @@ var _debug_add_insect: bool = false
 ## Whether or not print statements for killed insects should be executed.
 var _debug_kill_insect: bool = false
 
-var _insects: Array[Node2D] = []
+var _insects: Array[Insect] = []
 
 
 ## Adds the given amount of insects to the insect count.
-func add(new_insects: Array[Node2D]) -> void:
+func add(new_insects: Array[Insect]) -> void:
 	if new_insects.is_empty():
 		return
 
@@ -53,7 +53,7 @@ func add(new_insects: Array[Node2D]) -> void:
 
 
 ## Kills the input insect and removes it from the manager.
-func kill(insect: Node2D) -> void:
+func kill(insect: Insect) -> void:
 	var index: int = _insects.find(insect)
 	if index == -1:
 		push_warning("Attempted to find and kill %s, but not found in array." % insect.name)

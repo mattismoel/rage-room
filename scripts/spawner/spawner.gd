@@ -1,7 +1,7 @@
 class_name SpawnerComponent
 extends Node2D
 
-signal spawned(entry: SpawnEntry, node: Node)
+signal spawned(entry: SpawnEntry, insect: Insect)
 
 @export var _container: Node2D
 @export var _entry_selector: SpawnEntrySelector
@@ -13,21 +13,21 @@ signal spawned(entry: SpawnEntry, node: Node)
 ## input position.
 func spawn(pos: Vector2 = Vector2.ZERO) -> void:
 	var entry :=  _entry_selector.get_entry()
-	var instance: Node2D = entry.scene.instantiate()
+	var insect: Insect = entry.scene.instantiate()
 
 	if _container == null:
-		add_child(instance)
+		add_child(insect)
 	else:
-		_container.add_child(instance)
+		_container.add_child(insect)
 
 	if pos == Vector2.ZERO:
-		instance.global_position = _container.global_position
+		insect.global_position = _container.global_position
 	else:
-		instance.global_position = pos
+		insect.global_position = pos
 
-	spawned.emit(entry, instance)
+	spawned.emit(entry, insect)
 
 	if _debug_spawn:
-		print("Spawned %s" % instance.name)
+		print("Spawned insect %s" % insect.name)
 
-	InsectManager.add([instance])
+	InsectManager.add([insect])
