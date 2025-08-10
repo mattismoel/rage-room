@@ -69,5 +69,8 @@ func kill(insect: Insect) -> void:
 		all_killed.emit()
 
 	count_changed.emit(new_count)
+
+	insect.kill()
+
 	if _debug_kill_insect:
 		print("Killed insect %s" % insect.name)

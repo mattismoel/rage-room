@@ -7,3 +7,6 @@ var _target: Target
 func target(t: Target) -> void:
 	_target = t
 	pass
+
+func kill() -> void:
+	pass
