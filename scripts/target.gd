@@ -1,4 +1,4 @@
 class_name Target
 extends Area2D 
 
-@export var weight: float
+@export var weight: float = 1.0
