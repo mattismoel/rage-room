@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b13gyk6tudyfd"]
+
+[ext_resource type="Script" uid="uid://oblvmjguiltl" path="res://scripts/insect_manager.gd" id="1_sxixp"]
+
+[node name="InsectManager" type="Node"]
+script = ExtResource("1_sxixp")
