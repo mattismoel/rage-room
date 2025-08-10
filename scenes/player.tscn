@@ -21,14 +21,14 @@ radius = 40.0
 script = ExtResource("11_3v2ag")
 scene = ExtResource("12_jej6c")
 name = "Flyswatter"
-value = 1
+value = 25
 metadata/_custom_type_script = "uid://c3n2s4jlpujkh"
 
 [sub_resource type="Resource" id="Resource_oprun"]
 script = ExtResource("11_3v2ag")
 scene = ExtResource("13_jej6c")
 name = "Bug Zapper Racket"
-value = 2
+value = 50
 metadata/_custom_type_script = "uid://c3n2s4jlpujkh"
 
 [node name="Player" type="Node2D"]
