@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://ytos3fkkwwof"]
+
+[ext_resource type="Texture2D" uid="uid://bx5l7h32g5k41" path="res://assets/equipment/bug_zapper.png" id="1_4nidy"]
+
+[node name="BugZapper" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(5, -88)
+rotation = -0.664193
+scale = Vector2(0.37409, 0.37409)
+texture = ExtResource("1_4nidy")

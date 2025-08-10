@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://crbgnq0h1g3ym"]
+
+[ext_resource type="Texture2D" uid="uid://c3n6gq3kiutqc" path="res://assets/equipment/flyswatter.png" id="1_tppsa"]
+
+[node name="Flyswatter" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(5, -71)
+rotation = 1.05835
+scale = Vector2(0.274518, 0.274518)
+texture = ExtResource("1_tppsa")

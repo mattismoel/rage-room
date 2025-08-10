@@ -1,65 +1,98 @@
-[gd_scene load_steps=10 format=3 uid="uid://cmnjknfd4xhaj"]
+[gd_scene load_steps=17 format=3 uid="uid://cmnjknfd4xhaj"]
 
 [ext_resource type="Script" uid="uid://c674qynps85q7" path="res://scripts/player/player_manager.gd" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://b6nrrg1f2vfcl" path="res://scripts/player/hand.gd" id="2_dqkch"]
 [ext_resource type="Texture2D" uid="uid://badrntcjnvwgj" path="res://assets/player/hand.png" id="3_qhqgy"]
 [ext_resource type="Script" uid="uid://b0mmkvnp2vjq5" path="res://scripts/player/idle_state.gd" id="3_qlg0r"]
+[ext_resource type="Script" uid="uid://ca42s16x5547g" path="res://machinery/state_machine.gd" id="3_y4r1p"]
 [ext_resource type="Script" uid="uid://dowvmhrglkm7v" path="res://scripts/player/smack_state.gd" id="4_dqkch"]
 [ext_resource type="Texture2D" uid="uid://bqkybbohwmj75" path="res://assets/player/test arm.png" id="4_smehm"]
 [ext_resource type="Texture2D" uid="uid://cokbfjclr2ww3" path="res://assets/player/grab arm.png" id="5_qlg0r"]
 [ext_resource type="Script" uid="uid://qp3frfxg5ogc" path="res://scripts/player/pickup_state.gd" id="5_tuyoq"]
+[ext_resource type="Script" uid="uid://b4m3ikfypcuk2" path="res://scripts/player/equipment_state.gd" id="9_y4r1p"]
+[ext_resource type="Script" uid="uid://c3n2s4jlpujkh" path="res://scenes/equipment/equipment.gd" id="11_3v2ag"]
+[ext_resource type="PackedScene" uid="uid://crbgnq0h1g3ym" path="res://scenes/equipment/flyswatter.tscn" id="12_jej6c"]
+[ext_resource type="PackedScene" uid="uid://ytos3fkkwwof" path="res://scenes/equipment/bug_zapper.tscn" id="13_jej6c"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_smehm"]
 radius = 40.0
 
+[sub_resource type="Resource" id="Resource_f1ej7"]
+script = ExtResource("11_3v2ag")
+scene = ExtResource("12_jej6c")
+name = "Flyswatter"
+value = 1
+metadata/_custom_type_script = "uid://c3n2s4jlpujkh"
+
+[sub_resource type="Resource" id="Resource_oprun"]
+script = ExtResource("11_3v2ag")
+scene = ExtResource("13_jej6c")
+name = "Bug Zapper Racket"
+value = 2
+metadata/_custom_type_script = "uid://c3n2s4jlpujkh"
+
 [node name="Player" type="Node2D" node_paths=PackedStringArray("_hand")]
 script = ExtResource("1_3vyb7")
-_hand = NodePath("Hand")
+_hand = NodePath("")
 
-[node name="Hand" type="Node2D" parent="." node_paths=PackedStringArray("initial_state")]
-z_index = 1
+[node name="Hand" type="Node2D" parent="."]
 script = ExtResource("2_dqkch")
-initial_state = NodePath("Idle")
-debug_change_state = true
 
-[node name="Idle" type="Node2D" parent="Hand" node_paths=PackedStringArray("selection_area")]
-visible = false
+[node name="StateMachine" type="Node2D" parent="Hand" node_paths=PackedStringArray("initial_state")]
+z_index = 1
+script = ExtResource("3_y4r1p")
+initial_state = NodePath("Idle")
+metadata/_custom_type_script = "uid://ca42s16x5547g"
+
+[node name="Idle" type="Node2D" parent="Hand/StateMachine" node_paths=PackedStringArray("selection_area")]
 script = ExtResource("3_qlg0r")
 selection_area = NodePath("Area2D")
 
-[node name="Area2D" type="Area2D" parent="Hand/Idle"]
+[node name="Area2D" type="Area2D" parent="Hand/StateMachine/Idle"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hand/Idle/Area2D"]
-position = Vector2(2.00865, 0.982509)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hand/StateMachine/Idle/Area2D"]
+position = Vector2(-1, 2)
+rotation = 0.324872
+scale = Vector2(0.68, 0.96)
 shape = SubResource("CircleShape2D_smehm")
 
-[node name="Sprite2D" type="Sprite2D" parent="Hand/Idle"]
+[node name="Sprite2D" type="Sprite2D" parent="Hand/StateMachine/Idle"]
 position = Vector2(-5.72925, 31.0512)
 scale = Vector2(0.51175, 0.462724)
 texture = ExtResource("4_smehm")
 
-[node name="Smack" type="Node2D" parent="Hand" node_paths=PackedStringArray("selection_area")]
+[node name="Smack" type="Node2D" parent="Hand/StateMachine" node_paths=PackedStringArray("selection_area")]
 visible = false
 script = ExtResource("4_dqkch")
 selection_area = NodePath("Area2D")
 
-[node name="Sprite2D" type="Sprite2D" parent="Hand/Smack"]
+[node name="Sprite2D" type="Sprite2D" parent="Hand/StateMachine/Smack"]
 position = Vector2(-8, -3)
 rotation = 0.390436
 scale = Vector2(0.268589, 0.268589)
 texture = ExtResource("3_qhqgy")
 
-[node name="Area2D" type="Area2D" parent="Hand/Smack"]
+[node name="Area2D" type="Area2D" parent="Hand/StateMachine/Smack"]
+position = Vector2(-6, -7)
+rotation = 0.404892
+scale = Vector2(0.452091, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hand/Smack/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hand/StateMachine/Smack/Area2D"]
 position = Vector2(2.00865, 0.982509)
 shape = SubResource("CircleShape2D_smehm")
 
-[node name="Pick up" type="Node2D" parent="Hand"]
+[node name="Pick up" type="Node2D" parent="Hand/StateMachine" node_paths=PackedStringArray("equipment_state")]
 visible = false
 script = ExtResource("5_tuyoq")
+equipment_state = NodePath("../Use equiment")
 
-[node name="Sprite2D" type="Sprite2D" parent="Hand/Pick up"]
+[node name="Sprite2D" type="Sprite2D" parent="Hand/StateMachine/Pick up"]
 position = Vector2(2.37517, 42.9809)
 rotation = -0.47822
 texture = ExtResource("5_qlg0r")
+
+[node name="Use equiment" type="Node2D" parent="Hand/StateMachine"]
+visible = false
+script = ExtResource("9_y4r1p")
+_entries = Array[ExtResource("11_3v2ag")]([SubResource("Resource_f1ej7"), SubResource("Resource_oprun")])
+metadata/_custom_type_script = "uid://cjgkt6mw5ow4l"

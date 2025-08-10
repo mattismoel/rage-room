@@ -7,7 +7,7 @@ func enter() -> void:
 	
 	var overlapping_areas: Array[Area2D] = selection_area.get_overlapping_areas()
 	for area in overlapping_areas:
-		if area.get_parent().is_in_group("insects"):
+		if area.get_parent() is Insect:
 			InsectManager.kill(area.get_parent())
 	
 	await get_tree().create_timer(1.0).timeout
