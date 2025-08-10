@@ -1,5 +1,5 @@
 class_name Insect
-extends Node
+extends Node2D
 
 var _target: Target
 

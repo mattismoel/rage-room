@@ -1,8 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://b46vc2h2dvv8d"]
+[gd_scene load_steps=3 format=3 uid="uid://b46vc2h2dvv8d"]
 
+[ext_resource type="Script" uid="uid://ccaa38g7o2tdg" path="res://scenes/insects/insect.gd" id="1_bl13t"]
 [ext_resource type="Texture2D" uid="uid://dtj8s1car5ria" path="res://icon.svg" id="1_errlg"]
 
 [node name="Test" type="Node2D"]
+script = ExtResource("1_bl13t")
+metadata/_custom_type_script = "uid://ccaa38g7o2tdg"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.140625, 0.140625)
