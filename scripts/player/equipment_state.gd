@@ -12,7 +12,7 @@ func enter() -> void:
 	InventoryManager.entry_unequipped.connect(_on_entry_unequipped)
 
 func exit() -> void:
-	remove_child(loaded_equipment)
+	loaded_equipment.queue_free()
 	InventoryManager.entry_unequipped.disconnect(_on_entry_unequipped)
 	visible = false
 
@@ -34,10 +34,10 @@ func set_equipment(equipment: EquipmentEntry) -> void:
 	loaded_equipment = equipment.scene.instantiate()
 	add_child(loaded_equipment)
 	
-	print("Equipment state loaded equipment %s" % equipment.name)
+	print('"%s" was equipped' % equipment.name)
 
 func _on_entry_unequipped() -> void:
-	print("SKIIIIFT")
+	## Go to back to pick up state when equipment is unequipped
 	change_state.emit(pick_up_state)
 
 #func next_in_equipment_cycle(steps: int) -> void:

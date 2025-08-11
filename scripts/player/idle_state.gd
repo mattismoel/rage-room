@@ -11,8 +11,6 @@ func enter() -> void:
 		
 func input(event) -> void:
 	if event.is_action_pressed("interact"):
-		print("Mouse pressed at: ", event.position)
-	
 		## Switch to smack state
 		change_state.emit(smack_state)
 
