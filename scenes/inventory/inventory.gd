@@ -17,7 +17,7 @@ func _ready() -> void:
 	for child in get_children():
 		if child is InventorySlot:
 			inventory_slots.append(child)
-	print(inventory_slots.size())
+
 	## Calculates rectangle for detecting when the mouse is in the inventory
 	inventory_rect.position += inventory_area.global_position
 
@@ -25,7 +25,7 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_E:
-			print("add test_entry")
+			print("ADDED test_entry")
 			const test_entry = preload("res://scenes/equipment/entries/test_equipment_entry.tres");
 			InventoryManager.add_entry(test_entry)
 
