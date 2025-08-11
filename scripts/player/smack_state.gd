@@ -1,5 +1,8 @@
+class_name SmackState
 extends State
 @export var selection_area: CollisionObject2D
+
+@export var idle_state: IdleState
 
 func enter() -> void:
 	print("SMACK!")
@@ -11,7 +14,7 @@ func enter() -> void:
 			InsectManager.kill(area.get_parent())
 	
 	await get_tree().create_timer(1.0).timeout
-	change_state_by_name.emit("Idle")
+	change_state.emit(idle_state)
 	
 func exit() -> void:
 	super()

@@ -1,15 +1,25 @@
 class_name EquipmentState
 extends State
 
-@export var idle_state: State
+@export var idle_state: IdleState
+@export var pick_up_state: PickUpState
 
-var current_equipment_entry: EquipmentEntry
 @export var _entries: Array[EquipmentEntry] = []
-
+@onready var current_equipment_entry: EquipmentEntry = _entries[0]
 var loaded_equipment: Equipment
 
+@export var inventory: Inventory
+@onready var inventory_area: CollisionShape2D = inventory.selectable_area
+@onready var inventory_rect: Rect2 = inventory_area.get_shape().get_rect()
+
 func enter() -> void:
+	super()
 	visible = true
+	## Calculates rectangle for detecting when the mouse is in the inventory
+	inventory_rect.position = Vector2(\
+		inventory_area.global_position.x-inventory_rect.size.x/2,\
+		inventory_area.global_position.y-inventory_rect.size.y/2)
+		
 	if _entries.size() <= 0:
 		push_error("This weighted spawn entry selector has no entries!")
 
@@ -21,20 +31,17 @@ func input(event) -> void:
 	if event.is_action_pressed("interact"):
 		loaded_equipment.use(event.position)
 	
-	elif event is InputEventKey and event.pressed:
-		## If keycode is 0, go to idle state (no equipment)
-		if event.keycode == KEY_1:
-			change_state.emit(idle_state)
-		
-		elif event.keycode >= KEY_2 and event.keycode <= KEY_9:
-			var digit_pressed: int = -KEY_2 + event.keycode
-			# Switch to equipment state after setting equipment
-			set_equipment_from_index(digit_pressed)
-			
-	elif event.is_action_pressed("next_equipment"):
-		next_in_equipment_cycle(1)
-	elif event.is_action_pressed("prev_equipment"):
-		next_in_equipment_cycle(-1)
+	## Uncommenting this allows cycling between equipment
+	#elif event.is_action_pressed("next_equipment"):
+	#	next_in_equipment_cycle(1)
+	#elif event.is_action_pressed("prev_equipment"):
+	#	next_in_equipment_cycle(-1)
+
+func process(delta: float) -> void:
+	var mouse_pos := get_global_mouse_position()
+	if inventory_rect.has_point(mouse_pos):
+		## Switches to pickup state if mouse is hovering over the inventory
+		change_state.emit(pick_up_state)
 
 func set_equipment(equipment: EquipmentEntry) -> void:
 	if loaded_equipment != null:

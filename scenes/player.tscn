@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cmnjknfd4xhaj"]
+[gd_scene load_steps=22 format=3 uid="uid://cmnjknfd4xhaj"]
 
 [ext_resource type="Script" uid="uid://c674qynps85q7" path="res://scripts/player/player_manager.gd" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://b6nrrg1f2vfcl" path="res://scripts/player/hand.gd" id="2_dqkch"]
@@ -9,10 +9,13 @@
 [ext_resource type="Texture2D" uid="uid://bqkybbohwmj75" path="res://assets/player/test arm.png" id="4_smehm"]
 [ext_resource type="Texture2D" uid="uid://cokbfjclr2ww3" path="res://assets/player/grab arm.png" id="5_qlg0r"]
 [ext_resource type="Script" uid="uid://qp3frfxg5ogc" path="res://scripts/player/pickup_state.gd" id="5_tuyoq"]
+[ext_resource type="Texture2D" uid="uid://dniu173guiukg" path="res://assets/player/pickup hand.png" id="9_f1ej7"]
 [ext_resource type="Script" uid="uid://b4m3ikfypcuk2" path="res://scripts/player/equipment_state.gd" id="9_y4r1p"]
 [ext_resource type="Script" uid="uid://c3n2s4jlpujkh" path="res://scenes/equipment/equipment_entry.gd" id="11_3v2ag"]
 [ext_resource type="PackedScene" uid="uid://crbgnq0h1g3ym" path="res://scenes/equipment/flyswatter.tscn" id="12_jej6c"]
 [ext_resource type="PackedScene" uid="uid://ytos3fkkwwof" path="res://scenes/equipment/bug_zapper.tscn" id="13_jej6c"]
+[ext_resource type="Script" uid="uid://wqx0jp8lrt1" path="res://scripts/player/inventory.gd" id="15_a8ls1"]
+[ext_resource type="Texture2D" uid="uid://b1cln5grvtgrp" path="res://assets/belt.png" id="16_qfm1y"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_smehm"]
 radius = 40.0
@@ -31,13 +34,26 @@ name = "Bug Zapper Racket"
 value = 50
 metadata/_custom_type_script = "uid://c3n2s4jlpujkh"
 
-[node name="Player" type="Node2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a8ls1"]
+radius = 51.4483
+height = 135.242
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4r5pv"]
+height = 195.525
+
+[node name="Player" type="Node2D" node_paths=PackedStringArray("_hand")]
 z_index = 1
 rotation = -0.00110836
 script = ExtResource("1_3vyb7")
+_hand = NodePath("Hand")
 
-[node name="Hand" type="Node2D" parent="."]
+[node name="Hand" type="Node2D" parent="." node_paths=PackedStringArray("inventory", "state_machine", "equipment_state", "idle_state", "pick_up_state")]
 script = ExtResource("2_dqkch")
+inventory = NodePath("../Inventory")
+state_machine = NodePath("StateMachine")
+equipment_state = NodePath("StateMachine/Equiment")
+idle_state = NodePath("StateMachine/Idle")
+pick_up_state = NodePath("StateMachine/Pick up")
 
 [node name="StateMachine" type="Node2D" parent="Hand" node_paths=PackedStringArray("initial_state")]
 z_index = 1
@@ -46,11 +62,18 @@ initial_state = NodePath("Idle")
 debug_change_state = true
 metadata/_custom_type_script = "uid://ca42s16x5547g"
 
-[node name="Idle" type="Node2D" parent="Hand/StateMachine" node_paths=PackedStringArray("selection_area", "smack_state", "equipment_state")]
+[node name="Idle" type="Node2D" parent="Hand/StateMachine" node_paths=PackedStringArray("selection_area", "pick_up_state", "smack_state", "inventory")]
+visible = false
 script = ExtResource("3_qlg0r")
 selection_area = NodePath("Area2D")
+pick_up_state = NodePath("../Pick up")
 smack_state = NodePath("../Smack")
-equipment_state = NodePath("../Equiment")
+inventory = NodePath("../../../Inventory")
+
+[node name="Sprite2D" type="Sprite2D" parent="Hand/StateMachine/Idle"]
+position = Vector2(-5.72925, 31.0512)
+scale = Vector2(0.51175, 0.462724)
+texture = ExtResource("4_smehm")
 
 [node name="Area2D" type="Area2D" parent="Hand/StateMachine/Idle"]
 
@@ -60,16 +83,12 @@ rotation = 0.324872
 scale = Vector2(0.68, 0.96)
 shape = SubResource("CircleShape2D_smehm")
 
-[node name="Sprite2D" type="Sprite2D" parent="Hand/StateMachine/Idle"]
-position = Vector2(-5.72925, 31.0512)
-scale = Vector2(0.51175, 0.462724)
-texture = ExtResource("4_smehm")
-
-[node name="Smack" type="Node2D" parent="Hand/StateMachine" node_paths=PackedStringArray("selection_area")]
+[node name="Smack" type="Node2D" parent="Hand/StateMachine" node_paths=PackedStringArray("selection_area", "idle_state")]
 visible = false
 position = Vector2(-1, 6)
 script = ExtResource("4_dqkch")
 selection_area = NodePath("Area2D")
+idle_state = NodePath("../Idle")
 
 [node name="Sprite2D" type="Sprite2D" parent="Hand/StateMachine/Smack"]
 position = Vector2(-8, -3)
@@ -86,16 +105,34 @@ scale = Vector2(0.452091, 1)
 position = Vector2(2.00865, 0.982509)
 shape = SubResource("CircleShape2D_smehm")
 
-[node name="Pick up" type="Node2D" parent="Hand/StateMachine" node_paths=PackedStringArray("equipment_state")]
+[node name="Pick up" type="Node2D" parent="Hand/StateMachine" node_paths=PackedStringArray("selection_area", "equipment_state", "idle_state")]
 visible = false
 script = ExtResource("5_tuyoq")
+selection_area = NodePath("Area2D")
 equipment_state = NodePath("../Equiment")
+idle_state = NodePath("../Idle")
 
-[node name="Equiment" type="Node2D" parent="Hand/StateMachine" node_paths=PackedStringArray("idle_state")]
+[node name="Sprite2D" type="Sprite2D" parent="Hand/StateMachine/Pick up"]
+position = Vector2(-2.05098, 45.9977)
+rotation = 2.46684
+scale = Vector2(0.222363, 0.216348)
+texture = ExtResource("9_f1ej7")
+
+[node name="Area2D" type="Area2D" parent="Hand/StateMachine/Pick up"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hand/StateMachine/Pick up/Area2D"]
+position = Vector2(-1, 2)
+rotation = 0.324872
+scale = Vector2(0.0853466, 0.0855763)
+shape = SubResource("CircleShape2D_smehm")
+
+[node name="Equiment" type="Node2D" parent="Hand/StateMachine" node_paths=PackedStringArray("idle_state", "pick_up_state", "inventory")]
 visible = false
 script = ExtResource("9_y4r1p")
 idle_state = NodePath("../Idle")
+pick_up_state = NodePath("../Pick up")
 _entries = Array[ExtResource("11_3v2ag")]([SubResource("Resource_f1ej7"), SubResource("Resource_oprun")])
+inventory = NodePath("../../../Inventory")
 metadata/_custom_type_script = "uid://cjgkt6mw5ow4l"
 
 [node name="Sprite2D" type="Sprite2D" parent="Hand/StateMachine/Equiment"]
@@ -103,3 +140,53 @@ z_index = 1
 position = Vector2(4.9601, 36.0055)
 rotation = -0.47822
 texture = ExtResource("5_qlg0r")
+
+[node name="Inventory" type="Node2D" parent="." node_paths=PackedStringArray("selectable_area")]
+position = Vector2(134.796, 184.15)
+rotation = -0.00110836
+script = ExtResource("15_a8ls1")
+selectable_area = NodePath("Area2D/CollisionShape2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="Inventory"]
+position = Vector2(-50.0953, 85.9445)
+scale = Vector2(0.30326, 0.30326)
+texture = ExtResource("16_qfm1y")
+
+[node name="Area2D" type="Area2D" parent="Inventory"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Inventory/Area2D"]
+position = Vector2(-55.1063, 47.8779)
+rotation = 1.5708
+scale = Vector2(1.75235, 1.01121)
+shape = SubResource("CapsuleShape2D_a8ls1")
+
+[node name="All equipment" type="Node2D" parent="Inventory"]
+
+[node name="BugZapper" parent="Inventory/All equipment" instance=ExtResource("13_jej6c")]
+position = Vector2(-99.1219, 109.89)
+rotation = -0.0435606
+scale = Vector2(0.566633, 0.566633)
+
+[node name="Area2D" type="Area2D" parent="Inventory/All equipment/BugZapper"]
+position = Vector2(-1.90042, -76.0476)
+rotation = 0.0435606
+scale = Vector2(1.76481, 1.76481)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Inventory/All equipment/BugZapper/Area2D"]
+scale = Vector2(-2.03396, 0.616165)
+shape = SubResource("CapsuleShape2D_4r5pv")
+
+[node name="Flyswatter" parent="Inventory/All equipment" instance=ExtResource("12_jej6c")]
+position = Vector2(-62.1152, 103.931)
+rotation = -0.0150417
+scale = Vector2(0.978717, 0.978717)
+
+[node name="Area2D" type="Area2D" parent="Inventory/All equipment/Flyswatter"]
+position = Vector2(2.86826, -51.0476)
+rotation = 0.0150417
+scale = Vector2(1.02175, 1.02175)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Inventory/All equipment/Flyswatter/Area2D"]
+position = Vector2(-2.98447, -14.0033)
+scale = Vector2(1.19601, 0.832305)
+shape = SubResource("CapsuleShape2D_4r5pv")
