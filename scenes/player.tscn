@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cmnjknfd4xhaj"]
+[gd_scene load_steps=12 format=3 uid="uid://cmnjknfd4xhaj"]
 
 [ext_resource type="Script" uid="uid://b6nrrg1f2vfcl" path="res://scripts/player/hand.gd" id="2_dqkch"]
 [ext_resource type="Texture2D" uid="uid://badrntcjnvwgj" path="res://assets/player/hand.png" id="3_qhqgy"]
@@ -10,28 +10,9 @@
 [ext_resource type="Script" uid="uid://qp3frfxg5ogc" path="res://scripts/player/pickup_state.gd" id="5_tuyoq"]
 [ext_resource type="Texture2D" uid="uid://dniu173guiukg" path="res://assets/player/pickup hand.png" id="9_f1ej7"]
 [ext_resource type="Script" uid="uid://b4m3ikfypcuk2" path="res://scripts/player/equipment_state.gd" id="9_y4r1p"]
-[ext_resource type="Script" uid="uid://c3n2s4jlpujkh" path="res://scenes/equipment/equipment_entry.gd" id="11_3v2ag"]
-[ext_resource type="PackedScene" uid="uid://crbgnq0h1g3ym" path="res://scenes/equipment/flyswatter.tscn" id="12_jej6c"]
-[ext_resource type="PackedScene" uid="uid://ytos3fkkwwof" path="res://scenes/equipment/bug_zapper.tscn" id="13_jej6c"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_smehm"]
 radius = 40.0
-
-[sub_resource type="Resource" id="Resource_f1ej7"]
-script = ExtResource("11_3v2ag")
-scene = ExtResource("12_jej6c")
-name = "Flyswatter"
-unlocked = true
-value = 25
-metadata/_custom_type_script = "uid://c3n2s4jlpujkh"
-
-[sub_resource type="Resource" id="Resource_oprun"]
-script = ExtResource("11_3v2ag")
-scene = ExtResource("13_jej6c")
-name = "Bug Zapper Racket"
-unlocked = true
-value = 50
-metadata/_custom_type_script = "uid://c3n2s4jlpujkh"
 
 [node name="Hand" type="Node2D" node_paths=PackedStringArray("state_machine", "idle_state", "pick_up_state", "equipment_state")]
 z_index = 1
@@ -117,7 +98,6 @@ visible = false
 script = ExtResource("9_y4r1p")
 idle_state = NodePath("../Idle")
 pick_up_state = NodePath("../Pick up")
-_entries = Array[ExtResource("11_3v2ag")]([SubResource("Resource_f1ej7"), SubResource("Resource_oprun")])
 metadata/_custom_type_script = "uid://cjgkt6mw5ow4l"
 
 [node name="Sprite2D" type="Sprite2D" parent="StateMachine/Equiment"]

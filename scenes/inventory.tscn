@@ -1,14 +1,35 @@
-[gd_scene load_steps=4 format=3 uid="uid://crh2sifj0qerg"]
+[gd_scene load_steps=10 format=3 uid="uid://crh2sifj0qerg"]
 
 [ext_resource type="Script" uid="uid://djgu6m5pecjky" path="res://scripts/inventory.gd" id="1_hj2ta"]
 [ext_resource type="Texture2D" uid="uid://b1cln5grvtgrp" path="res://assets/belt.png" id="2_ty45s"]
+[ext_resource type="Script" uid="uid://bxcl32ibl8vgx" path="res://scenes/inventory/inventory_slot.gd" id="3_ty45s"]
+[ext_resource type="PackedScene" uid="uid://ytos3fkkwwof" path="res://scenes/equipment/bug_zapper.tscn" id="4_yyk2a"]
+[ext_resource type="Script" uid="uid://c3n2s4jlpujkh" path="res://scenes/equipment/equipment_entry.gd" id="5_uae8j"]
+[ext_resource type="PackedScene" uid="uid://crbgnq0h1g3ym" path="res://scenes/equipment/flyswatter.tscn" id="6_uae8j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hj2ta"]
 size = Vector2(148, 101)
 
-[node name="Inventory" type="Node2D" node_paths=PackedStringArray("inventory_area")]
+[sub_resource type="Resource" id="Resource_uae8j"]
+script = ExtResource("5_uae8j")
+scene = ExtResource("6_uae8j")
+name = "Fly swatter"
+unlocked = true
+value = 0
+metadata/_custom_type_script = "uid://c3n2s4jlpujkh"
+
+[sub_resource type="Resource" id="Resource_s887n"]
+script = ExtResource("5_uae8j")
+scene = ExtResource("4_yyk2a")
+name = "Bug zapper"
+unlocked = true
+value = 0
+metadata/_custom_type_script = "uid://c3n2s4jlpujkh"
+
+[node name="Inventory" type="Node2D" node_paths=PackedStringArray("inventory_area", "inventory_slots")]
 script = ExtResource("1_hj2ta")
 inventory_area = NodePath("HoverArea/CollisionShape2D")
+inventory_slots = [NodePath("CanvasLayer/InventorySlot"), NodePath("CanvasLayer/InventorySlot2"), NodePath("CanvasLayer/InventorySlot3"), NodePath("CanvasLayer/InventorySlot4"), NodePath("CanvasLayer/InventorySlot5")]
 
 [node name="Belt" type="Sprite2D" parent="."]
 position = Vector2(84.796, 270.15)
@@ -17,8 +38,52 @@ scale = Vector2(0.30326, 0.30326)
 texture = ExtResource("2_ty45s")
 
 [node name="HoverArea" type="Area2D" parent="."]
-position = Vector2(134.796, 184.15)
+position = Vector2(84, 264)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HoverArea"]
-position = Vector2(-50.796, 79.35)
 shape = SubResource("RectangleShape2D_hj2ta")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="InventorySlot" type="Button" parent="CanvasLayer"]
+offset_left = 13.0
+offset_top = 248.0
+offset_right = 102.0
+offset_bottom = 279.0
+scale = Vector2(0.562755, 0.562755)
+script = ExtResource("3_ty45s")
+initial_equipment = SubResource("Resource_uae8j")
+
+[node name="InventorySlot2" type="Button" parent="CanvasLayer"]
+offset_left = 59.0
+offset_top = 271.0
+offset_right = 148.0
+offset_bottom = 302.0
+scale = Vector2(0.562755, 0.562755)
+script = ExtResource("3_ty45s")
+
+[node name="InventorySlot3" type="Button" parent="CanvasLayer"]
+offset_left = 110.0
+offset_top = 251.0
+offset_right = 199.0
+offset_bottom = 282.0
+scale = Vector2(0.562755, 0.562755)
+script = ExtResource("3_ty45s")
+initial_equipment = SubResource("Resource_s887n")
+
+[node name="InventorySlot4" type="Button" parent="CanvasLayer"]
+offset_left = 137.0
+offset_top = 277.0
+offset_right = 226.0
+offset_bottom = 308.0
+scale = Vector2(0.562755, 0.562755)
+script = ExtResource("3_ty45s")
+
+[node name="InventorySlot5" type="Button" parent="CanvasLayer"]
+offset_left = 186.0
+offset_top = 249.0
+offset_right = 275.0
+offset_bottom = 280.0
+scale = Vector2(0.562755, 0.562755)
+script = ExtResource("3_ty45s")
