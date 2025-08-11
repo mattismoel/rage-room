@@ -8,7 +8,7 @@ rotation = -0.553565
 script = ExtResource("1_fokec")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(5, -88)
+position = Vector2(7.82002, -46.8919)
 rotation = -0.664193
-scale = Vector2(0.37409, 0.37409)
+scale = Vector2(0.169044, 0.169044)
 texture = ExtResource("1_4nidy")

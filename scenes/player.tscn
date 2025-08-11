@@ -27,40 +27,39 @@ equipment_state = NodePath("StateMachine/Equiment")
 z_index = 1
 script = ExtResource("3_y4r1p")
 initial_state = NodePath("Idle")
-debug_change_state = true
 metadata/_custom_type_script = "uid://ca42s16x5547g"
 
 [node name="Idle" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("selection_area", "pick_up_state", "smack_state")]
-visible = false
+scale = Vector2(0.999983, 0.988788)
 script = ExtResource("3_qlg0r")
 selection_area = NodePath("Area2D")
 pick_up_state = NodePath("../Pick up")
 smack_state = NodePath("../Smack")
 
 [node name="Sprite2D" type="Sprite2D" parent="StateMachine/Idle"]
-position = Vector2(-5.72925, 31.0512)
-scale = Vector2(0.51175, 0.462724)
+position = Vector2(-2.00336, 3.03177)
+scale = Vector2(0.165986, 0.150084)
 texture = ExtResource("4_smehm")
 
 [node name="Area2D" type="Area2D" parent="StateMachine/Idle"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Idle/Area2D"]
-position = Vector2(-1, 2)
+position = Vector2(0.00665021, -6.06803)
 rotation = 0.324872
-scale = Vector2(0.68, 0.96)
+scale = Vector2(0.166281, 0.295136)
 shape = SubResource("CircleShape2D_smehm")
 
-[node name="Smack" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("selection_area", "idle_state")]
+[node name="Smack" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("hit_area", "idle_state")]
 visible = false
 position = Vector2(-1, 6)
 script = ExtResource("4_dqkch")
-selection_area = NodePath("Area2D")
+hit_area = NodePath("Area2D")
 idle_state = NodePath("../Idle")
 
 [node name="Sprite2D" type="Sprite2D" parent="StateMachine/Smack"]
-position = Vector2(-8, -3)
+position = Vector2(-1.99113, -14.0033)
 rotation = 0.390436
-scale = Vector2(0.268589, 0.268589)
+scale = Vector2(0.0827047, 0.0827047)
 texture = ExtResource("3_qhqgy")
 
 [node name="Area2D" type="Area2D" parent="StateMachine/Smack"]
@@ -69,7 +68,8 @@ rotation = 0.404892
 scale = Vector2(0.452091, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Smack/Area2D"]
-position = Vector2(2.00865, 0.982509)
+position = Vector2(2.04823, -8.01624)
+scale = Vector2(0.303766, 0.303766)
 shape = SubResource("CircleShape2D_smehm")
 
 [node name="Pick up" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("equipment_state", "idle_state")]
@@ -79,17 +79,17 @@ equipment_state = NodePath("../Equiment")
 idle_state = NodePath("../Idle")
 
 [node name="Sprite2D" type="Sprite2D" parent="StateMachine/Pick up"]
-position = Vector2(-2.05098, 45.9977)
-rotation = 2.46684
-scale = Vector2(0.222363, 0.216348)
+position = Vector2(7.99224, 7.00886)
+rotation = 1.60354
+scale = Vector2(0.0518226, 0.0504208)
 texture = ExtResource("9_f1ej7")
 
 [node name="Area2D" type="Area2D" parent="StateMachine/Pick up"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Pick up/Area2D"]
-position = Vector2(-1, 2)
+position = Vector2(0, 1.19209e-07)
 rotation = 0.324872
-scale = Vector2(0.0853466, 0.0855763)
+scale = Vector2(0.0468719, 0.0469981)
 shape = SubResource("CircleShape2D_smehm")
 
 [node name="Equiment" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("idle_state", "pick_up_state")]
@@ -101,6 +101,7 @@ metadata/_custom_type_script = "uid://cjgkt6mw5ow4l"
 
 [node name="Sprite2D" type="Sprite2D" parent="StateMachine/Equiment"]
 z_index = 1
-position = Vector2(4.9601, 36.0055)
+position = Vector2(1.00222, -1.99889)
 rotation = -0.47822
+scale = Vector2(0.251999, 0.251999)
 texture = ExtResource("5_qlg0r")

@@ -7,63 +7,60 @@
 [ext_resource type="Resource" uid="uid://dy1f754kra1gv" path="res://scenes/equipment/entries/bug_zapper.tres" id="5_uae8j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hj2ta"]
-size = Vector2(176, 104.5)
+size = Vector2(79, 48)
 
 [node name="Inventory" type="Node2D" node_paths=PackedStringArray("inventory_area")]
 script = ExtResource("1_uae8j")
 inventory_area = NodePath("HoverArea/CollisionShape2D")
 
 [node name="Belt" type="Sprite2D" parent="."]
-position = Vector2(84.796, 270.15)
 rotation = -0.00110836
-scale = Vector2(0.30326, 0.30326)
+scale = Vector2(0.168978, 0.168978)
 texture = ExtResource("2_ty45s")
 
 [node name="HoverArea" type="Area2D" parent="."]
-position = Vector2(84, 264)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HoverArea"]
-position = Vector2(8, 1.75)
+position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_hj2ta")
 
 [node name="InventorySlot" type="Button" parent="."]
-offset_left = 7.0
-offset_top = 242.0
-offset_right = 96.0
-offset_bottom = 273.0
-scale = Vector2(0.562755, 0.562755)
+offset_left = -38.0
+offset_top = -14.0
+offset_right = 51.0
+offset_bottom = 17.0
+scale = Vector2(0.248057, 0.316245)
 script = ExtResource("3_ty45s")
 initial_equipment = ExtResource("4_yyk2a")
 
 [node name="InventorySlot2" type="Button" parent="."]
-offset_left = 25.0
-offset_top = 270.0
-offset_right = 114.0
-offset_bottom = 301.0
-scale = Vector2(0.562755, 0.562755)
+offset_left = -36.0
+offset_top = -1.0
+offset_right = 53.0
+offset_bottom = 30.0
+scale = Vector2(0.248057, 0.316245)
 script = ExtResource("3_ty45s")
 
 [node name="InventorySlot3" type="Button" parent="."]
-offset_left = 66.0
-offset_top = 249.0
-offset_right = 155.0
-offset_bottom = 280.0
-scale = Vector2(0.562755, 0.562755)
+offset_left = -11.0
+offset_top = -10.0
+offset_right = 78.0
+offset_bottom = 21.0
+scale = Vector2(0.248057, 0.316245)
 script = ExtResource("3_ty45s")
 initial_equipment = ExtResource("5_uae8j")
 
 [node name="InventorySlot4" type="Button" parent="."]
-offset_left = 105.0
-offset_top = 269.0
-offset_right = 194.0
-offset_bottom = 300.0
-scale = Vector2(0.562755, 0.562755)
+offset_left = 15.0
+offset_right = 104.0
+offset_bottom = 31.0
+scale = Vector2(0.248057, 0.316245)
 script = ExtResource("3_ty45s")
 
 [node name="InventorySlot5" type="Button" parent="."]
-offset_left = 126.0
-offset_top = 246.0
-offset_right = 215.0
-offset_bottom = 277.0
-scale = Vector2(0.562755, 0.562755)
+offset_left = 17.0
+offset_top = -13.0
+offset_right = 106.0
+offset_bottom = 18.0
+scale = Vector2(0.248057, 0.316245)
 script = ExtResource("3_ty45s")
