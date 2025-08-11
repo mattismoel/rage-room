@@ -1,5 +1,5 @@
 class_name TimedSpawner
-extends Node
+extends Node2D
 
 @export_group("References")
 @export var _spawn_timer: SpawnTimer
