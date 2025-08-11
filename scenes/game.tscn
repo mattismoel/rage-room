@@ -59,3 +59,8 @@ shape = SubResource("RectangleShape2D_0tnpc")
 script = ExtResource("6_gee14")
 _entries = Array[ExtResource("2_lnu2h")]([SubResource("Resource_0tnpc")])
 metadata/_custom_type_script = "uid://c8f6fbvcun4wt"
+
+[node name="Player" parent="." node_paths=PackedStringArray("inventory") instance=ExtResource("8_0tnpc")]
+inventory = NodePath("../Inventory")
+
+[node name="Inventory" parent="." instance=ExtResource("9_0tnpc")]

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="EquipmentEntry" load_steps=3 format=3 uid="uid://dy1f754kra1gv"]
+
+[ext_resource type="PackedScene" uid="uid://ytos3fkkwwof" path="res://scenes/equipment/bug_zapper.tscn" id="1_5h4gw"]
+[ext_resource type="Script" uid="uid://c3n2s4jlpujkh" path="res://scenes/equipment/equipment_entry.gd" id="2_67b5n"]
+
+[resource]
+script = ExtResource("2_67b5n")
+scene = ExtResource("1_5h4gw")
+name = "Bug zapper"
+unlocked = true
+value = 0
+metadata/_custom_type_script = "uid://c3n2s4jlpujkh"

@@ -1,0 +1,106 @@
+[gd_scene load_steps=12 format=3 uid="uid://cmnjknfd4xhaj"]
+
+[ext_resource type="Script" uid="uid://b6nrrg1f2vfcl" path="res://scripts/player/hand.gd" id="2_dqkch"]
+[ext_resource type="Texture2D" uid="uid://badrntcjnvwgj" path="res://assets/player/hand.png" id="3_qhqgy"]
+[ext_resource type="Script" uid="uid://b0mmkvnp2vjq5" path="res://scripts/player/idle_state.gd" id="3_qlg0r"]
+[ext_resource type="Script" uid="uid://ca42s16x5547g" path="res://machinery/state_machine.gd" id="3_y4r1p"]
+[ext_resource type="Script" uid="uid://dowvmhrglkm7v" path="res://scripts/player/smack_state.gd" id="4_dqkch"]
+[ext_resource type="Texture2D" uid="uid://bqkybbohwmj75" path="res://assets/player/test arm.png" id="4_smehm"]
+[ext_resource type="Texture2D" uid="uid://cokbfjclr2ww3" path="res://assets/player/grab arm.png" id="5_qlg0r"]
+[ext_resource type="Script" uid="uid://qp3frfxg5ogc" path="res://scripts/player/pickup_state.gd" id="5_tuyoq"]
+[ext_resource type="Texture2D" uid="uid://dniu173guiukg" path="res://assets/player/pickup hand.png" id="9_f1ej7"]
+[ext_resource type="Script" uid="uid://b4m3ikfypcuk2" path="res://scripts/player/equipment_state.gd" id="9_y4r1p"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_smehm"]
+radius = 40.0
+
+[node name="Hand" type="Node2D" node_paths=PackedStringArray("state_machine", "idle_state", "pick_up_state", "equipment_state")]
+z_index = 1
+rotation = -0.00110836
+script = ExtResource("2_dqkch")
+state_machine = NodePath("StateMachine")
+idle_state = NodePath("StateMachine/Idle")
+pick_up_state = NodePath("StateMachine/Pick up")
+equipment_state = NodePath("StateMachine/Equiment")
+
+[node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("initial_state")]
+z_index = 1
+script = ExtResource("3_y4r1p")
+initial_state = NodePath("Idle")
+debug_change_state = true
+metadata/_custom_type_script = "uid://ca42s16x5547g"
+
+[node name="Idle" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("selection_area", "pick_up_state", "smack_state")]
+visible = false
+script = ExtResource("3_qlg0r")
+selection_area = NodePath("Area2D")
+pick_up_state = NodePath("../Pick up")
+smack_state = NodePath("../Smack")
+
+[node name="Sprite2D" type="Sprite2D" parent="StateMachine/Idle"]
+position = Vector2(-5.72925, 31.0512)
+scale = Vector2(0.51175, 0.462724)
+texture = ExtResource("4_smehm")
+
+[node name="Area2D" type="Area2D" parent="StateMachine/Idle"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Idle/Area2D"]
+position = Vector2(-1, 2)
+rotation = 0.324872
+scale = Vector2(0.68, 0.96)
+shape = SubResource("CircleShape2D_smehm")
+
+[node name="Smack" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("selection_area", "idle_state")]
+visible = false
+position = Vector2(-1, 6)
+script = ExtResource("4_dqkch")
+selection_area = NodePath("Area2D")
+idle_state = NodePath("../Idle")
+
+[node name="Sprite2D" type="Sprite2D" parent="StateMachine/Smack"]
+position = Vector2(-8, -3)
+rotation = 0.390436
+scale = Vector2(0.268589, 0.268589)
+texture = ExtResource("3_qhqgy")
+
+[node name="Area2D" type="Area2D" parent="StateMachine/Smack"]
+position = Vector2(-6, -7)
+rotation = 0.404892
+scale = Vector2(0.452091, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Smack/Area2D"]
+position = Vector2(2.00865, 0.982509)
+shape = SubResource("CircleShape2D_smehm")
+
+[node name="Pick up" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("equipment_state", "idle_state")]
+visible = false
+script = ExtResource("5_tuyoq")
+equipment_state = NodePath("../Equiment")
+idle_state = NodePath("../Idle")
+
+[node name="Sprite2D" type="Sprite2D" parent="StateMachine/Pick up"]
+position = Vector2(-2.05098, 45.9977)
+rotation = 2.46684
+scale = Vector2(0.222363, 0.216348)
+texture = ExtResource("9_f1ej7")
+
+[node name="Area2D" type="Area2D" parent="StateMachine/Pick up"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/Pick up/Area2D"]
+position = Vector2(-1, 2)
+rotation = 0.324872
+scale = Vector2(0.0853466, 0.0855763)
+shape = SubResource("CircleShape2D_smehm")
+
+[node name="Equiment" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("idle_state", "pick_up_state")]
+visible = false
+script = ExtResource("9_y4r1p")
+idle_state = NodePath("../Idle")
+pick_up_state = NodePath("../Pick up")
+metadata/_custom_type_script = "uid://cjgkt6mw5ow4l"
+
+[node name="Sprite2D" type="Sprite2D" parent="StateMachine/Equiment"]
+z_index = 1
+position = Vector2(4.9601, 36.0055)
+rotation = -0.47822
+texture = ExtResource("5_qlg0r")
