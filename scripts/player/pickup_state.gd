@@ -22,6 +22,7 @@ func input(event) -> void:
 		for area in overlapping_areas:
 			if area.get_parent() is Equipment:
 				print(area.get_parent().name)
+				#pick_up_equipment()
 
 func pick_up_equipment(equipment_entry: EquipmentEntry) -> void:
 	equipment_state.set_equipment(equipment_entry)
