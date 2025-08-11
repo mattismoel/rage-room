@@ -1,6 +1,9 @@
 class_name Insect
 extends Node2D
 
+## Emitted whenever the insect is killed. It containes a reference to itself.
+signal killed(insect: Insect)
+
 @export var _target_zone: TargetZone
 
 var _target: Target
@@ -19,4 +22,4 @@ func target(t: Target) -> void:
 	pass
 
 func kill() -> void:
-	pass
+	killed.emit(self)
