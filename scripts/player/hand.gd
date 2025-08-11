@@ -18,10 +18,17 @@ func _process(delta: float) -> void:
 	#handle_equipment_change(event)
 
 func _on_mouse_enter_inventory() -> void:
-	state_machine.change_state(pick_up_state)
+	if InventoryManager.equipped_entry == null:
+		state_machine.change_state(pick_up_state)
 
 func _on_mouse_leave_inventory() -> void:
-	state_machine.change_state(idle_state)
+	## Switch to idle state
+	if InventoryManager.equipped_entry == null:
+		print("leaving emptyhanded")
+		state_machine.change_state(idle_state)
+	else:
+		print("leaving with equipment")
+		state_machine.change_state(equipment_state)
 
 #func handle_equipment_change(event: InputEvent) -> void:
 	### This is only meant for debugging/as an alternative to picking the equipment manually

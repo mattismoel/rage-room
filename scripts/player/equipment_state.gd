@@ -9,10 +9,11 @@ var loaded_equipment: Equipment
 func enter() -> void:
 	super()
 	visible = true
-	InventoryManager.entry_equipped.connect(set_equipment)
+	InventoryManager.entry_unequipped.connect(_on_entry_unequipped)
 
 func exit() -> void:
 	remove_child(loaded_equipment)
+	InventoryManager.entry_unequipped.disconnect(_on_entry_unequipped)
 	visible = false
 
 func input(event) -> void:
@@ -34,6 +35,10 @@ func set_equipment(equipment: EquipmentEntry) -> void:
 	add_child(loaded_equipment)
 	
 	print("Equipment state loaded equipment %s" % equipment.name)
+
+func _on_entry_unequipped() -> void:
+	print("SKIIIIFT")
+	change_state.emit(pick_up_state)
 
 #func next_in_equipment_cycle(steps: int) -> void:
 	#var index := _entries.find(current_equipment_entry) + steps

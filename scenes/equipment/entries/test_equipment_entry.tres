@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EquipmentEntry" load_steps=2 format=3 uid="uid://bvwwtgrwcejtt"]
+
+[ext_resource type="Script" uid="uid://c3n2s4jlpujkh" path="res://scenes/equipment/equipment_entry.gd" id="1_4ut28"]
+
+[resource]
+script = ExtResource("1_4ut28")
+name = "Test"
+unlocked = true
+value = 0
+metadata/_custom_type_script = "uid://c3n2s4jlpujkh"

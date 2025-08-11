@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="EquipmentEntry" load_steps=3 format=3 uid="uid://crrud54yx74ob"]
+
+[ext_resource type="PackedScene" uid="uid://crbgnq0h1g3ym" path="res://scenes/equipment/flyswatter.tscn" id="1_dl5au"]
+[ext_resource type="Script" uid="uid://c3n2s4jlpujkh" path="res://scenes/equipment/equipment_entry.gd" id="2_eipsb"]
+
+[resource]
+script = ExtResource("2_eipsb")
+scene = ExtResource("1_dl5au")
+name = "Fly swatter"
+unlocked = true
+value = 0
+metadata/_custom_type_script = "uid://c3n2s4jlpujkh"

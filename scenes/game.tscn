@@ -60,5 +60,4 @@ metadata/_custom_type_script = "uid://c8f6fbvcun4wt"
 [node name="Player" parent="." node_paths=PackedStringArray("inventory") instance=ExtResource("8_0tnpc")]
 inventory = NodePath("../Inventory")
 
-[node name="Inventory" parent="." node_paths=PackedStringArray("inventory_slots") instance=ExtResource("9_0tnpc")]
-inventory_slots = []
+[node name="Inventory" parent="." instance=ExtResource("9_0tnpc")]

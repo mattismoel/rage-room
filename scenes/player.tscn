@@ -72,10 +72,9 @@ scale = Vector2(0.452091, 1)
 position = Vector2(2.00865, 0.982509)
 shape = SubResource("CircleShape2D_smehm")
 
-[node name="Pick up" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("selection_area", "equipment_state", "idle_state")]
+[node name="Pick up" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("equipment_state", "idle_state")]
 visible = false
 script = ExtResource("5_tuyoq")
-selection_area = NodePath("Area2D")
 equipment_state = NodePath("../Equiment")
 idle_state = NodePath("../Idle")
 
