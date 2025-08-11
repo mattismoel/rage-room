@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dpcv78j3ky7pm"]
+[gd_scene load_steps=12 format=3 uid="uid://dpcv78j3ky7pm"]
 
 [ext_resource type="Script" uid="uid://oblvmjguiltl" path="res://scripts/insect_manager.gd" id="1_lbhrr"]
 [ext_resource type="Script" uid="uid://dvfp0i6u6ksgu" path="res://scripts/spawner/timed_spawner.gd" id="1_lnu2h"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://ic6q7foo7ydh" path="res://scenes/insects/ant/ant.tscn" id="7_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://bxs1nmrkh8j5q" path="res://scenes/targets/soup/soup.tscn" id="8_0tnpc"]
 [ext_resource type="Script" uid="uid://pke0c4qm2rkn" path="res://scripts/spawner/spawn_tick_component.gd" id="8_gee14"]
+[ext_resource type="Texture2D" uid="uid://b0h7cahu16b36" path="res://assets/table.png" id="9_0tnpc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0tnpc"]
 size = Vector2(32, 32)
@@ -23,6 +24,13 @@ metadata/_custom_type_script = "uid://7qy2yh4bqtbv"
 [node name="InsectManager" type="Node" parent="."]
 script = ExtResource("1_lbhrr")
 metadata/_custom_type_script = "uid://oblvmjguiltl"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("9_0tnpc")
+centered = false
+
+[node name="Plate" parent="." instance=ExtResource("8_0tnpc")]
+position = Vector2(124, 134)
 
 [node name="AntSpawner" type="Node2D" parent="." node_paths=PackedStringArray("_spawn_timer", "_spawner_component")]
 position = Vector2(197, 62)
@@ -51,6 +59,3 @@ shape = SubResource("RectangleShape2D_0tnpc")
 script = ExtResource("6_gee14")
 _entries = Array[ExtResource("2_lnu2h")]([SubResource("Resource_0tnpc")])
 metadata/_custom_type_script = "uid://c8f6fbvcun4wt"
-
-[node name="Plate" parent="." instance=ExtResource("8_0tnpc")]
-position = Vector2(124, 113)
