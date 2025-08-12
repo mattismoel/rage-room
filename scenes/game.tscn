@@ -2,15 +2,15 @@
 
 [ext_resource type="Script" uid="uid://oblvmjguiltl" path="res://scripts/insect_manager.gd" id="1_lbhrr"]
 [ext_resource type="Script" uid="uid://dvfp0i6u6ksgu" path="res://scripts/spawner/timed_spawner.gd" id="1_lnu2h"]
-[ext_resource type="PackedScene" uid="uid://cmnjknfd4xhaj" path="res://scenes/player.tscn" id="2_kvpfn"]
+[ext_resource type="PackedScene" path="res://scenes/player.tscn" id="2_kvpfn"]
 [ext_resource type="Script" uid="uid://7qy2yh4bqtbv" path="res://scripts/spawner/spawn_entry.gd" id="2_lnu2h"]
 [ext_resource type="Script" uid="uid://hxmlfmuavfju" path="res://scripts/spawner/area_spawner.gd" id="4_gee14"]
 [ext_resource type="Script" uid="uid://c8f6fbvcun4wt" path="res://scripts/spawner/selectors/weighted_selector.gd" id="6_gee14"]
 [ext_resource type="PackedScene" uid="uid://ic6q7foo7ydh" path="res://scenes/insects/ant/ant.tscn" id="7_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://bxs1nmrkh8j5q" path="res://scenes/targets/soup/soup.tscn" id="8_0tnpc"]
 [ext_resource type="Script" uid="uid://pke0c4qm2rkn" path="res://scripts/spawner/spawn_tick_component.gd" id="8_gee14"]
-[ext_resource type="Texture2D" uid="uid://grdxlxtbvcn2" path="res://assets/table.png" id="9_0tnpc"]
-[ext_resource type="PackedScene" uid="uid://crh2sifj0qerg" path="res://scenes/inventory.tscn" id="10_vtaks"]
+[ext_resource type="Texture2D" uid="uid://ddi0wkwb1ocpm" path="res://assets/table.png" id="9_0tnpc"]
+[ext_resource type="PackedScene" path="res://scenes/inventory.tscn" id="10_vtaks"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0tnpc"]
 size = Vector2(32, 32)
@@ -43,7 +43,6 @@ metadata/_custom_type_script = "uid://dvfp0i6u6ksgu"
 metadata/_edit_group_ = true
 
 [node name="SpawnTimer" type="Timer" parent="AntSpawner"]
-one_shot = true
 autostart = true
 script = ExtResource("8_gee14")
 
