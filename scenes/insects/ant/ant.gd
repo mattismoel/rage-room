@@ -6,7 +6,7 @@ extends Insect
 ## The max amount of variance in speed.
 @export var _speed_variance: float = 8.0
 
-@export_group("Vector2 System")
+@export_group("Waypoint System")
 ## The max distance from the straight line to the target, that the ant deviates. 
 @export var _wiggle_width: float = 12.0
 
