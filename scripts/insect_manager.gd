@@ -19,7 +19,7 @@ signal all_killed
 signal max_count_reached
 
 ## The maximum amount of allowed insects.
-const MAX_INSECT_COUNT: int = 500
+const MAX_INSECT_COUNT: int = 150
 
 ## Whether or not print statements for added insects should be executed.
 var _debug_add_insect: bool = false

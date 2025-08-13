@@ -220,7 +220,6 @@ _data = {
 
 [node name="Ant" type="Node2D" node_paths=PackedStringArray("_target_zone")]
 script = ExtResource("1_jvi1b")
-_speed_variance = 0.0
 _target_zone = NodePath("TargetZone")
 
 [node name="TargetZone" type="Area2D" parent="."]

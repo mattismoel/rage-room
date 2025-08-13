@@ -35,4 +35,3 @@ func spawn(pos: Vector2 = Vector2.ZERO) -> void:
 	if _debug_spawn:
 		print("Spawned insect %s" % insect.name)
 
-	InsectManager.add([insect])
