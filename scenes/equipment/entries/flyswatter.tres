@@ -5,8 +5,7 @@
 
 [resource]
 script = ExtResource("2_eipsb")
-scene = ExtResource("1_dl5au")
 name = "Fly swatter"
-unlocked = true
-value = 0
+scene = ExtResource("1_dl5au")
+cost = 10
 metadata/_custom_type_script = "uid://c3n2s4jlpujkh"
