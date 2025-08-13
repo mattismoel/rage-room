@@ -3,7 +3,6 @@ extends State
 
 var inventory: InventoryComponent
 
-@export var selection_area: CollisionObject2D
 @export var pick_up_state: PickUpState
 @export var smack_state: SmackState
 @export var _animation_player: AnimationPlayer
