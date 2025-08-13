@@ -9,7 +9,7 @@ extends Node2D
 
 func _ready() -> void:
 	inventory.mouse_entered.connect(_on_mouse_enter_inventory)
-	inventory.mouse_left.connect(_on_mouse_leave_inventory)
+	inventory.mouse_exited.connect(_on_mouse_leave_inventory)
 
 func _process(delta: float) -> void:
 	global_position = get_global_mouse_position()

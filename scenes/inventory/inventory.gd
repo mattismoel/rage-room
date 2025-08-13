@@ -1,14 +1,7 @@
 class_name Inventory
-extends Node2D
-
-@export var inventory_area: CollisionShape2D
-@onready var inventory_rect: Rect2 = inventory_area.get_shape().get_rect()
+extends Control
 
 var inventory_slots: Array[InventorySlot] = []
-
-var _mouse_inside_inventory: bool
-signal mouse_entered
-signal mouse_left
 
 func _ready() -> void:
 	InventoryManager.inventory_changed.connect(_on_inventory_changed)
@@ -17,9 +10,6 @@ func _ready() -> void:
 	for child in get_children():
 		if child is InventorySlot:
 			inventory_slots.append(child)
-
-	## Calculates rectangle for detecting when the mouse is in the inventory
-	inventory_rect.position += inventory_area.global_position
 
 ## THIS IS ONLY FOR DEBUGGING PURPOSES
 func _input(event: InputEvent) -> void:
@@ -51,13 +41,3 @@ func _on_inventory_changed() -> void:
 			if slot.stored_equipment == null:
 				slot.set_entry(entries[i])
 				break
-
-func _process(delta: float) -> void:
-	## Detetct if the mouse is entering or leaving the inventory
-	var mouse_pos := get_global_mouse_position()
-	if inventory_rect.has_point(mouse_pos) and not _mouse_inside_inventory:
-		mouse_entered.emit()
-		_mouse_inside_inventory = true
-	elif not inventory_rect.has_point(mouse_pos) and _mouse_inside_inventory:
-		mouse_left.emit()
-		_mouse_inside_inventory = false

@@ -115,8 +115,26 @@ script = ExtResource("6_gee14")
 _entries = Array[ExtResource("2_lnu2h")]([SubResource("Resource_0tnpc")])
 metadata/_custom_type_script = "uid://c8f6fbvcun4wt"
 
-[node name="Player" parent="." node_paths=PackedStringArray("inventory") instance=ExtResource("2_kvpfn")]
-inventory = NodePath("../Inventory")
+[node name="PlayerLayer" type="CanvasLayer" parent="."]
+layer = 2
 
-[node name="Inventory" parent="." instance=ExtResource("10_vtaks")]
-position = Vector2(46, 154)
+[node name="Player" parent="PlayerLayer" node_paths=PackedStringArray("inventory") instance=ExtResource("2_kvpfn")]
+inventory = NodePath("../../UI/MarginContainer/Inventory")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="Inventory" parent="UI/MarginContainer" instance=ExtResource("10_vtaks")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
