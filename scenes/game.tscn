@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dpcv78j3ky7pm"]
+[gd_scene load_steps=17 format=3 uid="uid://dpcv78j3ky7pm"]
 
 [ext_resource type="Script" uid="uid://px0ijr1h5uhl" path="res://scripts/intensity_manager.gd" id="1_kvpfn"]
 [ext_resource type="Script" uid="uid://dvfp0i6u6ksgu" path="res://scripts/spawner/timed_spawner.gd" id="1_lnu2h"]
@@ -35,14 +35,18 @@ metadata/_custom_type_script = "uid://7qy2yh4bqtbv"
 script = ExtResource("1_kvpfn")
 metadata/_custom_type_script = "uid://px0ijr1h5uhl"
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="TableCloth" type="Sprite2D" parent="."]
 texture = ExtResource("9_0tnpc")
 centered = false
 
-[node name="Plate" parent="." instance=ExtResource("8_0tnpc")]
+[node name="Targets" type="Node" parent="."]
+
+[node name="Plate" parent="Targets" instance=ExtResource("8_0tnpc")]
 position = Vector2(124, 84)
 
-[node name="AntSpawner" type="Node2D" parent="." node_paths=PackedStringArray("_spawn_timer", "_spawner_component")]
+[node name="Spawners" type="Node" parent="."]
+
+[node name="AntSpawner" type="Node2D" parent="Spawners" node_paths=PackedStringArray("_spawn_timer", "_spawner_component")]
 position = Vector2(190, 47)
 script = ExtResource("1_lnu2h")
 _spawn_timer = NodePath("SpawnTimer")
@@ -50,11 +54,11 @@ _spawner_component = NodePath("AreaSpawner")
 metadata/_custom_type_script = "uid://dvfp0i6u6ksgu"
 metadata/_edit_group_ = true
 
-[node name="SpawnTimer" type="Timer" parent="AntSpawner"]
+[node name="SpawnTimer" type="Timer" parent="Spawners/AntSpawner"]
 autostart = true
 script = ExtResource("8_gee14")
 
-[node name="AreaSpawner" type="Area2D" parent="AntSpawner" node_paths=PackedStringArray("_container", "_entry_selector")]
+[node name="AreaSpawner" type="Area2D" parent="Spawners/AntSpawner" node_paths=PackedStringArray("_container", "_entry_selector")]
 position = Vector2(95, -63)
 script = ExtResource("4_gee14")
 _container = NodePath(".")
@@ -62,15 +66,15 @@ _entry_selector = NodePath("WeightedSpawnEntrySelector2")
 metadata/_custom_type_script = "uid://hxmlfmuavfju"
 metadata/_edit_group_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AntSpawner/AreaSpawner"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spawners/AntSpawner/AreaSpawner"]
 shape = SubResource("RectangleShape2D_0tnpc")
 
-[node name="WeightedSpawnEntrySelector2" type="Node" parent="AntSpawner/AreaSpawner"]
+[node name="WeightedSpawnEntrySelector2" type="Node" parent="Spawners/AntSpawner/AreaSpawner"]
 script = ExtResource("6_gee14")
 _entries = Array[ExtResource("2_lnu2h")]([SubResource("Resource_0tnpc"), SubResource("Resource_kvuet")])
 metadata/_custom_type_script = "uid://c8f6fbvcun4wt"
 
-[node name="AntSpawner2" type="Node2D" parent="." node_paths=PackedStringArray("_spawn_timer", "_spawner_component")]
+[node name="AntSpawner2" type="Node2D" parent="Spawners" node_paths=PackedStringArray("_spawn_timer", "_spawner_component")]
 position = Vector2(-71, 110)
 script = ExtResource("1_lnu2h")
 _spawn_timer = NodePath("SpawnTimer")
@@ -78,26 +82,26 @@ _spawner_component = NodePath("AreaSpawner")
 metadata/_custom_type_script = "uid://dvfp0i6u6ksgu"
 metadata/_edit_group_ = true
 
-[node name="SpawnTimer" type="Timer" parent="AntSpawner2"]
+[node name="SpawnTimer" type="Timer" parent="Spawners/AntSpawner2"]
 autostart = true
 script = ExtResource("8_gee14")
 
-[node name="AreaSpawner" type="Area2D" parent="AntSpawner2" node_paths=PackedStringArray("_container", "_entry_selector")]
+[node name="AreaSpawner" type="Area2D" parent="Spawners/AntSpawner2" node_paths=PackedStringArray("_container", "_entry_selector")]
 script = ExtResource("4_gee14")
 _container = NodePath(".")
 _entry_selector = NodePath("WeightedSpawnEntrySelector2")
 metadata/_custom_type_script = "uid://hxmlfmuavfju"
 metadata/_edit_group_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AntSpawner2/AreaSpawner"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spawners/AntSpawner2/AreaSpawner"]
 shape = SubResource("RectangleShape2D_0tnpc")
 
-[node name="WeightedSpawnEntrySelector2" type="Node" parent="AntSpawner2/AreaSpawner"]
+[node name="WeightedSpawnEntrySelector2" type="Node" parent="Spawners/AntSpawner2/AreaSpawner"]
 script = ExtResource("6_gee14")
 _entries = Array[ExtResource("2_lnu2h")]([SubResource("Resource_0tnpc")])
 metadata/_custom_type_script = "uid://c8f6fbvcun4wt"
 
-[node name="AntSpawner3" type="Node2D" parent="." node_paths=PackedStringArray("_spawn_timer", "_spawner_component")]
+[node name="AntSpawner3" type="Node2D" parent="Spawners" node_paths=PackedStringArray("_spawn_timer", "_spawner_component")]
 position = Vector2(78, -57)
 script = ExtResource("1_lnu2h")
 _spawn_timer = NodePath("SpawnTimer")
@@ -105,21 +109,21 @@ _spawner_component = NodePath("AreaSpawner")
 metadata/_custom_type_script = "uid://dvfp0i6u6ksgu"
 metadata/_edit_group_ = true
 
-[node name="SpawnTimer" type="Timer" parent="AntSpawner3"]
+[node name="SpawnTimer" type="Timer" parent="Spawners/AntSpawner3"]
 autostart = true
 script = ExtResource("8_gee14")
 
-[node name="AreaSpawner" type="Area2D" parent="AntSpawner3" node_paths=PackedStringArray("_container", "_entry_selector")]
+[node name="AreaSpawner" type="Area2D" parent="Spawners/AntSpawner3" node_paths=PackedStringArray("_container", "_entry_selector")]
 script = ExtResource("4_gee14")
 _container = NodePath(".")
 _entry_selector = NodePath("WeightedSpawnEntrySelector2")
 metadata/_custom_type_script = "uid://hxmlfmuavfju"
 metadata/_edit_group_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AntSpawner3/AreaSpawner"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spawners/AntSpawner3/AreaSpawner"]
 shape = SubResource("RectangleShape2D_0tnpc")
 
-[node name="WeightedSpawnEntrySelector2" type="Node" parent="AntSpawner3/AreaSpawner"]
+[node name="WeightedSpawnEntrySelector2" type="Node" parent="Spawners/AntSpawner3/AreaSpawner"]
 script = ExtResource("6_gee14")
 _entries = Array[ExtResource("2_lnu2h")]([SubResource("Resource_0tnpc")])
 metadata/_custom_type_script = "uid://c8f6fbvcun4wt"
