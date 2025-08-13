@@ -120,7 +120,7 @@ metadata/_custom_type_script = "uid://c8f6fbvcun4wt"
 layer = 2
 
 [node name="Player" parent="PlayerLayer" node_paths=PackedStringArray("inventory") instance=ExtResource("2_kvpfn")]
-inventory = NodePath("../../UI/MarginContainer/Inventory")
+inventory = NodePath("../../UI/MarginContainer/InventoryComponent")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -135,11 +135,12 @@ theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 2
 
-[node name="Inventory" parent="UI/MarginContainer" instance=ExtResource("10_vtaks")]
+[node name="InventoryComponent" parent="UI/MarginContainer" node_paths=PackedStringArray("currency_component") instance=ExtResource("10_vtaks")]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
+currency_component = NodePath("../CurrencyComponent")
 
-[node name="Currency" parent="UI/MarginContainer" instance=ExtResource("12_kvuet")]
+[node name="CurrencyComponent" parent="UI/MarginContainer" instance=ExtResource("12_kvuet")]
 layout_mode = 2
 mouse_filter = 2

@@ -18,7 +18,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 InsectManager="*res://scripts/insect_manager.gd"
-InventoryManager="*res://scripts/inventory_manager.gd"
 
 [display]
 

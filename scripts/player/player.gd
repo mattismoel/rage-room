@@ -1,17 +1,18 @@
 extends Node2D
 
-@export var inventory: Inventory
+@export var inventory: InventoryComponent
 
 @export var state_machine: StateMachine
 @export var idle_state: IdleState
 @export var pick_up_state: PickUpState
 @export var equipment_state: EquipmentState
-
-signal player_ready
+@export var smack_state: SmackState
 
 func _ready() -> void:
-	idle_state.initialize(inventory)
+	idle_state.initialize(inventory) # Fix for weird missing reference bug
 	pick_up_state.inventory = inventory
+	equipment_state.inventory = inventory
+	smack_state.inventory = inventory
 
 func _process(delta: float) -> void:
 	global_position = get_global_mouse_position()

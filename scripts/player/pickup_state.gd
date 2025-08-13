@@ -1,7 +1,7 @@
 class_name PickUpState
 extends State
 
-var inventory: Inventory
+var inventory: InventoryComponent
 
 @export var equipment_state: EquipmentState
 @export var idle_state: IdleState
@@ -9,14 +9,14 @@ var inventory: Inventory
 
 func enter() -> void:
 	super()
-	InventoryManager.entry_equipped.connect(_on_equipment_picked_up)
+	inventory.entry_equipped.connect(_on_equipment_picked_up)
 	inventory.mouse_exited.connect(_on_mouse_leave_inventory)
 	_animation_player.play("pick_up")
 	visible = true
 	
 func exit() -> void:
 	super()
-	InventoryManager.entry_equipped.disconnect(_on_equipment_picked_up)
+	inventory.entry_equipped.disconnect(_on_equipment_picked_up)
 	inventory.mouse_exited.disconnect(_on_mouse_leave_inventory)
 	visible = false
 	

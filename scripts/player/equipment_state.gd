@@ -3,17 +3,18 @@ extends State
 
 @export var idle_state: IdleState
 @export var pick_up_state: PickUpState
+var inventory: InventoryComponent
 
 var loaded_equipment: Equipment
 
 func enter() -> void:
 	super()
 	visible = true
-	InventoryManager.entry_unequipped.connect(_on_entry_unequipped)
+	inventory.entry_unequipped.connect(_on_entry_unequipped)
 
 func exit() -> void:
 	loaded_equipment.queue_free()
-	InventoryManager.entry_unequipped.disconnect(_on_entry_unequipped)
+	inventory.entry_unequipped.disconnect(_on_entry_unequipped)
 	visible = false
 
 func input(event) -> void:
