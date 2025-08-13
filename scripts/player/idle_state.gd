@@ -12,14 +12,16 @@ func enter() -> void:
 	super()
 	visible = true
 	_animation_player.play("idle")
+	
+	## Fix for weird reference bug
+	if inventory != null: initialize(inventory)
 
-func initialize(inventory) -> void:
-	inventory = inventory
+func initialize(ref_inventory) -> void:
+	inventory = ref_inventory
 	inventory.mouse_entered.connect(_on_mouse_enter_inventory)
 
 func _on_mouse_enter_inventory() -> void:
-	if InventoryManager.equipped_entry == null:
-		changed_state.emit(pick_up_state)
+	changed_state.emit(pick_up_state)
 
 func input(event) -> void:
 	if event.is_action_pressed("interact"):
@@ -28,5 +30,5 @@ func input(event) -> void:
 
 func exit() -> void:
 	super()
-	#inventory.mouse_entered.disconnect(_on_mouse_enter_inventory)
+	inventory.mouse_entered.disconnect(_on_mouse_enter_inventory)
 	visible = false

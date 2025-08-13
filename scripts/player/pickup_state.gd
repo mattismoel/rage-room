@@ -22,8 +22,7 @@ func exit() -> void:
 	
 func _on_mouse_leave_inventory() -> void:
 	## Switch to idle state
-	if InventoryManager.equipped_entry == null:
-		changed_state.emit(idle_state)
+	changed_state.emit(idle_state)
 
 func _on_equipment_picked_up(equipment_entry: EquipmentEntry) -> void:
 	equipment_state.set_equipment(equipment_entry)
