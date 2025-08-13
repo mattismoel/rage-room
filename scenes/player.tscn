@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://bxp10qpdnhpjg"]
 
-[ext_resource type="Script" uid="uid://b6nrrg1f2vfcl" path="res://scripts/player/hand.gd" id="2_dqkch"]
+[ext_resource type="Script" uid="uid://b6nrrg1f2vfcl" path="res://scripts/player/player.gd" id="2_dqkch"]
 [ext_resource type="Texture2D" uid="uid://badrntcjnvwgj" path="res://assets/player/hand.png" id="3_qhqgy"]
 [ext_resource type="Script" uid="uid://b0mmkvnp2vjq5" path="res://scripts/player/idle_state.gd" id="3_qlg0r"]
 [ext_resource type="Script" uid="uid://ca42s16x5547g" path="res://scripts/state_machine/state_machine.gd" id="3_y4r1p"]
@@ -51,18 +51,6 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("StateMachine/Smack/SmackSprite:scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.0827047, 0.0827047)]
 }
 
 [sub_resource type="Animation" id="Animation_3v2ag"]
@@ -126,18 +114,6 @@ tracks/1/keys = {
 "method": &"_kill_intersecting_insects"
 }]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("StateMachine/Smack/SmackSprite:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0.0827047, 0.0827047), Vector2(0.2, 0.2), Vector2(0.075, 0.075)]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3v2ag"]
 _data = {
@@ -147,7 +123,7 @@ _data = {
 &"smack": SubResource("Animation_y4r1p")
 }
 
-[node name="Hand" type="Node2D" node_paths=PackedStringArray("state_machine", "idle_state", "pick_up_state", "equipment_state")]
+[node name="Player" type="Node2D" node_paths=PackedStringArray("state_machine", "idle_state", "pick_up_state", "equipment_state")]
 z_index = 1
 rotation = -0.00110836
 script = ExtResource("2_dqkch")

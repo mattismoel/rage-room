@@ -27,7 +27,7 @@ func _ready() -> void:
 		if child is State:
 			_states.append(child)
 			child.changed_state.connect(change_state)
-
+	
 	change_state(_initial_state)
 
 ## Change the StateMachine's state to another.

@@ -7,24 +7,17 @@ extends Node2D
 @export var pick_up_state: PickUpState
 @export var equipment_state: EquipmentState
 
+signal player_ready
+
 func _ready() -> void:
-	inventory.mouse_entered.connect(_on_mouse_enter_inventory)
-	inventory.mouse_exited.connect(_on_mouse_leave_inventory)
+	idle_state.initialize(inventory)
+	pick_up_state.inventory = inventory
 
 func _process(delta: float) -> void:
 	global_position = get_global_mouse_position()
 	
 #func _input(event: InputEvent) -> void:
 	#handle_equipment_change(event)
-
-func _on_mouse_enter_inventory() -> void:
-	if InventoryManager.equipped_entry == null:
-		state_machine.change_state(pick_up_state)
-
-func _on_mouse_leave_inventory() -> void:
-	## Switch to idle state
-	if InventoryManager.equipped_entry == null:
-		state_machine.change_state(idle_state)
 
 #func handle_equipment_change(event: InputEvent) -> void:
 	### This is only meant for debugging/as an alternative to picking the equipment manually

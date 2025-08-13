@@ -1,6 +1,8 @@
 class_name IdleState
 extends State
 
+var inventory: Inventory
+
 @export var selection_area: CollisionObject2D
 @export var pick_up_state: PickUpState
 @export var smack_state: SmackState
@@ -10,7 +12,15 @@ func enter() -> void:
 	super()
 	visible = true
 	_animation_player.play("idle")
-		
+
+func initialize(inventory) -> void:
+	inventory = inventory
+	inventory.mouse_entered.connect(_on_mouse_enter_inventory)
+
+func _on_mouse_enter_inventory() -> void:
+	if InventoryManager.equipped_entry == null:
+		changed_state.emit(pick_up_state)
+
 func input(event) -> void:
 	if event.is_action_pressed("interact"):
 		## Switch to smack state
@@ -18,4 +28,5 @@ func input(event) -> void:
 
 func exit() -> void:
 	super()
+	#inventory.mouse_entered.disconnect(_on_mouse_enter_inventory)
 	visible = false
