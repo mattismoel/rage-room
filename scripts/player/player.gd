@@ -1,12 +1,13 @@
 extends Node2D
 
+@export var max_vert_extension: float = 100
 @export var inventory: InventoryComponent
 
-@export var state_machine: StateMachine
+@export_group("States references")
 @export var idle_state: IdleState
+@export var smack_state: SmackState
 @export var pick_up_state: PickUpState
 @export var equipment_state: EquipmentState
-@export var smack_state: SmackState
 
 func _ready() -> void:
 	idle_state.initialize(inventory) # Fix for weird missing reference bug
@@ -15,7 +16,9 @@ func _ready() -> void:
 	smack_state.inventory = inventory
 
 func _process(delta: float) -> void:
-	global_position = get_global_mouse_position()
+	var mouse_pos = get_global_mouse_position()
+	var extension_from_top = get_window().content_scale_size.y-max_vert_extension
+	global_position = Vector2(mouse_pos.x, max(extension_from_top, mouse_pos.y))
 	
 #func _input(event: InputEvent) -> void:
 	#handle_equipment_change(event)

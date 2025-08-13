@@ -123,15 +123,14 @@ _data = {
 &"smack": SubResource("Animation_y4r1p")
 }
 
-[node name="Player" type="Node2D" node_paths=PackedStringArray("state_machine", "idle_state", "pick_up_state", "equipment_state", "smack_state")]
+[node name="Player" type="Node2D" node_paths=PackedStringArray("idle_state", "smack_state", "pick_up_state", "equipment_state")]
 z_index = 1
 rotation = -0.00110836
 script = ExtResource("2_dqkch")
-state_machine = NodePath("StateMachine")
 idle_state = NodePath("StateMachine/Idle")
+smack_state = NodePath("StateMachine/Smack")
 pick_up_state = NodePath("StateMachine/Pick up")
 equipment_state = NodePath("StateMachine/Equiment")
-smack_state = NodePath("StateMachine/Smack")
 
 [node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("_initial_state")]
 z_index = 1
