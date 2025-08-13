@@ -38,7 +38,6 @@ func _on_area_entered(area: Area2D) -> void:
 	if parent is Insect:
 		_contained_insects.append(parent)
 		parent.killed.connect(_on_insect_killed)
-		print("HAS ", _contained_insects.size())
 		return
 
 
