@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://bxp10qpdnhpjg"]
 
-[ext_resource type="Script" uid="uid://b6nrrg1f2vfcl" path="res://scripts/player/player.gd" id="2_dqkch"]
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_y4r1p"]
 [ext_resource type="Texture2D" uid="uid://badrntcjnvwgj" path="res://assets/player/hand.png" id="3_qhqgy"]
 [ext_resource type="Script" uid="uid://b0mmkvnp2vjq5" path="res://scripts/player/idle_state.gd" id="3_qlg0r"]
 [ext_resource type="Script" uid="uid://ca42s16x5547g" path="res://scripts/state_machine/state_machine.gd" id="3_y4r1p"]
@@ -126,7 +126,8 @@ _data = {
 [node name="Player" type="Node2D" node_paths=PackedStringArray("idle_state", "smack_state", "pick_up_state", "equipment_state")]
 z_index = 1
 rotation = -0.00110836
-script = ExtResource("2_dqkch")
+script = ExtResource("1_y4r1p")
+state_machine = NodePath("StateMachine")
 idle_state = NodePath("StateMachine/Idle")
 smack_state = NodePath("StateMachine/Smack")
 pick_up_state = NodePath("StateMachine/Pick up")
