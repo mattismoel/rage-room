@@ -3,6 +3,8 @@ extends Node2D
 
 signal spawned(entry: SpawnEntry, insect: Insect)
 
+@export var _disabled: bool = false
+
 @export_group("References")
 @export var _container: Node2D
 @export var _entry_selector: SpawnEntrySelector
@@ -13,6 +15,8 @@ signal spawned(entry: SpawnEntry, insect: Insect)
 ## Spawns the input packed scene into the input container node, at the given 
 ## input position.
 func spawn(pos: Vector2 = Vector2.ZERO) -> void:
+	if _disabled: return
+
 	var entry :=  _entry_selector.get_entry()
 	var insect: Insect = entry.scene.instantiate()
 
