@@ -16,4 +16,4 @@ func exit() -> void:
 
 func _on_equipment_picked_up(equipment_entry: EquipmentEntry) -> void:
 	equipment_state.set_equipment(equipment_entry)
-	change_state.emit(equipment_state)
+	changed_state.emit(equipment_state)

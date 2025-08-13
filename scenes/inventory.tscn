@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://crh2sifj0qerg"]
+[gd_scene load_steps=7 format=3 uid="uid://fkur1724phpe"]
 
 [ext_resource type="Script" uid="uid://djgu6m5pecjky" path="res://scenes/inventory/inventory.gd" id="1_uae8j"]
 [ext_resource type="Texture2D" uid="uid://b1cln5grvtgrp" path="res://assets/belt.png" id="2_ty45s"]

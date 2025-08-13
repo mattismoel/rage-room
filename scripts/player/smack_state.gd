@@ -15,7 +15,7 @@ func enter() -> void:
 
 func input(event: InputEvent) -> void:
 	if event.is_action_released("interact"):
-		change_state.emit(idle_state)
+		changed_state.emit(idle_state)
 
 func exit() -> void:
 	super()
