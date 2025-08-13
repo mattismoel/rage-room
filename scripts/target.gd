@@ -14,6 +14,24 @@ func _ready() -> void:
 	area_entered.connect(_on_area_entered)
 	_timer.timeout.connect(_on_timer_timeout)
 
+## Gets a random point on the targets circle shape perimeter.
+##
+## The random position selection is limited to the visible part of the
+## perimiter, with respect to the direction.
+func get_random_perimeter_point_from_point(p: Vector2) -> Vector2:
+	var direction := p.direction_to(global_position)
+	var shape := _get_collision_shape()
+
+	assert(shape.shape is CircleShape2D, "The shape must be of type CircleShape2D to find point on perimeter.")
+
+	var circle_shape := shape.shape as CircleShape2D
+	var perpendicular_direcion = Vector2(-direction.y, direction.x)
+	var random_direction := perpendicular_direcion.rotated(randf() * PI)
+
+	var perimeter_point := global_position + random_direction * circle_shape.radius
+
+	return perimeter_point
+
 func _on_area_entered(area: Area2D) -> void:
 	var parent := area.get_parent()
 
@@ -35,3 +53,9 @@ func _on_insect_killed(insect: Insect) -> void:
 	var index := _contained_insects.find(insect)
 	assert(index != -1, "The killed insect could not be found in the targets contained insects.")
 	_contained_insects.remove_at(index)
+
+func _get_collision_shape() -> CollisionShape2D:
+	for child in get_children():
+		if child is CollisionShape2D: 
+			return child
+	return null

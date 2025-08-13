@@ -22,17 +22,18 @@ extends Insect
 func target(t: Target) -> void:
 	super(t)
 
-	var tween := create_tween()
-	var segment_count := _calculate_segment_count(global_position, t.global_position, _segment_length)
+	var target_pos := t.get_random_perimeter_point_from_point(global_position)
 
-	var waypoints := _generate_waypoints(global_position, t.global_position, segment_count, _wiggle_width)
+	var tween := create_tween()
+	var segment_count := _calculate_segment_count(global_position, target_pos, _segment_length)
+
+	var waypoints := _generate_waypoints(global_position, target_pos, segment_count, _wiggle_width)
 	var speed := _calculate_randomized_speed(_base_speed, _speed_variance)
 
 	var prev_pos := global_position
 	for wp_pos in waypoints:
 		var wait_duration := _calculate_random_wait_duration(_waypoint_wait_duration, _waypoint_wait_duration_variance)
 		prev_pos = _add_waypoint_tween_step(tween, prev_pos, wp_pos, wait_duration, speed)
-
 
 ## Returns a randomized speed given a variance. 
 func _calculate_randomized_speed(speed: float, variance: float) -> float:
