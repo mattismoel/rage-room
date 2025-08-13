@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://fkur1724phpe"]
 
-[ext_resource type="Script" uid="uid://djgu6m5pecjky" path="res://scenes/inventory/inventory.gd" id="1_uae8j"]
+[ext_resource type="Script" uid="uid://djgu6m5pecjky" path="res://scenes/inventory/inventory.gd" id="1_yyk2a"]
 [ext_resource type="Texture2D" uid="uid://b1cln5grvtgrp" path="res://assets/belt.png" id="2_ty45s"]
 [ext_resource type="Script" uid="uid://bxcl32ibl8vgx" path="res://scenes/inventory/inventory_slot.gd" id="3_ty45s"]
 [ext_resource type="Resource" uid="uid://crrud54yx74ob" path="res://scenes/equipment/entries/flyswatter.tres" id="4_yyk2a"]
@@ -10,7 +10,7 @@
 custom_minimum_size = Vector2(90, 70)
 layout_mode = 3
 anchors_preset = 0
-script = ExtResource("1_uae8j")
+script = ExtResource("1_yyk2a")
 
 [node name="Belt" type="TextureRect" parent="."]
 layout_mode = 0

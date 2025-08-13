@@ -1,15 +1,15 @@
 [gd_scene load_steps=17 format=3 uid="uid://bxp10qpdnhpjg"]
 
-[ext_resource type="Script" uid="uid://b6nrrg1f2vfcl" path="res://scripts/player/player.gd" id="1_y4r1p"]
+[ext_resource type="Script" uid="uid://b6nrrg1f2vfcl" path="res://scripts/player/hand.gd" id="1_y4r1p"]
 [ext_resource type="Texture2D" uid="uid://badrntcjnvwgj" path="res://assets/player/hand.png" id="3_qhqgy"]
-[ext_resource type="Script" uid="uid://b0mmkvnp2vjq5" path="res://scripts/player/idle_state.gd" id="3_qlg0r"]
+[ext_resource type="Script" uid="uid://b0mmkvnp2vjq5" path="res://scripts/player/idle_state.gd" id="3_v24qn"]
 [ext_resource type="Script" uid="uid://ca42s16x5547g" path="res://scripts/state_machine/state_machine.gd" id="3_y4r1p"]
 [ext_resource type="Script" uid="uid://dowvmhrglkm7v" path="res://scripts/player/smack_state.gd" id="4_dqkch"]
 [ext_resource type="Texture2D" uid="uid://bqkybbohwmj75" path="res://assets/player/test arm.png" id="4_smehm"]
 [ext_resource type="Texture2D" uid="uid://cokbfjclr2ww3" path="res://assets/player/grab arm.png" id="5_qlg0r"]
-[ext_resource type="Script" uid="uid://qp3frfxg5ogc" path="res://scripts/player/pickup_state.gd" id="5_tuyoq"]
+[ext_resource type="Script" uid="uid://qp3frfxg5ogc" path="res://scripts/player/pickup_state.gd" id="7_bfalx"]
 [ext_resource type="Texture2D" uid="uid://dniu173guiukg" path="res://assets/player/pickup hand.png" id="9_f1ej7"]
-[ext_resource type="Script" uid="uid://b4m3ikfypcuk2" path="res://scripts/player/equipment_state.gd" id="9_y4r1p"]
+[ext_resource type="Script" uid="uid://b4m3ikfypcuk2" path="res://scripts/player/equipment_state.gd" id="9_v24qn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_smehm"]
 radius = 40.0
@@ -123,7 +123,7 @@ _data = {
 &"smack": SubResource("Animation_y4r1p")
 }
 
-[node name="Player" type="Node2D" node_paths=PackedStringArray("idle_state", "smack_state", "pick_up_state", "equipment_state")]
+[node name="Hand" type="Node2D" node_paths=PackedStringArray("idle_state", "smack_state", "pick_up_state", "equipment_state")]
 z_index = 1
 rotation = -0.00110836
 script = ExtResource("1_y4r1p")
@@ -138,10 +138,9 @@ script = ExtResource("3_y4r1p")
 _initial_state = NodePath("Idle")
 metadata/_custom_type_script = "uid://ca42s16x5547g"
 
-[node name="Idle" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("selection_area", "pick_up_state", "smack_state", "_animation_player")]
+[node name="Idle" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("pick_up_state", "smack_state", "_animation_player")]
 scale = Vector2(0.999983, 0.988788)
-script = ExtResource("3_qlg0r")
-selection_area = NodePath("Area2D")
+script = ExtResource("3_v24qn")
 pick_up_state = NodePath("../Pick up")
 smack_state = NodePath("../Smack")
 _animation_player = NodePath("../../AnimationPlayer")
@@ -186,7 +185,7 @@ shape = SubResource("CircleShape2D_smehm")
 
 [node name="Pick up" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("equipment_state", "idle_state", "_animation_player")]
 visible = false
-script = ExtResource("5_tuyoq")
+script = ExtResource("7_bfalx")
 equipment_state = NodePath("../Equiment")
 idle_state = NodePath("../Idle")
 _animation_player = NodePath("../../AnimationPlayer")
@@ -207,7 +206,7 @@ shape = SubResource("CircleShape2D_smehm")
 
 [node name="Equiment" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("idle_state", "pick_up_state")]
 visible = false
-script = ExtResource("9_y4r1p")
+script = ExtResource("9_v24qn")
 idle_state = NodePath("../Idle")
 pick_up_state = NodePath("../Pick up")
 metadata/_custom_type_script = "uid://cjgkt6mw5ow4l"

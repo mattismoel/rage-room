@@ -1,8 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://dpcv78j3ky7pm"]
+[gd_scene load_steps=18 format=3 uid="uid://dpcv78j3ky7pm"]
 
 [ext_resource type="Script" uid="uid://px0ijr1h5uhl" path="res://scripts/intensity_manager.gd" id="1_kvpfn"]
 [ext_resource type="Script" uid="uid://dvfp0i6u6ksgu" path="res://scripts/spawner/timed_spawner.gd" id="1_lnu2h"]
-[ext_resource type="PackedScene" uid="uid://bxp10qpdnhpjg" path="res://scenes/player.tscn" id="2_kvpfn"]
+[ext_resource type="PackedScene" uid="uid://bxp10qpdnhpjg" path="res://scenes/hand.tscn" id="2_kvpfn"]
 [ext_resource type="Script" uid="uid://7qy2yh4bqtbv" path="res://scripts/spawner/spawn_entry.gd" id="2_lnu2h"]
 [ext_resource type="Script" uid="uid://hxmlfmuavfju" path="res://scripts/spawner/area_spawner.gd" id="4_gee14"]
 [ext_resource type="Script" uid="uid://c8f6fbvcun4wt" path="res://scripts/spawner/selectors/weighted_selector.gd" id="6_gee14"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://c60qb2i7f4vto" path="res://scenes/insects/spider/spider.tscn" id="10_dinhu"]
 [ext_resource type="PackedScene" uid="uid://fkur1724phpe" path="res://scenes/inventory.tscn" id="10_vtaks"]
 [ext_resource type="PackedScene" uid="uid://do7aob8ascrgo" path="res://scenes/currency/currency.tscn" id="12_kvuet"]
+[ext_resource type="Script" uid="uid://dmds87a1jnvh0" path="res://scripts/health_component.gd" id="12_trtic"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0tnpc"]
 size = Vector2(32, 32)
@@ -131,8 +132,14 @@ metadata/_custom_type_script = "uid://c8f6fbvcun4wt"
 [node name="PlayerLayer" type="CanvasLayer" parent="."]
 layer = 2
 
-[node name="Player" parent="PlayerLayer" node_paths=PackedStringArray("inventory") instance=ExtResource("2_kvpfn")]
-inventory = NodePath("../../UI/MarginContainer/InventoryComponent")
+[node name="Player" type="Node" parent="PlayerLayer"]
+
+[node name="PlayerHealthComponent" type="Node" parent="PlayerLayer/Player"]
+script = ExtResource("12_trtic")
+metadata/_custom_type_script = "uid://dmds87a1jnvh0"
+
+[node name="Hand" parent="PlayerLayer/Player" node_paths=PackedStringArray("inventory") instance=ExtResource("2_kvpfn")]
+inventory = NodePath("../../../UI/MarginContainer/InventoryComponent")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
