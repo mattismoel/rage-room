@@ -9,6 +9,8 @@ signal killed(insect: Insect)
 var _target: Target
 
 func _ready() -> void:
+	InsectManager.add([self])
+
 	## We need to wait two physics frames for some reason...
 	await get_tree().physics_frame
 	await get_tree().physics_frame
