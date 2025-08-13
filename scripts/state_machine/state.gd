@@ -4,11 +4,7 @@ extends Node2D
 
 ## Signal sent when wishing to exit this state and change to other state by
 ## reference.
-signal change_state(to: State)
-
-## Signal sent when wishing to exit this state and change to other state
-## by state name.
-signal change_state_by_name(from: State, to: String)
+signal changed_state(to: State)
 
 @export_group("Debug")
 @export var debug_enter: bool = false

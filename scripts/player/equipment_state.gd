@@ -38,7 +38,7 @@ func set_equipment(equipment: EquipmentEntry) -> void:
 
 func _on_entry_unequipped() -> void:
 	## Go to back to pick up state when equipment is unequipped
-	change_state.emit(pick_up_state)
+	changed_state.emit(pick_up_state)
 
 #func next_in_equipment_cycle(steps: int) -> void:
 	#var index := _entries.find(current_equipment_entry) + steps

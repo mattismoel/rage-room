@@ -1,9 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://cmnjknfd4xhaj"]
+[gd_scene load_steps=12 format=3 uid="uid://bxp10qpdnhpjg"]
 
 [ext_resource type="Script" uid="uid://b6nrrg1f2vfcl" path="res://scripts/player/hand.gd" id="2_dqkch"]
 [ext_resource type="Texture2D" uid="uid://badrntcjnvwgj" path="res://assets/player/hand.png" id="3_qhqgy"]
 [ext_resource type="Script" uid="uid://b0mmkvnp2vjq5" path="res://scripts/player/idle_state.gd" id="3_qlg0r"]
-[ext_resource type="Script" uid="uid://ca42s16x5547g" path="res://machinery/state_machine.gd" id="3_y4r1p"]
+[ext_resource type="Script" uid="uid://ca42s16x5547g" path="res://scripts/state_machine/state_machine.gd" id="3_y4r1p"]
 [ext_resource type="Script" uid="uid://dowvmhrglkm7v" path="res://scripts/player/smack_state.gd" id="4_dqkch"]
 [ext_resource type="Texture2D" uid="uid://bqkybbohwmj75" path="res://assets/player/test arm.png" id="4_smehm"]
 [ext_resource type="Texture2D" uid="uid://cokbfjclr2ww3" path="res://assets/player/grab arm.png" id="5_qlg0r"]
@@ -23,10 +23,10 @@ idle_state = NodePath("StateMachine/Idle")
 pick_up_state = NodePath("StateMachine/Pick up")
 equipment_state = NodePath("StateMachine/Equiment")
 
-[node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("initial_state")]
+[node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("_initial_state")]
 z_index = 1
 script = ExtResource("3_y4r1p")
-initial_state = NodePath("Idle")
+_initial_state = NodePath("Idle")
 metadata/_custom_type_script = "uid://ca42s16x5547g"
 
 [node name="Idle" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("selection_area", "pick_up_state", "smack_state")]

@@ -12,7 +12,7 @@ func enter() -> void:
 func input(event) -> void:
 	if event.is_action_pressed("interact"):
 		## Switch to smack state
-		change_state.emit(smack_state)
+		changed_state.emit(smack_state)
 
 func exit() -> void:
 	super()

@@ -6,38 +6,33 @@ extends Node2D
 signal state_changed(to: State)
 
 ## The initial state, that is entered upon instantiation of the StateMachine.
-@export var initial_state: State
+@export var _initial_state: State
 
 @export_group("Debug")
 ## Whether or not, the state machine should print information on state change.
-@export var debug_change_state: bool = false
+@export var _debug_change_state: bool = false
 
 
-var states: Array[State] = []
+var _states: Array[State] = []
 var _current_state: State = null
-
 
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
 		
-	if initial_state == null:
+	if _initial_state == null:
 		push_error("Initial state on StateMachine '%s' is null! Returning early..." % name)
 		
 	for child in get_children():
 		if child is State:
-			states.append(child)
-			child.change_state.connect(change_state)
-			child.change_state_by_name.connect(change_state_by_name)
+			_states.append(child)
+			child.changed_state.connect(change_state)
 
-	change_state(initial_state)
+	change_state(_initial_state)
 
 ## Change the StateMachine's state to another.
 ## If the from and to state are equivelant, nothing happens, and the function
 ## returns early.
-##
-## If desired, the state can also be changed with the 'change_state_by_name'
-## function, for changing by state name instead of direct reference.
 func change_state(to: State) -> void:
 	if _current_state == to:
 		print_debug("Tried to enter already active state %s. Returning prematurely..." % to.name)
@@ -48,7 +43,7 @@ func change_state(to: State) -> void:
 		_current_state.active = false
 		pass
 
-	var prev_state_name: String = _current_state.name if _current_state else "null"
+	var prev_state_name := _current_state.name if _current_state != null else StringName("null")
 
 	_current_state = to
 	_current_state.enter()
@@ -56,27 +51,8 @@ func change_state(to: State) -> void:
 
 	state_changed.emit(to)
 
-	if debug_change_state:
+	if _debug_change_state:
 		print("Changed from %s to %s" % [prev_state_name, to.name])
-
-
-## Changes the StateMachine's state by name. If the state does not exist,
-## noting happens.
-func change_state_by_name(to_name: String) -> void:
-	var to_state := state_by_name(to_name)
-
-	if to_state == null:
-		return
-	change_state(to_state)
-
-## Searches for a state with a given name. If found, the state is returned,
-## else 'null' is returned.
-func state_by_name(state_name: String) -> State:
-	for state in states:
-		if state.name.to_lower() == state_name.to_lower():
-			return state
-	return null
-
 
 func _process(delta: float) -> void:
 	if !_current_state:
