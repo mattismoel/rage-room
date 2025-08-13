@@ -8,7 +8,7 @@ extends Insect
 
 @export_group("Vector2 System")
 ## The max distance from the straight line to the target, that the ant deviates. 
-@export var _wiggle_width: float = 24.0
+@export var _wiggle_width: float = 12.0
 
 ## The target segment length between waypoints.
 @export var _segment_length: float = 64.0
