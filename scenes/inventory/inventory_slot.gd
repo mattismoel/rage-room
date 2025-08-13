@@ -5,7 +5,6 @@ extends Button
 var stored_equipment: EquipmentEntry
 
 signal equipment_change(slot: InventorySlot)
-signal buy_equipment_attempt(entry: EquipmentEntry)
 
 func _ready() -> void:
 	set_entry(initial_equipment)
