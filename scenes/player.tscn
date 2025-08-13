@@ -127,7 +127,6 @@ _data = {
 z_index = 1
 rotation = -0.00110836
 script = ExtResource("1_y4r1p")
-state_machine = NodePath("StateMachine")
 idle_state = NodePath("StateMachine/Idle")
 smack_state = NodePath("StateMachine/Smack")
 pick_up_state = NodePath("StateMachine/Pick up")
