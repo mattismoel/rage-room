@@ -2,7 +2,7 @@ class_name SpawnTimer
 extends Timer
 
 ## The initial spawn rate (amount of spawns per second).
-@export var _spawn_rate: float = 1.0
+@export var _spawn_rate: float = 0.25
 
 @export var _max_spawn_rate: float = 10.0
 
