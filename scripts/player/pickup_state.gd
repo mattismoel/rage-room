@@ -3,10 +3,12 @@ extends State
 
 @export var equipment_state: EquipmentState
 @export var idle_state: IdleState
+@export var _animation_player: AnimationPlayer
 
 func enter() -> void:
 	super()
 	InventoryManager.entry_equipped.connect(_on_equipment_picked_up)
+	_animation_player.play("pick_up")
 	visible = true
 	
 func exit() -> void:

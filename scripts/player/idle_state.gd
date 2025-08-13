@@ -4,10 +4,12 @@ extends State
 @export var selection_area: CollisionObject2D
 @export var pick_up_state: PickUpState
 @export var smack_state: SmackState
+@export var _animation_player: AnimationPlayer
 
 func enter() -> void:
 	super()
 	visible = true
+	_animation_player.play("idle")
 		
 func input(event) -> void:
 	if event.is_action_pressed("interact"):

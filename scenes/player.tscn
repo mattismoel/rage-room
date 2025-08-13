@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bxp10qpdnhpjg"]
+[gd_scene load_steps=17 format=3 uid="uid://bxp10qpdnhpjg"]
 
 [ext_resource type="Script" uid="uid://b6nrrg1f2vfcl" path="res://scripts/player/hand.gd" id="2_dqkch"]
 [ext_resource type="Texture2D" uid="uid://badrntcjnvwgj" path="res://assets/player/hand.png" id="3_qhqgy"]
@@ -13,6 +13,115 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_smehm"]
 radius = 40.0
+
+[sub_resource type="Animation" id="Animation_y4r1p"]
+resource_name = "smack"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StateMachine/Smack/SmackSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 0, 0, 0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StateMachine/Smack")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_kill_intersecting_insects"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_d2wvv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StateMachine/Smack/SmackSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StateMachine/Idle/IdleSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StateMachine/Pick up/PickUpSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_3v2ag"]
+resource_name = "idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StateMachine/Idle/IdleSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_jej6c"]
+resource_name = "pick_up"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StateMachine/Pick up/PickUpSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3v2ag"]
+_data = {
+&"RESET": SubResource("Animation_d2wvv"),
+&"idle": SubResource("Animation_3v2ag"),
+&"pick_up": SubResource("Animation_jej6c"),
+&"smack": SubResource("Animation_y4r1p")
+}
 
 [node name="Hand" type="Node2D" node_paths=PackedStringArray("state_machine", "idle_state", "pick_up_state", "equipment_state")]
 z_index = 1
@@ -29,17 +138,13 @@ script = ExtResource("3_y4r1p")
 _initial_state = NodePath("Idle")
 metadata/_custom_type_script = "uid://ca42s16x5547g"
 
-[node name="Idle" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("selection_area", "pick_up_state", "smack_state")]
+[node name="Idle" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("selection_area", "pick_up_state", "smack_state", "_animation_player")]
 scale = Vector2(0.999983, 0.988788)
 script = ExtResource("3_qlg0r")
 selection_area = NodePath("Area2D")
 pick_up_state = NodePath("../Pick up")
 smack_state = NodePath("../Smack")
-
-[node name="Sprite2D" type="Sprite2D" parent="StateMachine/Idle"]
-position = Vector2(-2.00336, 3.03177)
-scale = Vector2(0.165986, 0.150084)
-texture = ExtResource("4_smehm")
+_animation_player = NodePath("../../AnimationPlayer")
 
 [node name="Area2D" type="Area2D" parent="StateMachine/Idle"]
 
@@ -49,14 +154,20 @@ rotation = 0.324872
 scale = Vector2(0.166281, 0.295136)
 shape = SubResource("CircleShape2D_smehm")
 
-[node name="Smack" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("hit_area", "idle_state")]
+[node name="IdleSprite" type="Sprite2D" parent="StateMachine/Idle"]
+position = Vector2(-2.00336, 3.03177)
+scale = Vector2(0.165986, 0.150084)
+texture = ExtResource("4_smehm")
+
+[node name="Smack" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("hit_area", "idle_state", "_animation_player")]
 visible = false
 position = Vector2(-1, 6)
 script = ExtResource("4_dqkch")
 hit_area = NodePath("Area2D")
 idle_state = NodePath("../Idle")
+_animation_player = NodePath("../../AnimationPlayer")
 
-[node name="Sprite2D" type="Sprite2D" parent="StateMachine/Smack"]
+[node name="SmackSprite" type="Sprite2D" parent="StateMachine/Smack"]
 position = Vector2(-1.99113, -14.0033)
 rotation = 0.390436
 scale = Vector2(0.0827047, 0.0827047)
@@ -72,13 +183,14 @@ position = Vector2(2.04823, -8.01624)
 scale = Vector2(0.303766, 0.303766)
 shape = SubResource("CircleShape2D_smehm")
 
-[node name="Pick up" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("equipment_state", "idle_state")]
+[node name="Pick up" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("equipment_state", "idle_state", "_animation_player")]
 visible = false
 script = ExtResource("5_tuyoq")
 equipment_state = NodePath("../Equiment")
 idle_state = NodePath("../Idle")
+_animation_player = NodePath("../../AnimationPlayer")
 
-[node name="Sprite2D" type="Sprite2D" parent="StateMachine/Pick up"]
+[node name="PickUpSprite" type="Sprite2D" parent="StateMachine/Pick up"]
 position = Vector2(7.99224, 7.00886)
 rotation = 1.60354
 scale = Vector2(0.0518226, 0.0504208)
@@ -99,9 +211,14 @@ idle_state = NodePath("../Idle")
 pick_up_state = NodePath("../Pick up")
 metadata/_custom_type_script = "uid://cjgkt6mw5ow4l"
 
-[node name="Sprite2D" type="Sprite2D" parent="StateMachine/Equiment"]
+[node name="EquipSprite" type="Sprite2D" parent="StateMachine/Equiment"]
 z_index = 1
 position = Vector2(1.00222, -1.99889)
 rotation = -0.47822
 scale = Vector2(0.251999, 0.251999)
 texture = ExtResource("5_qlg0r")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_3v2ag")
+}
