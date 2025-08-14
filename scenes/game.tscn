@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://dpcv78j3ky7pm"]
+[gd_scene load_steps=23 format=3 uid="uid://dpcv78j3ky7pm"]
 
 [ext_resource type="Script" uid="uid://px0ijr1h5uhl" path="res://scripts/intensity_manager.gd" id="1_kvpfn"]
 [ext_resource type="Script" uid="uid://dvfp0i6u6ksgu" path="res://scripts/spawner/timed_spawner.gd" id="1_lnu2h"]
+[ext_resource type="Script" uid="uid://bgbi2h521tu0g" path="res://scenes/currency/currency_component.gd" id="2_ir15t"]
 [ext_resource type="PackedScene" uid="uid://bxp10qpdnhpjg" path="res://scenes/hand.tscn" id="2_kvpfn"]
 [ext_resource type="Script" uid="uid://7qy2yh4bqtbv" path="res://scripts/spawner/spawn_entry.gd" id="2_lnu2h"]
 [ext_resource type="Script" uid="uid://hxmlfmuavfju" path="res://scripts/spawner/area_spawner.gd" id="4_gee14"]
@@ -12,8 +13,12 @@
 [ext_resource type="Texture2D" uid="uid://ddi0wkwb1ocpm" path="res://assets/table.png" id="9_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://c60qb2i7f4vto" path="res://scenes/insects/spider/spider.tscn" id="10_dinhu"]
 [ext_resource type="PackedScene" uid="uid://fkur1724phpe" path="res://scenes/inventory.tscn" id="10_vtaks"]
-[ext_resource type="PackedScene" uid="uid://do7aob8ascrgo" path="res://scenes/currency/currency.tscn" id="12_kvuet"]
 [ext_resource type="Script" uid="uid://dmds87a1jnvh0" path="res://scripts/health_component.gd" id="12_trtic"]
+[ext_resource type="Script" uid="uid://cgqttha6wp5wb" path="res://scenes/ui/game_ui.gd" id="14_ca42v"]
+[ext_resource type="Script" uid="uid://clj4yaht54h7c" path="res://scenes/inventory/inventory_component.gd" id="16_ca42v"]
+[ext_resource type="Script" uid="uid://c3n2s4jlpujkh" path="res://scenes/equipment/equipment_entry.gd" id="17_264po"]
+[ext_resource type="Resource" uid="uid://dy1f754kra1gv" path="res://scenes/equipment/entries/bug_zapper.tres" id="18_1kice"]
+[ext_resource type="Resource" uid="uid://crrud54yx74ob" path="res://scenes/equipment/entries/flyswatter.tres" id="19_5newe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0tnpc"]
 size = Vector2(32, 32)
@@ -36,6 +41,16 @@ metadata/_custom_type_script = "uid://7qy2yh4bqtbv"
 script = ExtResource("1_kvpfn")
 metadata/_custom_type_script = "uid://px0ijr1h5uhl"
 
+[node name="CurrencyComponent" type="Node" parent="."]
+script = ExtResource("2_ir15t")
+_initial_balance = 100
+metadata/_custom_type_script = "uid://bgbi2h521tu0g"
+
+[node name="InventoryComponent" type="Node" parent="."]
+script = ExtResource("16_ca42v")
+_equipment = Array[ExtResource("17_264po")]([ExtResource("19_5newe"), ExtResource("18_1kice")])
+metadata/_custom_type_script = "uid://clj4yaht54h7c"
+
 [node name="TableCloth" type="Sprite2D" parent="."]
 texture = ExtResource("9_0tnpc")
 centered = false
@@ -43,12 +58,12 @@ centered = false
 [node name="Targets" type="Node" parent="."]
 
 [node name="Plate" parent="Targets" instance=ExtResource("8_0tnpc")]
-position = Vector2(124, 84)
+position = Vector2(124, 116)
 
 [node name="Spawners" type="Node" parent="."]
 
 [node name="AntSpawner" type="Node2D" parent="Spawners" node_paths=PackedStringArray("_spawn_timer", "_spawner_component")]
-position = Vector2(190, 47)
+position = Vector2(270, 28)
 script = ExtResource("1_lnu2h")
 _spawn_timer = NodePath("SpawnTimer")
 _spawner_component = NodePath("AreaSpawner")
@@ -60,7 +75,6 @@ autostart = true
 script = ExtResource("8_gee14")
 
 [node name="AreaSpawner" type="Area2D" parent="Spawners/AntSpawner" node_paths=PackedStringArray("_container", "_entry_selector")]
-position = Vector2(95, -63)
 script = ExtResource("4_gee14")
 _container = NodePath(".")
 _entry_selector = NodePath("WeightedSpawnEntrySelector2")
@@ -76,7 +90,7 @@ _entries = Array[ExtResource("2_lnu2h")]([SubResource("Resource_0tnpc"), SubReso
 metadata/_custom_type_script = "uid://c8f6fbvcun4wt"
 
 [node name="AntSpawner2" type="Node2D" parent="Spawners" node_paths=PackedStringArray("_spawn_timer", "_spawner_component")]
-position = Vector2(-71, 110)
+position = Vector2(-23, 92)
 script = ExtResource("1_lnu2h")
 _spawn_timer = NodePath("SpawnTimer")
 _spawner_component = NodePath("AreaSpawner")
@@ -103,7 +117,7 @@ _entries = Array[ExtResource("2_lnu2h")]([SubResource("Resource_0tnpc")])
 metadata/_custom_type_script = "uid://c8f6fbvcun4wt"
 
 [node name="AntSpawner3" type="Node2D" parent="Spawners" node_paths=PackedStringArray("_spawn_timer", "_spawner_component")]
-position = Vector2(78, -57)
+position = Vector2(86, -27)
 script = ExtResource("1_lnu2h")
 _spawn_timer = NodePath("SpawnTimer")
 _spawner_component = NodePath("AreaSpawner")
@@ -138,28 +152,48 @@ layer = 2
 script = ExtResource("12_trtic")
 metadata/_custom_type_script = "uid://dmds87a1jnvh0"
 
-[node name="Hand" parent="PlayerLayer/Player" node_paths=PackedStringArray("inventory") instance=ExtResource("2_kvpfn")]
-inventory = NodePath("../../../UI/MarginContainer/InventoryComponent")
+[node name="Hand" parent="PlayerLayer/Player" node_paths=PackedStringArray("_inventory", "_inventory_component") instance=ExtResource("2_kvpfn")]
+_inventory = NodePath("../../../UI/Inventory")
+_inventory_component = NodePath("../../../InventoryComponent")
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("_currency_component", "_currency_label")]
+script = ExtResource("14_ca42v")
+_currency_component = NodePath("../CurrencyComponent")
+_currency_label = NodePath("Control/MarginContainer/CurrencyLabel")
 
-[node name="MarginContainer" type="MarginContainer" parent="UI"]
+[node name="Control" type="VBoxContainer" parent="UI"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = 2
+mouse_filter = 2
 
-[node name="InventoryComponent" parent="UI/MarginContainer" node_paths=PackedStringArray("currency_component") instance=ExtResource("10_vtaks")]
+[node name="MarginContainer" type="MarginContainer" parent="UI/Control"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="CurrencyLabel" type="Label" parent="UI/Control/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
-size_flags_vertical = 8
-currency_component = NodePath("../CurrencyComponent")
+size_flags_vertical = 0
+text = "0"
 
-[node name="CurrencyComponent" parent="UI/MarginContainer" instance=ExtResource("12_kvuet")]
-layout_mode = 2
-mouse_filter = 2
+[node name="Inventory" parent="UI" node_paths=PackedStringArray("_currency_component", "_inventory_component") instance=ExtResource("10_vtaks")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_top = 110.0
+offset_right = 240.0
+offset_bottom = 180.0
+grow_horizontal = 1
+grow_vertical = 1
+size_flags_horizontal = 0
+size_flags_vertical = 8
+mouse_default_cursor_shape = 8
+_currency_component = NodePath("../../CurrencyComponent")
+_inventory_component = NodePath("../../InventoryComponent")
