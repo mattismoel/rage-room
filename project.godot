@@ -31,6 +31,10 @@ window/stretch/mode="canvas_items"
 
 insects=""
 
+[gui]
+
+theme/custom="uid://4vxqoiug806n"
+
 [input]
 
 interact={
