@@ -26,13 +26,14 @@ script = ExtResource("4_c0cfm")
 metadata/_custom_type_script = "uid://dmds87a1jnvh0"
 
 [node name="HealthBar" parent="." node_paths=PackedStringArray("_health_component") instance=ExtResource("3_yrrjs")]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
 offset_left = -32.0
-offset_top = 7.0
+offset_top = 8.0
 offset_right = 32.0
-offset_bottom = 34.0
+offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 _health_component = NodePath("../HealthComponent")
