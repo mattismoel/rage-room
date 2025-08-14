@@ -1,28 +1,79 @@
+@tool
 class_name InventorySlot
-extends Button
+extends Control
 
-@export var initial_equipment: EquipmentEntry
-var stored_equipment: EquipmentEntry
+signal bought
+signal selected
 
-signal equipment_change(slot: InventorySlot)
+signal changed_equipment(slot: InventorySlot)
+
+@export var _texture: Texture:
+	set(v):
+		_texture = v
+		if v != null:
+			_item_texture.texture = v
+
+@export var _title_label: Label
+@export var _item_texture: TextureRect
+
+@export var _select_button: Button
+@export var _buy_button: Button
+@export var _inventory_component: InventoryComponent
+
+var _stored_equipment: EquipmentEntry
 
 func _ready() -> void:
-	set_entry(initial_equipment)
-	pressed.connect(_on_pressed)
+	_buy_button.pressed.connect(bought.emit)
+	_select_button.pressed.connect(selected.emit)
+
+	mouse_entered.connect(_on_mouse_entered)
+	mouse_exited.connect(_on_mouse_exited)
+
+func initialise(inventory_component: InventoryComponent) -> void:
+	_inventory_component = inventory_component
+
+	_inventory_component.unlocked_entry.connect(_on_entry_unlocked)
+	_inventory_component.equipped_entry.connect(_on_changed_equipment)
+	pass
 
 func set_entry(entry: EquipmentEntry):
 	if entry == null: return clear()
-	stored_equipment = entry
+	_stored_equipment = entry
 
-	## Set slot to display the stored equipment entry
-	if stored_equipment.unlocked:
-		text = entry.name
-	else:
-		text = "Cost: %d" % stored_equipment.cost
+	_title_label.text = entry.name
+	_buy_button.text = "$%d" % _stored_equipment.cost
+	# _item_texture.hide()
+
+	if !entry.is_unlocked:
+		_select_button.disabled = true
+
+func get_entry() -> EquipmentEntry:
+	return _stored_equipment
 
 func clear():
-	text = ""
-	stored_equipment = null
+	_title_label.text = ""
+	_stored_equipment = null
 
 func _on_pressed():
-	equipment_change.emit(self)
+	changed_equipment.emit(self)
+
+func _on_entry_unlocked(entry: EquipmentEntry) -> void:
+	if entry != _stored_equipment: return
+
+	_buy_button.hide()
+	_select_button.disabled = false
+	pass
+
+func _on_mouse_entered() -> void:
+	## Pop-up animation
+	pass
+
+func _on_mouse_exited() -> void:
+	## Pop-down animation.
+	pass
+
+func _on_changed_equipment(entry: EquipmentEntry) -> void:
+	# if _stored_equipment != entry:
+	# 	_item_texture.show()
+	# _item_texture.hide()
+	pass

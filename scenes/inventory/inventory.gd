@@ -1,98 +1,86 @@
-class_name InventoryComponent
+class_name InventoryUI
 extends Control
 
-@export var currency_component: CurrencyComponent
+signal entry_entered(entry: EquipmentEntry)
+signal entry_exited(entry: EquipmentEntry)
+signal entry_selected(entry: EquipmentEntry)
 
-var inventory: Array[EquipmentEntry] = []
-var slots: Array[InventorySlot] = []
-var equipped_entry: EquipmentEntry
+@export var _currency_component: CurrencyComponent
+@export var _inventory_component: InventoryComponent
+@export var _slot_container: Control
 
-signal entry_equipped(entry: EquipmentEntry)
-signal entry_unequipped
+var _slots: Array[InventorySlot] = []
 
-func _ready() -> void:	
-	## Append all inventory slots to array
-	for child in get_children():
-		if child is InventorySlot:
-			slots.append(child)
-			inventory.append(child.initial_equipment)
-			child.equipment_change.connect(_on_slot_clicked)
+func _ready() -> void:
+	_inventory_component.equipped_entry.connect(_on_equip)
 
-func _on_slot_clicked(slot: InventorySlot) -> void:
-	var new_slot_entry: EquipmentEntry
-	
-	## If slot is not empty, equip what is already there. Else just unequip.
-	if 	slot.stored_equipment != null:
-		
-		## Purchase the equipment if it is not unlocked
-		if not slot.stored_equipment.unlocked:
-			var cost := slot.stored_equipment.cost
-			var purchased := currency_component.attempt_purchase(cost)
-			
-			slot.stored_equipment.unlocked = true if purchased else false
-			if not purchased: return
-			
-		new_slot_entry = eqiup(slot.stored_equipment)
-	else: new_slot_entry = unequip()
-	
-	slot.set_entry(new_slot_entry)
+	for child in _slot_container.get_children(true):
+		if child is not InventorySlot: continue
+		_slots.append(child)
 
-## Takes the entry being equipped as argument and returns what it replaces
-func eqiup(new_entry: EquipmentEntry) -> EquipmentEntry:
-	var replaced_entry := equipped_entry
-	equipped_entry = new_entry
-	
-	## Put the entry that is being replaced back in the inventory
-	if replaced_entry != null: inventory.append(replaced_entry)
-	entry_unequipped.emit()
-	
-	## Remove the entry that is being picked up from the inventory
-	inventory.erase(new_entry)
-	
-	entry_equipped.emit(new_entry)
-	return replaced_entry
+	var initial_equipment := _inventory_component.get_equipment_entries()
 
-func unequip() -> EquipmentEntry:
-	var replaced_entry := equipped_entry
-	
-	## Put the currently equipped entry back in the inventory
-	if replaced_entry != null: inventory.append(replaced_entry)
-	equipped_entry = null
-	
-	entry_unequipped.emit()
-	return replaced_entry
+	assert(_slots.size() >= initial_equipment.size(), "There are not enough inventory slots for the given InventoryComponent.")
 
-func has_mouse_inside() -> bool:
-	var mouse_pos = get_viewport().get_mouse_position()
-	return 	get_global_rect().has_point(mouse_pos)
+	for i in range(initial_equipment.size()):
+		var entry := initial_equipment[i]
 
-## THIS SECTION IS ONLY FOR DEBUGGING PURPOSES (AND CHEATERS)
-func _input(event: InputEvent) -> void:
-	if event is InputEventKey and event.pressed:
-		if event.keycode == KEY_E:
-			print("ADDED test_entry")
-			const test_entry = preload("res://scenes/equipment/entries/test_equipment_entry.tres");
-			inventory.append(test_entry)
-			allocate_to_vacant_slots()
+		_slots[i].initialise(_inventory_component)
+		_slots[i].set_entry(entry)
 
-func allocate_to_vacant_slots() -> void:
-	## Allocate missing inventory equipment entries to vacant slots
-	## There is a lot of for-loops and if-statements here. Can it be improved? likely..
-	for i in range(inventory.size()):
-		## Check if this entry is already equipped
-		var homeless := false
-		if inventory[i] != equipped_entry:
-			homeless = true
-		
-		## Check if this entry has been assigned a slot
-		for slot in slots:
-			if slot.stored_equipment == inventory[i]:
-				homeless = false
-				break
-			
-		if not homeless: continue
-		## Look for vacant slots and assign entry to one if found
-		for slot in slots:
-			if slot.stored_equipment == null:
-				slot.set_entry(inventory[i])
-				break
+		_slots[i].bought.connect(func(): _on_entry_bought(entry))
+		_slots[i].mouse_entered.connect(func(): _on_entry_entered(entry))
+		_slots[i].mouse_exited.connect(func(): _on_entry_exited(entry))
+		_slots[i].selected.connect(func(): _on_entry_selected(entry))
+
+func _on_equip(entry: EquipmentEntry) -> void:
+	for slot in _slots:
+		if slot.get_entry() != entry: continue
+
+		## The equipped entry is the current one
+		## ...
+
+func _on_entry_bought(entry: EquipmentEntry) -> void:
+	var bought := _currency_component.attempt_purchase(entry.cost)
+
+	if !bought: return
+
+	_inventory_component.unlock_entry(entry)
+	pass
+
+func _on_entry_entered(entry: EquipmentEntry) -> void:
+	entry_entered.emit(entry)
+	pass
+
+func _on_entry_exited(entry: EquipmentEntry) -> void:
+	entry_exited.emit(entry)
+	pass
+
+func _on_entry_selected(entry: EquipmentEntry) -> void:
+	if !entry.is_unlocked: return
+
+	_inventory_component.equip(entry)
+	entry_selected.emit(entry)
+
+# func allocate_to_vacant_slots() -> void:
+# 	## Allocate missing inventory equipment entries to vacant slots
+# 	## There is a lot of for-loops and if-statements here. Can it be improved? likely..
+# 	for i in range(inventory.size()):
+# 		## Check if this entry is already equipped
+# 		var homeless := false
+# 		if inventory[i] != _current_equipment:
+# 			homeless = true
+#
+# 		## Check if this entry has been assigned a slot
+# 		for slot in slots:
+# 			if slot.stored_equipment == inventory[i]:
+# 				homeless = false
+# 				break
+#
+# 		if not homeless: continue
+# 		## Look for vacant slots and assign entry to one if found
+# 		for slot in slots:
+# 			if slot.stored_equipment == null:
+# 				slot.set_entry(inventory[i])
+# 				break
+

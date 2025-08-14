@@ -1,71 +1,82 @@
-[gd_scene load_steps=6 format=3 uid="uid://fkur1724phpe"]
+[gd_scene load_steps=9 format=3 uid="uid://fkur1724phpe"]
 
 [ext_resource type="Script" uid="uid://djgu6m5pecjky" path="res://scenes/inventory/inventory.gd" id="1_yyk2a"]
-[ext_resource type="Texture2D" uid="uid://b1cln5grvtgrp" path="res://assets/belt.png" id="2_ty45s"]
-[ext_resource type="Script" uid="uid://bxcl32ibl8vgx" path="res://scenes/inventory/inventory_slot.gd" id="3_ty45s"]
-[ext_resource type="Resource" uid="uid://crrud54yx74ob" path="res://scenes/equipment/entries/flyswatter.tres" id="4_yyk2a"]
-[ext_resource type="Resource" uid="uid://dy1f754kra1gv" path="res://scenes/equipment/entries/bug_zapper.tres" id="5_uae8j"]
+[ext_resource type="PackedScene" uid="uid://cya45llykdujp" path="res://scenes/inventory/inventory_slot.tscn" id="3_ty45s"]
+[ext_resource type="Texture2D" uid="uid://dsebaurnk1wov" path="res://scenes/inventory/jeans.png" id="3_yyk2a"]
+[ext_resource type="Texture2D" uid="uid://cahvx2xs8wheo" path="res://scenes/inventory/belt.png" id="4_uae8j"]
+[ext_resource type="Texture2D" uid="uid://cyp6kcm84ob04" path="res://scenes/inventory/straps.png" id="5_s887n"]
 
-[node name="Inventory" type="Control"]
-custom_minimum_size = Vector2(90, 70)
+[sub_resource type="AtlasTexture" id="AtlasTexture_g71ie"]
+atlas = ExtResource("3_yyk2a")
+region = Rect2(0, 159, 240, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sr8g6"]
+atlas = ExtResource("4_uae8j")
+region = Rect2(0, 158, 240, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p7iul"]
+atlas = ExtResource("5_s887n")
+region = Rect2(0, 160, 240, 20)
+
+[node name="Inventory" type="Control" node_paths=PackedStringArray("_slot_container")]
+custom_minimum_size = Vector2(240, 70)
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_yyk2a")
+_slot_container = NodePath("Toolbar/SlotContainer")
 
-[node name="Belt" type="TextureRect" parent="."]
+[node name="Toolbar" type="Control" parent="."]
+custom_minimum_size = Vector2(240, 23)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 240.0
+grow_vertical = 0
+metadata/_edit_group_ = true
+
+[node name="Jeans" type="TextureRect" parent="Toolbar"]
 layout_mode = 0
-rotation = -0.00110836
-scale = Vector2(0.168978, 0.168978)
-texture = ExtResource("2_ty45s")
+offset_top = 2.0
+offset_right = 240.0
+offset_bottom = 23.0
+texture = SubResource("AtlasTexture_g71ie")
+stretch_mode = 2
 
-[node name="InventorySlot" type="Button" parent="."]
+[node name="SlotContainer" type="HBoxContainer" parent="Toolbar"]
 layout_mode = 1
-offset_left = 56.0
-offset_top = 43.0
-offset_right = 145.0
-offset_bottom = 74.0
-scale = Vector2(0.248057, 0.316245)
-mouse_filter = 1
-script = ExtResource("3_ty45s")
-initial_equipment = ExtResource("4_yyk2a")
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -74.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 16
 
-[node name="InventorySlot2" type="Button" parent="."]
-layout_mode = 1
-offset_left = 60.0
-offset_top = 32.0
-offset_right = 149.0
-offset_bottom = 63.0
-scale = Vector2(0.248057, 0.316245)
-mouse_filter = 1
-script = ExtResource("3_ty45s")
+[node name="InventorySlot" parent="Toolbar/SlotContainer" instance=ExtResource("3_ty45s")]
+layout_mode = 2
 
-[node name="InventorySlot3" type="Button" parent="."]
-layout_mode = 1
-offset_left = 31.0
-offset_top = 32.0
-offset_right = 120.0
-offset_bottom = 63.0
-scale = Vector2(0.248057, 0.316245)
-mouse_filter = 1
-script = ExtResource("3_ty45s")
-initial_equipment = ExtResource("5_uae8j")
+[node name="InventorySlot2" parent="Toolbar/SlotContainer" instance=ExtResource("3_ty45s")]
+layout_mode = 2
 
-[node name="InventorySlot4" type="Button" parent="."]
-layout_mode = 1
-offset_left = 6.0
-offset_top = 46.0
-offset_right = 95.0
-offset_bottom = 77.0
-scale = Vector2(0.248057, 0.316245)
-mouse_filter = 1
-script = ExtResource("3_ty45s")
+[node name="Belt" type="TextureRect" parent="Toolbar"]
+layout_mode = 0
+offset_right = 240.0
+offset_bottom = 22.0
+texture = SubResource("AtlasTexture_sr8g6")
+stretch_mode = 2
 
-[node name="InventorySlot5" type="Button" parent="."]
-layout_mode = 1
-offset_left = 4.0
-offset_top = 34.0
-offset_right = 93.0
-offset_bottom = 65.0
-scale = Vector2(0.248057, 0.316245)
-mouse_filter = 1
-script = ExtResource("3_ty45s")
+[node name="Straps" type="TextureRect" parent="Toolbar"]
+layout_mode = 0
+offset_top = 2.0
+offset_right = 240.0
+offset_bottom = 23.0
+texture = SubResource("AtlasTexture_p7iul")
+stretch_mode = 2

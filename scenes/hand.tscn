@@ -1,15 +1,15 @@
 [gd_scene load_steps=17 format=3 uid="uid://bxp10qpdnhpjg"]
 
-[ext_resource type="Script" uid="uid://b6nrrg1f2vfcl" path="res://scripts/player/hand.gd" id="1_y4r1p"]
+[ext_resource type="Script" uid="uid://b6nrrg1f2vfcl" path="res://scenes/player/hand/hand.gd" id="1_y4r1p"]
 [ext_resource type="Texture2D" uid="uid://badrntcjnvwgj" path="res://assets/player/hand.png" id="3_qhqgy"]
-[ext_resource type="Script" uid="uid://b0mmkvnp2vjq5" path="res://scripts/player/idle_state.gd" id="3_v24qn"]
+[ext_resource type="Script" uid="uid://b0mmkvnp2vjq5" path="res://scenes/player/hand/idle_state.gd" id="3_v24qn"]
 [ext_resource type="Script" uid="uid://ca42s16x5547g" path="res://scripts/state_machine/state_machine.gd" id="3_y4r1p"]
-[ext_resource type="Script" uid="uid://dowvmhrglkm7v" path="res://scripts/player/smack_state.gd" id="4_dqkch"]
+[ext_resource type="Script" uid="uid://dowvmhrglkm7v" path="res://scenes/player/hand/smack_state.gd" id="4_dqkch"]
 [ext_resource type="Texture2D" uid="uid://bqkybbohwmj75" path="res://assets/player/test arm.png" id="4_smehm"]
 [ext_resource type="Texture2D" uid="uid://cokbfjclr2ww3" path="res://assets/player/grab arm.png" id="5_qlg0r"]
-[ext_resource type="Script" uid="uid://qp3frfxg5ogc" path="res://scripts/player/pickup_state.gd" id="7_bfalx"]
+[ext_resource type="Script" uid="uid://qp3frfxg5ogc" path="res://scenes/player/hand/pickup_state.gd" id="7_bfalx"]
 [ext_resource type="Texture2D" uid="uid://dniu173guiukg" path="res://assets/player/pickup hand.png" id="9_f1ej7"]
-[ext_resource type="Script" uid="uid://b4m3ikfypcuk2" path="res://scripts/player/equipment_state.gd" id="9_v24qn"]
+[ext_resource type="Script" uid="uid://b4m3ikfypcuk2" path="res://scenes/player/hand/equipment_state.gd" id="9_v24qn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_smehm"]
 radius = 40.0
@@ -136,13 +136,14 @@ equipment_state = NodePath("StateMachine/Equiment")
 z_index = 1
 script = ExtResource("3_y4r1p")
 _initial_state = NodePath("Idle")
+_debug_change_state = true
 metadata/_custom_type_script = "uid://ca42s16x5547g"
 
-[node name="Idle" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("pick_up_state", "smack_state", "_animation_player")]
+[node name="Idle" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("_pick_up_state", "_smack_state", "_animation_player")]
 scale = Vector2(0.999983, 0.988788)
 script = ExtResource("3_v24qn")
-pick_up_state = NodePath("../Pick up")
-smack_state = NodePath("../Smack")
+_pick_up_state = NodePath("../Pick up")
+_smack_state = NodePath("../Smack")
 _animation_player = NodePath("../../AnimationPlayer")
 
 [node name="Area2D" type="Area2D" parent="StateMachine/Idle"]
@@ -158,13 +159,13 @@ position = Vector2(-2.00336, 3.03177)
 scale = Vector2(0.165986, 0.150084)
 texture = ExtResource("4_smehm")
 
-[node name="Smack" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("hit_area", "idle_state", "pick_up_state", "_animation_player")]
+[node name="Smack" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("_hit_area", "_idle_state", "_pick_up_state", "_animation_player")]
 visible = false
 position = Vector2(-1, 6)
 script = ExtResource("4_dqkch")
-hit_area = NodePath("Area2D")
-idle_state = NodePath("../Idle")
-pick_up_state = NodePath("../Pick up")
+_hit_area = NodePath("Area2D")
+_idle_state = NodePath("../Idle")
+_pick_up_state = NodePath("../Pick up")
 _animation_player = NodePath("../../AnimationPlayer")
 
 [node name="SmackSprite" type="Sprite2D" parent="StateMachine/Smack"]
@@ -183,11 +184,11 @@ position = Vector2(2.04823, -8.01624)
 scale = Vector2(0.303766, 0.303766)
 shape = SubResource("CircleShape2D_smehm")
 
-[node name="Pick up" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("equipment_state", "idle_state", "_animation_player")]
+[node name="Pick up" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("_equipment_state", "_idle_state", "_animation_player")]
 visible = false
 script = ExtResource("7_bfalx")
-equipment_state = NodePath("../Equiment")
-idle_state = NodePath("../Idle")
+_equipment_state = NodePath("../Equiment")
+_idle_state = NodePath("../Idle")
 _animation_player = NodePath("../../AnimationPlayer")
 
 [node name="PickUpSprite" type="Sprite2D" parent="StateMachine/Pick up"]
@@ -204,11 +205,10 @@ rotation = 0.324872
 scale = Vector2(0.0468719, 0.0469981)
 shape = SubResource("CircleShape2D_smehm")
 
-[node name="Equiment" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("idle_state", "pick_up_state")]
+[node name="Equiment" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("_pick_up_state")]
 visible = false
 script = ExtResource("9_v24qn")
-idle_state = NodePath("../Idle")
-pick_up_state = NodePath("../Pick up")
+_pick_up_state = NodePath("../Pick up")
 metadata/_custom_type_script = "uid://cjgkt6mw5ow4l"
 
 [node name="EquipSprite" type="Sprite2D" parent="StateMachine/Equiment"]
