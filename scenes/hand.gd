@@ -1,17 +1,12 @@
 class_name Hand
 extends Node2D
 
-@export var initial_equipment: EquipmentEntry
-
-@export var _max_vertical_arm_extension: float = 100
-@export var _struggle_extension: float = 70
+@export var struggle_component: StruggleComponent
 @export var _equipment_container: Node2D
 
-@onready var _logistic_constant: float = -log((_max_vertical_arm_extension/\
-_struggle_extension)-1)/(_struggle_extension-_max_vertical_arm_extension/2)
+@export var initial_equipment: EquipmentEntry
 
 func _ready() -> void:
-	assert(!is_nan(_logistic_constant), "Invalid values for arm extension")
 	set_equipment(initial_equipment)
 
 func set_equipment(entry: EquipmentEntry) -> void:
@@ -23,18 +18,7 @@ func set_equipment(entry: EquipmentEntry) -> void:
 	_equipment_container.add_child(equipment)
 	pass
 
-## Converts regular coordinates to godot coordinates and vice versa
-func _coords_convert(in_cords: float) -> float:
-	return get_window().content_scale_size.y - in_cords
-
 func _process(_delta: float) -> void:
 	var mouse_pos = get_global_mouse_position()
-	var y_pos = _coords_convert(mouse_pos.y)
-	
-	## Arm is limited by a logistic function if extended past the struggle bound
-	if _coords_convert(mouse_pos.y) > _struggle_extension:		
-		var variable = _coords_convert(mouse_pos.y)
-		y_pos = _max_vertical_arm_extension/(1+exp(-_logistic_constant\
-		*(variable-_max_vertical_arm_extension/2)))
-		
-	global_position = Vector2(mouse_pos.x, _coords_convert(y_pos))
+	#mouse_pos.y = struggle_component.apply_struggle(mouse_pos.y)
+	global_position = mouse_pos
