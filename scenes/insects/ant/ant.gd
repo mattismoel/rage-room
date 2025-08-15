@@ -20,8 +20,6 @@ extends Insect
 @export var _waypoint_wait_duration_variance: float = 0.5
 
 func target(t: Target) -> void:
-	super(t)
-
 	var target_pos := t.get_random_perimeter_point_from_point(global_position)
 
 	var tween := create_tween()
