@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://cya45llykdujp"]
 
 [ext_resource type="Script" uid="uid://bxcl32ibl8vgx" path="res://scenes/inventory/inventory_slot.gd" id="1_5agom"]
-[ext_resource type="Texture2D" uid="uid://dtj8s1car5ria" path="res://icon.svg" id="2_u6pog"]
+[ext_resource type="Texture2D" uid="uid://bx5l7h32g5k41" path="res://assets/equipment/bug_zapper.png" id="2_u6pog"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c00wg"]
 
@@ -105,8 +105,14 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = -1.69813
+offset_right = 1.0
+offset_bottom = -1.69813
 grow_horizontal = 2
 grow_vertical = 2
+rotation = 0.0776194
+scale = Vector2(1.0364, 1.0364)
 texture = ExtResource("2_u6pog")
 expand_mode = 2
 stretch_mode = 5
