@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://cya45llykdujp"]
 
 [ext_resource type="Script" uid="uid://bxcl32ibl8vgx" path="res://scenes/inventory/inventory_slot.gd" id="1_5agom"]
-[ext_resource type="Texture2D" uid="uid://357l16nln1ge" path="res://assets/inventory_slot.png" id="2_c7w7p"]
+[ext_resource type="Texture2D" uid="uid://357l16nln1ge" path="res://scenes/inventory/inventory_slot.png" id="2_c7w7p"]
 [ext_resource type="Texture2D" uid="uid://bx5l7h32g5k41" path="res://assets/equipment/bug_zapper.png" id="2_u6pog"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c00wg"]
@@ -38,7 +38,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_u6pog"]
@@ -106,9 +106,11 @@ _data = {
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 3
 anchors_preset = 0
-offset_top = 0.349066
 offset_right = 32.0
-offset_bottom = 32.3491
+offset_bottom = 64.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_default_cursor_shape = 2
 script = ExtResource("1_5agom")
 _title_label = NodePath("ToolTip/Container/TitleLabel")
 _item_texture = NodePath("MovableOnHover/SelectButton/EquipmentSprite")
@@ -118,20 +120,26 @@ _buy_button = NodePath("MovableOnHover/BuyButton")
 
 [node name="MovableOnHover" type="Control" parent="."]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -16.0
-offset_right = 16.0
+anchors_preset = 0
+offset_right = 32.0
 offset_bottom = 32.0
-grow_horizontal = 2
 mouse_filter = 1
+mouse_default_cursor_shape = 2
+
+[node name="ReferenceRect" type="ReferenceRect" parent="MovableOnHover"]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 64.0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+border_color = Color(1, 0, 0, 0)
 
 [node name="SelectButton" type="Button" parent="MovableOnHover"]
 custom_minimum_size = Vector2(32, 32)
-layout_mode = 1
+layout_mode = 2
+offset_top = 1.0
 offset_right = 32.0
-offset_bottom = 32.0
+offset_bottom = 65.0
 size_flags_vertical = 0
 mouse_filter = 1
 mouse_default_cursor_shape = 2
@@ -145,43 +153,40 @@ icon = ExtResource("2_c7w7p")
 
 [node name="EquipmentSprite" type="TextureRect" parent="MovableOnHover/SelectButton"]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 1.0
 grow_horizontal = 2
-grow_vertical = 2
-rotation = 0.0776194
-scale = Vector2(1.0364, 1.0364)
 mouse_filter = 2
+mouse_default_cursor_shape = 2
 texture = ExtResource("2_u6pog")
-expand_mode = 2
+expand_mode = 5
 stretch_mode = 5
 
 [node name="BuyButton" type="Button" parent="MovableOnHover"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+offset_right = 32.0
+offset_bottom = 32.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 mouse_default_cursor_shape = 2
 text = "$0"
+icon_alignment = 1
 
 [node name="ToolTip" type="Control" parent="."]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_top = -20.3491
-offset_bottom = -20.3491
-grow_horizontal = 2
+anchors_preset = 0
+offset_top = -19.0
+offset_right = 32.0
 mouse_filter = 2
 
 [node name="Container" type="VBoxContainer" parent="ToolTip"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 8.0
+offset_bottom = 19.0
 grow_horizontal = 2
 mouse_filter = 2
 
@@ -196,3 +201,4 @@ root_node = NodePath("../MovableOnHover/BuyButton")
 libraries = {
 &"": SubResource("AnimationLibrary_0uvgv")
 }
+autoplay = "RESET"

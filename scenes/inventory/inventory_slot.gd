@@ -3,7 +3,7 @@ class_name InventorySlot
 extends Control
 
 signal bought
-signal selected
+signal pressed
 
 #signal changed_equipment(slot: InventorySlot)
 
@@ -26,8 +26,7 @@ var entry: EquipmentEntry
 
 func _ready() -> void:
 	_buy_button.pressed.connect(bought.emit)
-	_select_button.pressed.connect(selected.emit)
-
+	_select_button.pressed.connect(pressed.emit)
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
 
@@ -46,7 +45,7 @@ func set_entry(new_entry: EquipmentEntry):
 		_select_button.disabled = true
 
 func clear():
-	_title_label.text = ""
+	#_title_label.text = ""
 	_item_texture.hide()
 
 func disable():
@@ -63,7 +62,6 @@ func _on_mouse_entered() -> void:
 	## Pop-up animation
 	if animation_disabled: return
 	_animation_player.play("focus")
-	pass
 
 func _on_mouse_exited() -> void:
 	## Pop-down animation.

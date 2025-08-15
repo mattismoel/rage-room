@@ -6,7 +6,7 @@
 [node name="Hand" type="Node2D" node_paths=PackedStringArray("_equipment_container")]
 z_index = 1
 script = ExtResource("1_y4r1p")
-_initial_equipment = ExtResource("2_cmdsa")
+initial_equipment = ExtResource("2_cmdsa")
 _max_vertical_arm_extension = 1000.0
 _struggle_extension = 1000.0
 _equipment_container = NodePath("EquipmentContainer")

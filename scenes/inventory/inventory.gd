@@ -4,6 +4,7 @@ extends Control
 signal entry_entered(entry: EquipmentEntry)
 signal entry_exited(entry: EquipmentEntry)
 signal entry_selected(entry: EquipmentEntry)
+signal entry_pressed(entry: EquipmentEntry)
 signal entry_bought(entry: EquipmentEntry)
 
 @export var _inventory_slot_scene: PackedScene
@@ -20,7 +21,7 @@ func set_equipment_entries(entries: Array[EquipmentEntry]) -> void:
 		slot.bought.connect(func(): entry_bought.emit(entry))
 		slot.mouse_entered.connect(func(): entry_entered.emit(entry))
 		slot.mouse_exited.connect(func(): entry_exited.emit(entry))
-		slot.selected.connect(func(): entry_selected.emit(entry))
+		slot.pressed.connect(func(): entry_pressed.emit(entry))
 		
 		_slot_container.add_child(slot)
 		_slots.append(slot)
@@ -36,6 +37,8 @@ func vacate_slot(entry: EquipmentEntry) -> void:
 		slot.disable()
 		if slot.entry != entry: continue
 		slot.enable()
+		
+		## The item slot will stay out if this line is uncommented
 		#slot.animation_disabled = true
 		slot.clear()
 

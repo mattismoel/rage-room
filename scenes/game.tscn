@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dpcv78j3ky7pm"]
+[gd_scene load_steps=26 format=3 uid="uid://dpcv78j3ky7pm"]
 
 [ext_resource type="Script" uid="uid://krx438rn24sp" path="res://scenes/game.gd" id="1_bt5mj"]
 [ext_resource type="Script" uid="uid://px0ijr1h5uhl" path="res://scripts/intensity_manager.gd" id="1_kvpfn"]
@@ -13,7 +13,6 @@
 [ext_resource type="PackedScene" uid="uid://bxs1nmrkh8j5q" path="res://scenes/targets/soup/soup.tscn" id="8_0tnpc"]
 [ext_resource type="Script" uid="uid://pke0c4qm2rkn" path="res://scripts/spawner/spawn_tick_component.gd" id="8_gee14"]
 [ext_resource type="Texture2D" uid="uid://ddi0wkwb1ocpm" path="res://assets/table.png" id="9_0tnpc"]
-[ext_resource type="Resource" uid="uid://6pny6l2hfd1o" path="res://scenes/equipment/entries/smack_hand.tres" id="9_bt5mj"]
 [ext_resource type="PackedScene" uid="uid://c60qb2i7f4vto" path="res://scenes/insects/spider/spider.tscn" id="10_dinhu"]
 [ext_resource type="Script" path="res://scripts/health_component.gd" id="12_trtic"]
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="16_5newe"]
@@ -58,7 +57,7 @@ metadata/_custom_type_script = "uid://bgbi2h521tu0g"
 
 [node name="InventoryComponent" type="Node" parent="."]
 script = ExtResource("16_ca42v")
-_equipment = Array[ExtResource("17_264po")]([ExtResource("5_bt5mj"), ExtResource("19_5newe"), ExtResource("18_1kice"), ExtResource("9_bt5mj")])
+_equipment = Array[ExtResource("17_264po")]([ExtResource("5_bt5mj"), ExtResource("19_5newe"), ExtResource("18_1kice")])
 metadata/_custom_type_script = "uid://clj4yaht54h7c"
 
 [node name="TableCloth" type="Sprite2D" parent="."]

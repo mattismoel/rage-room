@@ -1,7 +1,7 @@
 class_name Hand
 extends Node2D
 
-@export var _initial_equipment: EquipmentEntry
+@export var initial_equipment: EquipmentEntry
 
 @export var _max_vertical_arm_extension: float = 100
 @export var _struggle_extension: float = 70
@@ -12,7 +12,7 @@ _struggle_extension)-1)/(_struggle_extension-_max_vertical_arm_extension/2)
 
 func _ready() -> void:
 	assert(!is_nan(_logistic_constant), "Invalid values for arm extension")
-	set_equipment(_initial_equipment)
+	set_equipment(initial_equipment)
 
 func set_equipment(entry: EquipmentEntry) -> void:
 	## Queue free any previous equipment.
