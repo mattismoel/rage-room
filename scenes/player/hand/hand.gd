@@ -5,7 +5,6 @@ extends Node2D
 @onready var _logistic_constant: float = -log((_max_vertical_arm_extension/\
 _struggle_extension)-1)/(_struggle_extension-_max_vertical_arm_extension/2)
 
-@export var _inventory: InventoryUI
 @export var _inventory_component: InventoryComponent
 @export var _game_ui: GameUI
 
@@ -19,10 +18,10 @@ func _ready() -> void:
 	assert(!is_nan(_logistic_constant), "Invalid values for arm extension")
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	
-	idle_state.initialize(_inventory) # Fix for weird missing reference bug
-	pick_up_state.initialise(_inventory_component, _inventory)
-	equipment_state.initialise(_inventory_component, _inventory)
-	smack_state.initialise(_inventory)
+	idle_state.initialize(_game_ui) # Fix for weird missing reference bug
+	pick_up_state.initialise(_inventory_component, _game_ui)
+	equipment_state.initialise(_inventory_component, _game_ui)
+	smack_state.initialise(_game_ui)
 
 ## Converts regular coordinates to godot coordinates and vice versa
 func _coords_convert(in_cords: float) -> float:
