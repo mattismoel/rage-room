@@ -1,0 +1,70 @@
+[gd_scene load_steps=12 format=3 uid="uid://cxf3is8nrir28"]
+
+[ext_resource type="Script" uid="uid://dnk61d4pc5l28" path="res://scenes/equipment/spoon/spoon.gd" id="1_b5e8w"]
+[ext_resource type="Texture2D" uid="uid://dtj8s1car5ria" path="res://icon.svg" id="3_y0pof"]
+[ext_resource type="Texture2D" uid="uid://j7e2jf2fnaq2" path="res://assets/utensils.png" id="4_ue2ih"]
+[ext_resource type="Script" uid="uid://ca42s16x5547g" path="res://scripts/state_machine/state_machine.gd" id="5_dp4ym"]
+[ext_resource type="Script" uid="uid://do5w6ug5c1u2a" path="res://scenes/targets/target_entry.gd" id="6_lrdkn"]
+[ext_resource type="Script" uid="uid://bahkthmjnmyy7" path="res://scenes/equipment/spoon/idle_state.gd" id="6_me6in"]
+[ext_resource type="Resource" uid="uid://tcg8jwtwqq2b" path="res://assets/consumables/soup.tres" id="7_fyw4f"]
+[ext_resource type="Texture2D" uid="uid://cokbfjclr2ww3" path="res://assets/player/grab arm.png" id="7_qijt7"]
+[ext_resource type="Script" uid="uid://bw6elx7we86pn" path="res://scenes/equipment/spoon/feeding_state.gd" id="7_y0pof"]
+[ext_resource type="Script" uid="uid://dst6xhvtl70qp" path="res://scenes/equipment/spoon/holding_state.gd" id="8_oyfky"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ue2ih"]
+radius = 6.0
+height = 18.0
+
+[node name="Spoon" type="Node2D"]
+script = ExtResource("1_b5e8w")
+
+[node name="Spoon" type="Sprite2D" parent="."]
+texture = ExtResource("4_ue2ih")
+offset = Vector2(0, 14)
+region_enabled = true
+region_rect = Rect2(7, 0, 9, 42)
+
+[node name="Food" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.078125, 0.078125)
+texture = ExtResource("3_y0pof")
+
+[node name="PickupArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
+shape = SubResource("CapsuleShape2D_ue2ih")
+
+[node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("_initial_state")]
+script = ExtResource("5_dp4ym")
+_initial_state = NodePath("IdleState")
+_debug_change_state = true
+metadata/_custom_type_script = "uid://ca42s16x5547g"
+
+[node name="IdleState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("_equipment", "_pickup_area", "_holding_state")]
+script = ExtResource("6_me6in")
+_equipment = NodePath("../..")
+_allowed_consumables = Array[ExtResource("6_lrdkn")]([ExtResource("7_fyw4f")])
+_pickup_area = NodePath("../../PickupArea")
+_holding_state = NodePath("../HoldingState")
+metadata/_custom_type_script = "uid://cjgkt6mw5ow4l"
+
+[node name="HoldingState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("_equipment", "_pickup_area", "_food_sprite", "_idle_state", "_feeding_state")]
+script = ExtResource("8_oyfky")
+_equipment = NodePath("../..")
+_pickup_area = NodePath("../../PickupArea")
+_food_sprite = NodePath("../../Food")
+_idle_state = NodePath("../IdleState")
+_feeding_state = NodePath("../FeedingState")
+metadata/_custom_type_script = "uid://cjgkt6mw5ow4l"
+
+[node name="FeedingState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("_pickup_area", "_idle_state", "_food_sprite")]
+script = ExtResource("7_y0pof")
+_pickup_area = NodePath("../../PickupArea")
+_idle_state = NodePath("../IdleState")
+_food_sprite = NodePath("../../Food")
+metadata/_custom_type_script = "uid://cjgkt6mw5ow4l"
+
+[node name="Hand" type="Sprite2D" parent="."]
+position = Vector2(-3, 33)
+scale = Vector2(0.371134, 0.371134)
+texture = ExtResource("7_qijt7")
