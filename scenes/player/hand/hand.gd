@@ -7,6 +7,7 @@ _struggle_extension)-1)/(_struggle_extension-_max_vertical_arm_extension/2)
 
 @export var _inventory: InventoryUI
 @export var _inventory_component: InventoryComponent
+@export var _game_ui: GameUI
 
 @export_group("States references")
 @export var idle_state: IdleState

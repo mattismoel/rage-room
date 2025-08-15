@@ -9,6 +9,8 @@ var _entered_inventory: bool
 @export var _pick_up_state: PickUpState
 @export var _animation_player: AnimationPlayer
 
+var _game_ui: GameUI
+
 func enter() -> void:
 	visible = true
 	_entered_inventory = false
@@ -26,6 +28,10 @@ func initialise(inventory: Control) -> void:
 func exit() -> void:
 	super()
 	visible = false
+
+func initialise(game_ui: GameUI) -> void:
+	_game_ui = game_ui
+	pass
 
 func _kill_intersecting_insects() -> void:
 	var overlapping_areas: Array[Area2D] = _hit_area.get_overlapping_areas()

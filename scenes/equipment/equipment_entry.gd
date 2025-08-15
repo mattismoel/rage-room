@@ -10,7 +10,7 @@ extends Resource
 @export var cost: int
 
 ## Whether or not the equipment has been is_unlocked.
-var is_unlocked: bool = false
+@export var is_unlocked: bool = false
 
 func unlock() -> void:
 	is_unlocked = true

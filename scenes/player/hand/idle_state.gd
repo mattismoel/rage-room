@@ -5,7 +5,7 @@ extends State
 @export var _smack_state: SmackState
 @export var _animation_player: AnimationPlayer
 
-var _inventory: Control
+# var _game_ui: GameUI
 
 func enter() -> void:
 	super()
@@ -13,9 +13,11 @@ func enter() -> void:
 	_animation_player.play("idle")
 	if _inventory != null: initialize(_inventory)
 
-func initialize(inventory: InventoryUI) -> void:
-	_inventory = inventory
-	_inventory.entry_entered.connect(_on_entry_entered)
+func initialize(game_ui: GameUI) -> void:
+	game_ui.inventory.entry_entered.connect(_on_entry_entered)
+	print("OIIIII", game_ui.inventory)
+	# _inventory = inventory
+	# inventory.entry_entered.connect(_on_entry_entered)
 
 func input(event) -> void:
 	if event.is_action_pressed("interact"):
@@ -27,4 +29,5 @@ func exit() -> void:
 	_inventory.entry_entered.disconnect(_on_entry_entered)
 
 func _on_entry_entered(_entry: EquipmentEntry) -> void:
+	print("OI")
 	changed_state.emit(_pick_up_state)

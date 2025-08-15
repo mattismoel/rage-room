@@ -4,8 +4,8 @@ extends State
 @export var _pick_up_state: PickUpState
 
 var _inventory_component: InventoryComponent
-var _inventory: Control
 var _loaded_equipment: Equipment
+var _game_ui: GameUI
 
 func enter() -> void:
 	super()
@@ -24,11 +24,11 @@ func input(event) -> void:
 	#elif event.is_action_pressed("prev_equipment"):
 	#	next_in_equipment_cycle(-1)
 
-func initialise(inventory_component: InventoryComponent, inventory: Control) -> void:
+func initialise(inventory_component: InventoryComponent, game_ui: GameUI) -> void:
 	_inventory_component = inventory_component
-	_inventory = inventory
 	_inventory_component.unequipped_entry.connect(_on_entry_unequipped)
 	_inventory_component.equipped_entry.connect(_on_entry_equipped)
+	_game_ui = game_ui
 	pass
 
 func _set_equipment(equipment: EquipmentEntry) -> void:
@@ -37,6 +37,7 @@ func _set_equipment(equipment: EquipmentEntry) -> void:
 
 	## Istantiate new equipment
 	_loaded_equipment = equipment.scene.instantiate()
+	_loaded_equipment.used.connect(_on_equipment_used)
 	add_child(_loaded_equipment)
 	
 	print('"%s" was equipped' % equipment.name)
@@ -47,6 +48,7 @@ func _on_entry_equipped(new_entry: EquipmentEntry) -> void:
 func _on_entry_unequipped(_entry: EquipmentEntry) -> void:
 	## Go to back to pick up state when equipment is unequipped
 	changed_state.emit(_pick_up_state)
+	_loaded_equipment.used.disconnect(_on_equipment_used)
 
 #func next_in_equipment_cycle(steps: int) -> void:
 	#var index := _entries.find(current_equipment_entry) + steps
@@ -59,3 +61,6 @@ func _on_entry_unequipped(_entry: EquipmentEntry) -> void:
 	## Check that requested equipment index is valid
 	#if index < _entries.size():
 		#_set_equipment(_entries[index])
+
+func _on_equipment_used() -> void:
+	pass

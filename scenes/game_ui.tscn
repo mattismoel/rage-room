@@ -1,0 +1,111 @@
+[gd_scene load_steps=7 format=3 uid="uid://bgxj30mwiqb0w"]
+
+[ext_resource type="Script" uid="uid://cgqttha6wp5wb" path="res://scenes/ui/game_ui.gd" id="1_bt76a"]
+[ext_resource type="Texture2D" uid="uid://7qknjlhhtrjs" path="res://assets/backboard.png" id="1_rns2u"]
+[ext_resource type="PackedScene" uid="uid://fkur1724phpe" path="res://scenes/inventory.tscn" id="1_yubou"]
+[ext_resource type="Texture2D" uid="uid://bqasjl8cvigx3" path="res://assets/healthbar-background.png" id="2_u2dgd"]
+[ext_resource type="Texture2D" uid="uid://cxer3yx4am1vw" path="res://assets/healthbar-fill.png" id="3_bt76a"]
+[ext_resource type="Script" uid="uid://ch1oyr7wphxnm" path="res://scenes/ui/health_bar.gd" id="5_djwj0"]
+
+[node name="GameUI" type="Control" node_paths=PackedStringArray("inventory", "_currency_label", "_health_bar")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bt76a")
+inventory = NodePath("VBoxContainer/Inventory")
+_currency_label = NodePath("VBoxContainer/MarginContainer/PlayerStats/Currency/HBoxContainer/CenterContainer/CurrencyLabel")
+_health_bar = NodePath("VBoxContainer/MarginContainer/PlayerStats/Health/HBoxContainer/CenterContainer/HealthBar")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="PlayerStats" type="Control" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Backboard" type="TextureRect" parent="VBoxContainer/MarginContainer/PlayerStats"]
+layout_mode = 1
+offset_right = 92.0
+offset_bottom = 39.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("1_rns2u")
+stretch_mode = 2
+
+[node name="Health" type="MarginContainer" parent="VBoxContainer/MarginContainer/PlayerStats"]
+layout_mode = 1
+offset_left = 14.0
+offset_top = 1.0
+offset_right = 91.0
+offset_bottom = 13.0
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/PlayerStats/Health"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/MarginContainer/PlayerStats/Health/HBoxContainer"]
+layout_mode = 2
+
+[node name="HealthBar" type="TextureProgressBar" parent="VBoxContainer/MarginContainer/PlayerStats/Health/HBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+value = 75.0
+texture_under = ExtResource("2_u2dgd")
+texture_progress = ExtResource("3_bt76a")
+texture_progress_offset = Vector2(1, 1)
+script = ExtResource("5_djwj0")
+
+[node name="Spacer" type="Control" parent="VBoxContainer/MarginContainer/PlayerStats/Health/HBoxContainer"]
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HealthLabel" type="Label" parent="VBoxContainer/MarginContainer/PlayerStats/Health/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.0705882, 0.0392157, 0.101961, 1)
+text = "100HP"
+vertical_alignment = 1
+
+[node name="Currency" type="MarginContainer" parent="VBoxContainer/MarginContainer/PlayerStats"]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 22.0
+offset_right = 37.0
+offset_bottom = 36.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/PlayerStats/Currency"]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/MarginContainer/PlayerStats/Currency/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CurrencyLabel" type="Label" parent="VBoxContainer/MarginContainer/PlayerStats/Currency/HBoxContainer/CenterContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0705882, 0.0392157, 0.101961, 1)
+text = "$100"
+
+[node name="Inventory" parent="VBoxContainer" instance=ExtResource("1_yubou")]
+layout_mode = 2

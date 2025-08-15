@@ -1,8 +1,6 @@
 class_name InventoryComponent
 extends Node
 
-# @export var currency_component: CurrencyComponent
-
 @export var _equipment: Array[EquipmentEntry] = []
 
 ## Emitted whenever an equipment has been equipped.
@@ -19,31 +17,10 @@ signal unlocked_entry(entry: EquipmentEntry)
 
 var _current_equipment: EquipmentEntry
 
-# func _on_slot_clicked(slot: InventorySlot) -> void:
-# 	var new_slot_entry: EquipmentEntry
-#
-# 	## If slot is not empty, equip what is already there. Else just unequip.
-# 	if 	slot.stored_equipment != null:
-#
-# 		## Purchase the equipment if it is not unlocked
-# 		# if not slot.stored_equipment.unlocked:
-# 			# var cost := slot.stored_equipment.cost
-# 			# var purchased := currency_component.attempt_purchase(cost)
-#
-# 			# slot.stored_equipment.unlocked = true if purchased else false
-# 			# if not purchased: return
-#
-# 		new_slot_entry = equip(slot.stored_equipment)
-# 	else: new_slot_entry = unequip()
-#
-# 	slot.set_entry(new_slot_entry)
-
-
 ## Takes the entry being equipped as argument and returns what it replaces
 func equip(new_entry: EquipmentEntry) -> EquipmentEntry:
 	var replaced_entry := _current_equipment
 	_current_equipment = new_entry
-
 	
 	## Put the entry that is being replaced back in the inventory
 	if replaced_entry != null: 
@@ -81,7 +58,6 @@ func deselect_all() -> void:
 
 func get_equipment_entries() -> Array[EquipmentEntry]:
 	return _equipment
-
 
 func current_equipment() -> EquipmentEntry:
 	return _current_equipment

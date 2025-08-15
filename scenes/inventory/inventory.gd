@@ -4,83 +4,30 @@ extends Control
 signal entry_entered(entry: EquipmentEntry)
 signal entry_exited(entry: EquipmentEntry)
 signal entry_selected(entry: EquipmentEntry)
+signal entry_bought(entry: EquipmentEntry)
 
-@export var _currency_component: CurrencyComponent
-@export var _inventory_component: InventoryComponent
+@export var _inventory_slot_scene: PackedScene
 @export var _slot_container: Control
 
 var _slots: Array[InventorySlot] = []
 
-func _ready() -> void:
-	_inventory_component.equipped_entry.connect(_on_equip)
+func set_equipment_entries(entries: Array[EquipmentEntry]) -> void:
+	for entry in entries:
+		var slot: InventorySlot = _inventory_slot_scene.instantiate()
+		_slot_container.add_child(slot)
 
-	for child in _slot_container.get_children(true):
-		if child is not InventorySlot: continue
-		_slots.append(child)
+		slot.set_entry(entry)
 
-	var initial_equipment := _inventory_component.get_equipment_entries()
+		slot.bought.connect(func(): entry_bought.emit(entry))
+		slot.mouse_entered.connect(func(): print("HEY"))
+		slot.mouse_exited.connect(func(): entry_exited.emit(entry))
+		slot.selected.connect(func(): entry_selected.emit(entry))
 
-	assert(_slots.size() >= initial_equipment.size(), "There are not enough inventory slots for the given InventoryComponent.")
+func select_entry(new_entry: EquipmentEntry) -> void:
+	if !new_entry.is_unlocked: return
 
-	for i in range(initial_equipment.size()):
-		var entry := initial_equipment[i]
-
-		_slots[i].initialise(_inventory_component)
-		_slots[i].set_entry(entry)
-
-		_slots[i].bought.connect(func(): _on_entry_bought(entry))
-		_slots[i].mouse_entered.connect(func(): _on_entry_entered(entry))
-		_slots[i].mouse_exited.connect(func(): _on_entry_exited(entry))
-		_slots[i].selected.connect(func(): _on_entry_selected(entry))
-
-func _on_equip(entry: EquipmentEntry) -> void:
 	for slot in _slots:
-		if slot.get_entry() != entry: continue
-
-		## The equipped entry is the current one
-		## ...
-
-func _on_entry_bought(entry: EquipmentEntry) -> void:
-	var bought := _currency_component.attempt_purchase(entry.cost)
-
-	if !bought: return
-
-	_inventory_component.unlock_entry(entry)
-	pass
-
-func _on_entry_entered(entry: EquipmentEntry) -> void:
-	entry_entered.emit(entry)
-	pass
-
-func _on_entry_exited(entry: EquipmentEntry) -> void:
-	entry_exited.emit(entry)
-	pass
-
-func _on_entry_selected(entry: EquipmentEntry) -> void:
-	if !entry.is_unlocked: return
-
-	_inventory_component.equip(entry)
-	entry_selected.emit(entry)
-
-# func allocate_to_vacant_slots() -> void:
-# 	## Allocate missing inventory equipment entries to vacant slots
-# 	## There is a lot of for-loops and if-statements here. Can it be improved? likely..
-# 	for i in range(inventory.size()):
-# 		## Check if this entry is already equipped
-# 		var homeless := false
-# 		if inventory[i] != _current_equipment:
-# 			homeless = true
-#
-# 		## Check if this entry has been assigned a slot
-# 		for slot in slots:
-# 			if slot.stored_equipment == inventory[i]:
-# 				homeless = false
-# 				break
-#
-# 		if not homeless: continue
-# 		## Look for vacant slots and assign entry to one if found
-# 		for slot in slots:
-# 			if slot.stored_equipment == null:
-# 				slot.set_entry(inventory[i])
-# 				break
-
+		if slot.entry != new_entry: continue
+		slot.set_entry(new_entry)
+			
+	entry_selected.emit(new_entry)

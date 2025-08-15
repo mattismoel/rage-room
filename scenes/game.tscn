@@ -1,24 +1,27 @@
-[gd_scene load_steps=23 format=3 uid="uid://dpcv78j3ky7pm"]
+[gd_scene load_steps=26 format=3 uid="uid://dpcv78j3ky7pm"]
 
+[ext_resource type="Script" uid="uid://krx438rn24sp" path="res://scenes/game.gd" id="1_bt5mj"]
 [ext_resource type="Script" uid="uid://px0ijr1h5uhl" path="res://scripts/intensity_manager.gd" id="1_kvpfn"]
 [ext_resource type="Script" uid="uid://dvfp0i6u6ksgu" path="res://scripts/spawner/timed_spawner.gd" id="1_lnu2h"]
 [ext_resource type="Script" uid="uid://bgbi2h521tu0g" path="res://scenes/currency/currency_component.gd" id="2_ir15t"]
 [ext_resource type="PackedScene" uid="uid://bxp10qpdnhpjg" path="res://scenes/hand.tscn" id="2_kvpfn"]
 [ext_resource type="Script" uid="uid://7qy2yh4bqtbv" path="res://scripts/spawner/spawn_entry.gd" id="2_lnu2h"]
 [ext_resource type="Script" uid="uid://hxmlfmuavfju" path="res://scripts/spawner/area_spawner.gd" id="4_gee14"]
+[ext_resource type="Resource" uid="uid://r1eajmc151of" path="res://scenes/equipment/entries/spoon.tres" id="5_bt5mj"]
 [ext_resource type="Script" uid="uid://c8f6fbvcun4wt" path="res://scripts/spawner/selectors/weighted_selector.gd" id="6_gee14"]
 [ext_resource type="PackedScene" uid="uid://ic6q7foo7ydh" path="res://scenes/insects/ant/ant.tscn" id="7_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://bxs1nmrkh8j5q" path="res://scenes/targets/soup/soup.tscn" id="8_0tnpc"]
 [ext_resource type="Script" uid="uid://pke0c4qm2rkn" path="res://scripts/spawner/spawn_tick_component.gd" id="8_gee14"]
 [ext_resource type="Texture2D" uid="uid://ddi0wkwb1ocpm" path="res://assets/table.png" id="9_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://c60qb2i7f4vto" path="res://scenes/insects/spider/spider.tscn" id="10_dinhu"]
-[ext_resource type="PackedScene" uid="uid://fkur1724phpe" path="res://scenes/inventory.tscn" id="10_vtaks"]
 [ext_resource type="Script" uid="uid://dmds87a1jnvh0" path="res://scripts/health_component.gd" id="12_trtic"]
-[ext_resource type="Script" uid="uid://cgqttha6wp5wb" path="res://scenes/ui/game_ui.gd" id="14_ca42v"]
+[ext_resource type="Script" uid="uid://dokle3afjp1y3" path="res://scenes/player/player.gd" id="16_5newe"]
 [ext_resource type="Script" uid="uid://clj4yaht54h7c" path="res://scenes/inventory/inventory_component.gd" id="16_ca42v"]
 [ext_resource type="Script" uid="uid://c3n2s4jlpujkh" path="res://scenes/equipment/equipment_entry.gd" id="17_264po"]
 [ext_resource type="Resource" uid="uid://dy1f754kra1gv" path="res://scenes/equipment/entries/bug_zapper.tres" id="18_1kice"]
 [ext_resource type="Resource" uid="uid://crrud54yx74ob" path="res://scenes/equipment/entries/flyswatter.tres" id="19_5newe"]
+[ext_resource type="PackedScene" uid="uid://7ffbbl45ypej" path="res://scenes/mouth/mouth.tscn" id="20_37s47"]
+[ext_resource type="PackedScene" uid="uid://bgxj30mwiqb0w" path="res://scenes/game_ui.tscn" id="23_bt5mj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0tnpc"]
 size = Vector2(32, 32)
@@ -35,7 +38,12 @@ scene = ExtResource("10_dinhu")
 weight = 0.25
 metadata/_custom_type_script = "uid://7qy2yh4bqtbv"
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("_game_ui", "_currency_component", "_inventory_component", "_player_health_component")]
+script = ExtResource("1_bt5mj")
+_game_ui = NodePath("UI/GameUI")
+_currency_component = NodePath("CurrencyComponent")
+_inventory_component = NodePath("InventoryComponent")
+_player_health_component = NodePath("PlayerLayer/Player/HealthComponent")
 
 [node name="IntensityManager" type="Node" parent="."]
 script = ExtResource("1_kvpfn")
@@ -48,7 +56,7 @@ metadata/_custom_type_script = "uid://bgbi2h521tu0g"
 
 [node name="InventoryComponent" type="Node" parent="."]
 script = ExtResource("16_ca42v")
-_equipment = Array[ExtResource("17_264po")]([ExtResource("19_5newe"), ExtResource("18_1kice")])
+_equipment = Array[ExtResource("17_264po")]([ExtResource("5_bt5mj"), ExtResource("19_5newe"), ExtResource("18_1kice")])
 metadata/_custom_type_script = "uid://clj4yaht54h7c"
 
 [node name="TableCloth" type="Sprite2D" parent="."]
@@ -57,8 +65,8 @@ centered = false
 
 [node name="Targets" type="Node" parent="."]
 
-[node name="Plate" parent="Targets" instance=ExtResource("8_0tnpc")]
-position = Vector2(124, 116)
+[node name="Soup" parent="Targets" instance=ExtResource("8_0tnpc")]
+position = Vector2(124, 77)
 
 [node name="Spawners" type="Node" parent="."]
 
@@ -146,54 +154,27 @@ metadata/_custom_type_script = "uid://c8f6fbvcun4wt"
 [node name="PlayerLayer" type="CanvasLayer" parent="."]
 layer = 2
 
-[node name="Player" type="Node" parent="PlayerLayer"]
+[node name="Player" type="Node" parent="PlayerLayer" node_paths=PackedStringArray("_health_component")]
+script = ExtResource("16_5newe")
+_health_component = NodePath("HealthComponent")
+_hunger_per_second = 1.0
 
-[node name="PlayerHealthComponent" type="Node" parent="PlayerLayer/Player"]
+[node name="HealthComponent" type="Node" parent="PlayerLayer/Player"]
 script = ExtResource("12_trtic")
 metadata/_custom_type_script = "uid://dmds87a1jnvh0"
 
-[node name="Hand" parent="PlayerLayer/Player" node_paths=PackedStringArray("_inventory", "_inventory_component") instance=ExtResource("2_kvpfn")]
-_inventory = NodePath("../../../UI/Inventory")
+[node name="Hand" parent="PlayerLayer/Player" node_paths=PackedStringArray("_inventory_component", "_game_ui") instance=ExtResource("2_kvpfn")]
 _inventory_component = NodePath("../../../InventoryComponent")
+_game_ui = NodePath("../../../UI/GameUI")
 
-[node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("_currency_component", "_currency_label")]
-script = ExtResource("14_ca42v")
-_currency_component = NodePath("../CurrencyComponent")
-_currency_label = NodePath("Control/MarginContainer/CurrencyLabel")
+[node name="UI" type="CanvasLayer" parent="."]
 
-[node name="Control" type="VBoxContainer" parent="UI"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
+[node name="Mouth" parent="UI" node_paths=PackedStringArray("_player_health_component") instance=ExtResource("20_37s47")]
+position = Vector2(118, 21)
+_player_health_component = NodePath("../../PlayerLayer/Player/HealthComponent")
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/Control"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
-
-[node name="CurrencyLabel" type="Label" parent="UI/Control/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-text = "0"
-
-[node name="Inventory" parent="UI" node_paths=PackedStringArray("_currency_component", "_inventory_component") instance=ExtResource("10_vtaks")]
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_top = 110.0
-offset_right = 240.0
-offset_bottom = 180.0
-grow_horizontal = 1
-grow_vertical = 1
-size_flags_horizontal = 0
-size_flags_vertical = 8
-mouse_default_cursor_shape = 8
+[node name="GameUI" parent="UI" node_paths=PackedStringArray("_player_health_component", "_currency_component") instance=ExtResource("23_bt5mj")]
+_player_health_component = NodePath("../../PlayerLayer/Player/HealthComponent")
 _currency_component = NodePath("../../CurrencyComponent")
-_inventory_component = NodePath("../../InventoryComponent")
+
+[editable path="UI/GameUI"]

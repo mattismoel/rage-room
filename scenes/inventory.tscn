@@ -19,14 +19,15 @@ atlas = ExtResource("5_s887n")
 region = Rect2(0, 160, 240, 20)
 
 [node name="Inventory" type="Control" node_paths=PackedStringArray("_slot_container")]
-custom_minimum_size = Vector2(240, 70)
+custom_minimum_size = Vector2(240, 19)
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+offset_right = 240.0
+offset_bottom = 19.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
 script = ExtResource("1_yyk2a")
+_inventory_slot_scene = ExtResource("3_ty45s")
 _slot_container = NodePath("Toolbar/SlotContainer")
 
 [node name="Toolbar" type="Control" parent="."]
@@ -55,16 +56,11 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -36.0
+offset_top = -60.0
+offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/separation = 16
-
-[node name="InventorySlot" parent="Toolbar/SlotContainer" instance=ExtResource("3_ty45s")]
-layout_mode = 2
-
-[node name="InventorySlot2" parent="Toolbar/SlotContainer" instance=ExtResource("3_ty45s")]
-layout_mode = 2
 
 [node name="Belt" type="TextureRect" parent="Toolbar"]
 layout_mode = 0
