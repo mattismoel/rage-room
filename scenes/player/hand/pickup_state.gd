@@ -26,8 +26,8 @@ func initialise(inventory_component: InventoryComponent, game_ui: GameUI) -> voi
 	_game_ui.inventory.entry_exited.connect(_on_entry_exited)
 	
 func _on_entry_exited(_entry: EquipmentEntry) -> void:
-	if _inventory_component.current_equipment() != null:
-		changed_state.emit(_equipment_state)
+	if _inventory_component.current_equipment() == null:
+		changed_state.emit(_idle_state)
 		return
 
 func equip(entry: EquipmentEntry) -> void:
