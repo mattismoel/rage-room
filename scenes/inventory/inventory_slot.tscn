@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bxcl32ibl8vgx" path="res://scenes/inventory/inventory_slot.gd" id="1_5agom"]
 [ext_resource type="Texture2D" uid="uid://357l16nln1ge" path="res://scenes/inventory/inventory_slot.png" id="2_c7w7p"]
-[ext_resource type="Texture2D" uid="uid://bx5l7h32g5k41" path="res://assets/equipment/bug_zapper.png" id="2_u6pog"]
+[ext_resource type="Texture2D" uid="uid://c3n6gq3kiutqc" path="res://assets/equipment/flyswatter.png" id="3_c7w7p"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c00wg"]
 
@@ -148,18 +148,18 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_td8r7")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_u6pog")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_c7w7p")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_0uvgv")
-disabled = true
 icon = ExtResource("2_c7w7p")
 
 [node name="EquipmentSprite" type="TextureRect" parent="MovableOnHover/SelectButton"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
+offset_bottom = 32.0
 grow_horizontal = 2
 mouse_filter = 2
 mouse_default_cursor_shape = 2
-texture = ExtResource("2_u6pog")
-expand_mode = 5
+texture = ExtResource("3_c7w7p")
+expand_mode = 2
 stretch_mode = 5
 
 [node name="BuyButton" type="Button" parent="MovableOnHover"]

@@ -2,6 +2,7 @@ class_name EquipmentEntry
 extends Resource
 
 @export var name: String
+@export var icon_preview: CompressedTexture2D
 
 ## The scene to be spawned
 @export var scene: PackedScene

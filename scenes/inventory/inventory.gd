@@ -23,6 +23,10 @@ func set_equipment_entries(entries: Array[EquipmentEntry]) -> void:
 		slot.mouse_exited.connect(func(): entry_exited.emit(entry))
 		slot.pressed.connect(func(): entry_pressed.emit(entry))
 		
+		## Remove the buy button etc. if the entry is already unlocked
+		if entry.is_unlocked:
+			slot.unlock()
+		
 		_slot_container.add_child(slot)
 		_slots.append(slot)
 

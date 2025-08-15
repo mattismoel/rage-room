@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="EquipmentEntry" load_steps=3 format=3 uid="uid://r1eajmc151of"]
+[gd_resource type="Resource" script_class="EquipmentEntry" load_steps=4 format=3 uid="uid://r1eajmc151of"]
 
 [ext_resource type="Script" uid="uid://c3n2s4jlpujkh" path="res://scenes/equipment/equipment_entry.gd" id="1_8uwef"]
 [ext_resource type="PackedScene" uid="uid://cxf3is8nrir28" path="res://scenes/equipment/spoon/spoon.tscn" id="1_em57d"]
+[ext_resource type="Texture2D" uid="uid://dabwqdcstrb3b" path="res://assets/equipment/spoon.png" id="1_o117j"]
 
 [resource]
 script = ExtResource("1_8uwef")
 name = "Spoon"
+icon_preview = ExtResource("1_o117j")
 scene = ExtResource("1_em57d")
 cost = 0
 is_unlocked = true

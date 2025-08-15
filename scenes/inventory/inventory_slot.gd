@@ -37,6 +37,7 @@ func set_entry(new_entry: EquipmentEntry):
 	if new_entry == null: return clear()
 	entry = new_entry
 
+	_item_texture.texture = entry.icon_preview
 	_item_texture.show()
 	_title_label.text = entry.name
 	_buy_button.text = "$%d" % entry.cost
