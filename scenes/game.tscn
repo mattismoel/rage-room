@@ -1,7 +1,7 @@
 [gd_scene load_steps=26 format=3 uid="uid://dpcv78j3ky7pm"]
 
-[ext_resource type="Script" uid="uid://krx438rn24sp" path="res://scenes/game.gd" id="1_bt5mj"]
-[ext_resource type="Script" uid="uid://px0ijr1h5uhl" path="res://scripts/intensity_manager.gd" id="1_kvpfn"]
+[ext_resource type="Script" path="res://scenes/game.gd" id="1_bt5mj"]
+[ext_resource type="Script" path="res://scripts/intensity_manager.gd" id="1_kvpfn"]
 [ext_resource type="Script" uid="uid://dvfp0i6u6ksgu" path="res://scripts/spawner/timed_spawner.gd" id="1_lnu2h"]
 [ext_resource type="Script" uid="uid://bgbi2h521tu0g" path="res://scenes/currency/currency_component.gd" id="2_ir15t"]
 [ext_resource type="PackedScene" uid="uid://bxp10qpdnhpjg" path="res://scenes/hand.tscn" id="2_kvpfn"]
@@ -14,8 +14,8 @@
 [ext_resource type="Script" uid="uid://pke0c4qm2rkn" path="res://scripts/spawner/spawn_tick_component.gd" id="8_gee14"]
 [ext_resource type="Texture2D" uid="uid://ddi0wkwb1ocpm" path="res://assets/table.png" id="9_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://c60qb2i7f4vto" path="res://scenes/insects/spider/spider.tscn" id="10_dinhu"]
-[ext_resource type="Script" path="res://scripts/health_component.gd" id="12_trtic"]
-[ext_resource type="Script" path="res://scenes/player/player.gd" id="16_5newe"]
+[ext_resource type="Script" uid="uid://dmds87a1jnvh0" path="res://scripts/health_component.gd" id="12_trtic"]
+[ext_resource type="Script" uid="uid://dokle3afjp1y3" path="res://scenes/player/player.gd" id="16_5newe"]
 [ext_resource type="Script" uid="uid://clj4yaht54h7c" path="res://scenes/inventory/inventory_component.gd" id="16_ca42v"]
 [ext_resource type="Script" uid="uid://c3n2s4jlpujkh" path="res://scenes/equipment/equipment_entry.gd" id="17_264po"]
 [ext_resource type="Resource" uid="uid://dy1f754kra1gv" path="res://scenes/equipment/entries/bug_zapper.tres" id="18_1kice"]
@@ -48,7 +48,6 @@ _player_health_component = NodePath("PlayerLayer/Player/HealthComponent")
 
 [node name="IntensityManager" type="Node" parent="."]
 script = ExtResource("1_kvpfn")
-metadata/_custom_type_script = "uid://px0ijr1h5uhl"
 
 [node name="CurrencyComponent" type="Node" parent="."]
 script = ExtResource("2_ir15t")

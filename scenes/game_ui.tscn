@@ -8,8 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://cxer3yx4am1vw" path="res://assets/healthbar-fill.png" id="3_bt76a"]
 [ext_resource type="Script" uid="uid://ch1oyr7wphxnm" path="res://scenes/ui/health_bar.gd" id="5_djwj0"]
 [ext_resource type="Texture2D" uid="uid://bna8u8bcj3hdn" path="res://assets/mouse-pointing.png" id="8_3huio"]
-[ext_resource type="Script" uid="uid://btdc8u1y6l15i" path="res://scenes/ui/cursor.gd" id="8_o3bws"]
-[ext_resource type="Script" uid="uid://d064u8c578k76" path="res://scenes/ui/cursor_entry.gd" id="8_sjwyb"]
+[ext_resource type="Script" path="res://scenes/ui/cursor.gd" id="8_o3bws"]
+[ext_resource type="Script" path="res://scenes/ui/cursor_entry.gd" id="8_sjwyb"]
 
 [sub_resource type="Resource" id="Resource_5kh4o"]
 script = ExtResource("8_sjwyb")
@@ -23,7 +23,7 @@ texture = ExtResource("2_o3bws")
 offset = Vector2(-6, 0)
 metadata/_custom_type_script = "uid://d064u8c578k76"
 
-[node name="GameUI" type="Control" node_paths=PackedStringArray("cursor", "inventory", "_currency_label", "_health_bar")]
+[node name="GameUI" type="Control" node_paths=PackedStringArray("cursor", "inventory", "_currency_label", "_health_label", "_health_bar")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -35,6 +35,7 @@ script = ExtResource("1_bt76a")
 cursor = NodePath("Cursor")
 inventory = NodePath("VBoxContainer/Inventory")
 _currency_label = NodePath("VBoxContainer/MarginContainer/PlayerStats/Currency/HBoxContainer/CenterContainer/CurrencyLabel")
+_health_label = NodePath("VBoxContainer/MarginContainer/PlayerStats/Health/HBoxContainer/HealthLabel")
 _health_bar = NodePath("VBoxContainer/MarginContainer/PlayerStats/Health/HBoxContainer/CenterContainer/HealthBar")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]

@@ -11,6 +11,7 @@ signal inventory_entry_exited(entry: EquipmentEntry)
 
 @export var _currency_component: CurrencyComponent
 @export var _currency_label: Label
+@export var _health_label: Label
 @export var _health_bar: HealthBar
 
 func _ready() -> void:
@@ -27,3 +28,4 @@ func _on_currency_changed(new_currency: float) -> void:
 
 func update_health(new_health: float) -> void:
 	_health_bar.set_health(new_health)
+	_health_label.text = "%dHP" % roundi(new_health)
