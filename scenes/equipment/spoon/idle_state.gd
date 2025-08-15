@@ -1,21 +1,17 @@
 extends State
 
-@export var _equipment: Equipment
 @export var _allowed_consumables: Array[ConsumableEntry] = []
 @export var _pickup_area: Area2D
 @export var _holding_state: SpoonHoldingState
 
-func _ready() -> void:
-	_equipment.used.connect(_on_equipment_used)
+func input(event: InputEvent) -> void:
+	super(event)
+	if !event.is_action_pressed("interact"): return
 
-func _on_equipment_used() -> void:
 	for area in _pickup_area.get_overlapping_areas():
 		if area is not Target: continue
-
 		var consumable := (area as Target).consumable
-		if !_is_allowed_consumable(consumable):
-			print(consumable, area.consumable)
-			return
+		if !_is_allowed_consumable(consumable): continue
 
 		_holding_state.set_consumable(consumable)
 		changed_state.emit(_holding_state)

@@ -1,0 +1,118 @@
+[gd_scene load_steps=12 format=3 uid="uid://cvykrvotigoc5"]
+
+[ext_resource type="Script" uid="uid://ca42s16x5547g" path="res://scripts/state_machine/state_machine.gd" id="1_gdlno"]
+[ext_resource type="Script" uid="uid://cng50qi8ac087" path="res://scenes/equipment/equipment.gd" id="1_tgmp8"]
+[ext_resource type="Script" uid="uid://b0mmkvnp2vjq5" path="res://scenes/equipment/smack_hand/idle_state.gd" id="2_r0jqn"]
+[ext_resource type="Script" uid="uid://dowvmhrglkm7v" path="res://scenes/equipment/smack_hand/smack_state.gd" id="3_elhpo"]
+[ext_resource type="Texture2D" uid="uid://badrntcjnvwgj" path="res://assets/player/hand.png" id="3_garvd"]
+[ext_resource type="Texture2D" uid="uid://bqkybbohwmj75" path="res://assets/player/test arm.png" id="5_v4a0k"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v4a0k"]
+
+[sub_resource type="Animation" id="Animation_tgmp8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StateMachine/SmackState/SmackSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StateMachine/IdleState/IdleSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_elhpo"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StateMachine/IdleState/IdleSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_v4a0k"]
+resource_name = "smack"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StateMachine/SmackState/SmackSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 0, 0, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_garvd"]
+_data = {
+&"RESET": SubResource("Animation_tgmp8"),
+&"idle": SubResource("Animation_elhpo"),
+&"smack": SubResource("Animation_v4a0k")
+}
+
+[node name="SmackHand" type="Node2D"]
+script = ExtResource("1_tgmp8")
+
+[node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("_initial_state")]
+script = ExtResource("1_gdlno")
+_initial_state = NodePath("IdleState")
+metadata/_custom_type_script = "uid://ca42s16x5547g"
+
+[node name="IdleState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("_smack_state", "_animation_player")]
+script = ExtResource("2_r0jqn")
+_smack_state = NodePath("../SmackState")
+_animation_player = NodePath("../../AnimationPlayer")
+metadata/_custom_type_script = "uid://cjgkt6mw5ow4l"
+
+[node name="IdleSprite" type="Sprite2D" parent="StateMachine/IdleState"]
+scale = Vector2(0.0982143, 0.0982143)
+texture = ExtResource("3_garvd")
+
+[node name="SmackState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("_idle_state", "_hit_area", "_animation_player")]
+visible = false
+script = ExtResource("3_elhpo")
+_idle_state = NodePath("../IdleState")
+_hit_area = NodePath("Area2D")
+_animation_player = NodePath("../../AnimationPlayer")
+metadata/_custom_type_script = "uid://cjgkt6mw5ow4l"
+
+[node name="SmackSprite" type="Sprite2D" parent="StateMachine/SmackState"]
+position = Vector2(0, 12)
+scale = Vector2(0.210526, 0.210526)
+texture = ExtResource("5_v4a0k")
+
+[node name="Area2D" type="Area2D" parent="StateMachine/SmackState"]
+position = Vector2(2, 0)
+rotation = 0.281942
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/SmackState/Area2D"]
+shape = SubResource("CapsuleShape2D_v4a0k")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_garvd")
+}

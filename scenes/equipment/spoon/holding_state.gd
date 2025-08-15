@@ -1,7 +1,6 @@
 class_name SpoonHoldingState
 extends State
 
-@export var _equipment: Equipment
 @export var _pickup_area: Area2D
 @export var _food_sprite: Sprite2D
 @export var _idle_state: State
@@ -9,22 +8,13 @@ extends State
 
 var _current_consumable: ConsumableEntry
 
-func _ready() -> void:
-	_food_sprite.hide()
-
 func enter() -> void:
 	super()
-	_equipment.used.connect(_on_equipment_used)
-
-func exit() -> void:
-	super()
-	_equipment.used.disconnect(_on_equipment_used)
-
-func set_consumable(entry: ConsumableEntry) -> void:
-	_current_consumable = entry
 	_food_sprite.show()
 
-func _on_equipment_used() -> void:
+func input(event: InputEvent) -> void:
+	if !event.is_action_pressed("interact"): return
+
 	var overlapping_areas := _pickup_area.get_overlapping_areas()
 	for area in overlapping_areas:
 		if area is Target:
@@ -36,3 +26,6 @@ func _on_equipment_used() -> void:
 			_feeding_state.set_consumable(_current_consumable)
 			changed_state.emit(_feeding_state)
 			return
+
+func set_consumable(entry: ConsumableEntry) -> void:
+	_current_consumable = entry

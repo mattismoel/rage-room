@@ -5,5 +5,4 @@ extends Area2D
 
 func feed(entry: ConsumableEntry) -> void:
 	_player_health_component.heal(entry.heal_amount)
-	print("Ate %s with %d health" % [entry.name, entry.heal_amount])
 	pass

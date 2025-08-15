@@ -4,13 +4,14 @@ extends Control
 signal inventory_entry_entered(entry: EquipmentEntry)
 signal inventory_entry_exited(entry: EquipmentEntry)
 
+@export var cursor: Cursor
 @export var inventory: InventoryUI
+
 @export var _player_health_component: HealthComponent
 
 @export var _currency_component: CurrencyComponent
 @export var _currency_label: Label
 @export var _health_bar: HealthBar
-
 
 func _ready() -> void:
 	_currency_component.balance_changed.connect(_on_currency_changed)
@@ -20,7 +21,7 @@ func _ready() -> void:
 
 	inventory.entry_entered.connect(inventory_entry_entered.emit)
 	inventory.entry_exited.connect(inventory_entry_exited.emit)
-	
+
 func _on_currency_changed(new_currency: float) -> void:
 	_currency_label.text = "%d" % new_currency
 

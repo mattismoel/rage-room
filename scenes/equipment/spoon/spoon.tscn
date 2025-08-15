@@ -37,20 +37,17 @@ shape = SubResource("CapsuleShape2D_ue2ih")
 [node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("_initial_state")]
 script = ExtResource("5_dp4ym")
 _initial_state = NodePath("IdleState")
-_debug_change_state = true
 metadata/_custom_type_script = "uid://ca42s16x5547g"
 
-[node name="IdleState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("_equipment", "_pickup_area", "_holding_state")]
+[node name="IdleState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("_pickup_area", "_holding_state")]
 script = ExtResource("6_me6in")
-_equipment = NodePath("../..")
 _allowed_consumables = Array[ExtResource("6_lrdkn")]([ExtResource("7_fyw4f")])
 _pickup_area = NodePath("../../PickupArea")
 _holding_state = NodePath("../HoldingState")
 metadata/_custom_type_script = "uid://cjgkt6mw5ow4l"
 
-[node name="HoldingState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("_equipment", "_pickup_area", "_food_sprite", "_idle_state", "_feeding_state")]
+[node name="HoldingState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("_pickup_area", "_food_sprite", "_idle_state", "_feeding_state")]
 script = ExtResource("8_oyfky")
-_equipment = NodePath("../..")
 _pickup_area = NodePath("../../PickupArea")
 _food_sprite = NodePath("../../Food")
 _idle_state = NodePath("../IdleState")
