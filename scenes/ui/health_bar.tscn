@@ -1,10 +1,21 @@
 [gd_scene load_steps=2 format=3 uid="uid://be4hlj50qjqxx"]
 
-[ext_resource type="Script" uid="uid://bq1ximm4tr8b3" path="res://scenes/ui/health_bar.gd" id="1_1vcc2"]
+[ext_resource type="Script" uid="uid://ch1oyr7wphxnm" path="res://scenes/ui/health_bar.gd" id="1_1vcc2"]
 
-[node name="HealthBar" type="ProgressBar"]
-custom_minimum_size = Vector2(64, 0)
-offset_right = 64.0
-offset_bottom = 12.0
+[node name="HealthBar" type="TextureProgressBar"]
+custom_minimum_size = Vector2(16, 6)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -3.0
+offset_right = 8.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 4
+size_flags_vertical = 4
 script = ExtResource("1_1vcc2")
+metadata/_custom_type_script = "uid://bq1ximm4tr8b3"
