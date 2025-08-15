@@ -67,7 +67,7 @@ centered = false
 [node name="Targets" type="Node" parent="."]
 
 [node name="Soup" parent="Targets" instance=ExtResource("8_0tnpc")]
-position = Vector2(124, 77)
+position = Vector2(121, 101)
 
 [node name="Spawners" type="Node" parent="."]
 
