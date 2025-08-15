@@ -57,14 +57,12 @@ func _on_pressed():
 	changed_equipment.emit(self)
 
 func _on_mouse_entered() -> void:
-	print("OVER")
 	## Pop-up animation
 	_animation_player.play("focus")
 	#position.x = position.x
 	pass
 
 func _on_mouse_exited() -> void:
-	print("OUT")
 	## Pop-down animation.
 	_animation_player.play("unfocus")
 	pass
