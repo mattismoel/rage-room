@@ -16,11 +16,17 @@ signal changed_equipment(slot: InventorySlot)
 @export var _title_label: Label
 @export var _item_texture: TextureRect
 
+## Unable to use animation player because of this issue:
+## https://github.com/godotengine/godot/issues/104964
+@export var _animation_player: AnimationPlayer
+
 @export var _select_button: Button
 @export var _buy_button: Button
 @export var _inventory_component: InventoryComponent
 
 var _stored_equipment: EquipmentEntry
+
+var debug_float: float = 0
 
 func _ready() -> void:
 	_buy_button.pressed.connect(bought.emit)
@@ -66,10 +72,13 @@ func _on_entry_unlocked(entry: EquipmentEntry) -> void:
 
 func _on_mouse_entered() -> void:
 	## Pop-up animation
+	_animation_player.play("focus")
+	#position.x = position.x
 	pass
 
 func _on_mouse_exited() -> void:
 	## Pop-down animation.
+	_animation_player.play("unfocus")
 	pass
 
 func _on_changed_equipment(entry: EquipmentEntry) -> void:
