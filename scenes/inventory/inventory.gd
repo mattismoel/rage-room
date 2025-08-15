@@ -19,7 +19,7 @@ func set_equipment_entries(entries: Array[EquipmentEntry]) -> void:
 		slot.set_entry(entry)
 
 		slot.bought.connect(func(): entry_bought.emit(entry))
-		slot.mouse_entered.connect(func(): print("HEY"))
+		slot.mouse_entered.connect(func(): entry_entered.emit(entry))
 		slot.mouse_exited.connect(func(): entry_exited.emit(entry))
 		slot.selected.connect(func(): entry_selected.emit(entry))
 

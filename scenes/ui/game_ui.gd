@@ -1,8 +1,8 @@
 class_name GameUI
 extends Control
 
-# signal inventory_entry_entered(entry: EquipmentEntry)
-# signal inventory_entry_exited(entry: EquipmentEntry)
+signal inventory_entry_entered(entry: EquipmentEntry)
+signal inventory_entry_exited(entry: EquipmentEntry)
 
 @export var inventory: InventoryUI
 @export var _player_health_component: HealthComponent
@@ -18,8 +18,8 @@ func _ready() -> void:
 	_health_bar.max_value = _player_health_component.max_health
 	_health_bar.value = _player_health_component.initial_health
 
-	# inventory.entry_entered.connect(inventory_entry_entered.emit)
-	# inventory.entry_exited.connect(inventory_entry_exited.emit)
+	inventory.entry_entered.connect(inventory_entry_entered.emit)
+	inventory.entry_exited.connect(inventory_entry_exited.emit)
 	
 func _on_currency_changed(new_currency: float) -> void:
 	_currency_label.text = "%d" % new_currency
