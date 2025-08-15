@@ -17,8 +17,3 @@ func set_equipment(entry: EquipmentEntry) -> void:
 	var equipment := entry.scene.instantiate() as Equipment
 	_equipment_container.add_child(equipment)
 	pass
-
-func _process(_delta: float) -> void:
-	var mouse_pos = get_global_mouse_position()
-	#mouse_pos.y = struggle_component.apply_struggle(mouse_pos.y)
-	global_position = mouse_pos
