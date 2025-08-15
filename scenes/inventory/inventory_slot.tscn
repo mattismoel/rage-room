@@ -94,6 +94,7 @@ offset_right = 32.0
 offset_bottom = 32.3491
 size_flags_vertical = 0
 mouse_filter = 1
+mouse_default_cursor_shape = 2
 theme_override_styles/focus = SubResource("StyleBoxEmpty_c00wg")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_td8r7")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_u6pog")
@@ -122,11 +123,12 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 0.349066
-offset_bottom = 0.349068
+offset_top = 18.0
+offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+mouse_default_cursor_shape = 2
 text = "$0"
 
 [node name="TitleLabel" type="Label" parent="MovableOnHover"]
