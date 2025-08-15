@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ConsumableEntry" load_steps=2 format=3 uid="uid://tcg8jwtwqq2b"]
+
+[ext_resource type="Script" uid="uid://do5w6ug5c1u2a" path="res://scenes/targets/target_entry.gd" id="1_brxx6"]
+
+[resource]
+script = ExtResource("1_brxx6")
+name = "Soup"
+heal_amount = 10.0
+metadata/_custom_type_script = "uid://do5w6ug5c1u2a"

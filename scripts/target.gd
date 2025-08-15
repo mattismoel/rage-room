@@ -1,7 +1,13 @@
 class_name Target
 extends Area2D 
 
+
+## The weight (importance) of the target.
 @export var weight: float = 1.0
+
+## The consumable associated with the target.
+@export var consumable: ConsumableEntry
+
 @export var _damage_per_insect: float = 1.0
 
 @export_group("References")

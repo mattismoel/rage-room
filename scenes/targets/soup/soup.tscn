@@ -1,15 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://bxs1nmrkh8j5q"]
+[gd_scene load_steps=7 format=3 uid="uid://bxs1nmrkh8j5q"]
 
 [ext_resource type="Script" uid="uid://c5esn4h1wsvqj" path="res://scripts/target.gd" id="1_4nqb7"]
 [ext_resource type="Texture2D" uid="uid://cmso83akppnpg" path="res://scenes/targets/soup/soup.png" id="2_5kyck"]
+[ext_resource type="Resource" uid="uid://tcg8jwtwqq2b" path="res://assets/consumables/soup.tres" id="2_c0cfm"]
 [ext_resource type="PackedScene" uid="uid://be4hlj50qjqxx" path="res://scenes/ui/health_bar.tscn" id="3_yrrjs"]
 [ext_resource type="Script" uid="uid://dmds87a1jnvh0" path="res://scripts/health_component.gd" id="4_c0cfm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4nqb7"]
 radius = 24.0208
 
-[node name="Plate" type="Area2D" node_paths=PackedStringArray("_health_component", "_timer")]
+[node name="Soup" type="Area2D" node_paths=PackedStringArray("_health_component", "_timer")]
 script = ExtResource("1_4nqb7")
+consumable = ExtResource("2_c0cfm")
 _health_component = NodePath("HealthComponent")
 _timer = NodePath("Timer")
 metadata/_custom_type_script = "uid://c5esn4h1wsvqj"
@@ -25,18 +27,11 @@ shape = SubResource("CircleShape2D_4nqb7")
 script = ExtResource("4_c0cfm")
 metadata/_custom_type_script = "uid://dmds87a1jnvh0"
 
-[node name="HealthBar" parent="." node_paths=PackedStringArray("_health_component") instance=ExtResource("3_yrrjs")]
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -32.0
-offset_top = 8.0
-offset_right = 32.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-_health_component = NodePath("../HealthComponent")
+[node name="HealthBar" parent="." instance=ExtResource("3_yrrjs")]
+offset_left = -36.0
+offset_top = 10.0
+offset_right = 36.0
+offset_bottom = 16.0
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
