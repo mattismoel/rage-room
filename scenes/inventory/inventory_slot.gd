@@ -5,7 +5,7 @@ extends Control
 signal bought
 signal selected
 
-signal changed_equipment(slot: InventorySlot)
+#signal changed_equipment(slot: InventorySlot)
 
 @export var _texture: Texture:
 	set(v):
@@ -16,16 +16,13 @@ signal changed_equipment(slot: InventorySlot)
 @export var _title_label: Label
 @export var _item_texture: TextureRect
 
-## Unable to use animation player because of this issue:
-## https://github.com/godotengine/godot/issues/104964
 @export var _animation_player: AnimationPlayer
-
 @export var _select_button: Button
 @export var _buy_button: Button
 
-var entry: EquipmentEntry
+var animation_disabled: bool = false
 
-var debug_float: float = 0
+var entry: EquipmentEntry
 
 func _ready() -> void:
 	_buy_button.pressed.connect(bought.emit)
@@ -36,33 +33,39 @@ func _ready() -> void:
 
 func unlock() -> void:
 	_buy_button.hide()
-	_select_button.disabled = false
 
 func set_entry(new_entry: EquipmentEntry):
-	if entry == null: return clear()
+	if new_entry == null: return clear()
 	entry = new_entry
 
+	_item_texture.show()
 	_title_label.text = entry.name
 	_buy_button.text = "$%d" % entry.cost
-	# _item_texture.hide()
 
 	if !entry.is_unlocked:
 		_select_button.disabled = true
 
 func clear():
 	_title_label.text = ""
-	entry = null
+	_item_texture.hide()
 
-func _on_pressed():
-	changed_equipment.emit(self)
+func disable():
+	_select_button.disabled = true
+	_buy_button.disabled = true
+	animation_disabled = true
+
+func enable():
+	_select_button.disabled = false
+	_buy_button.disabled = false
+	animation_disabled = false
 
 func _on_mouse_entered() -> void:
 	## Pop-up animation
+	if animation_disabled: return
 	_animation_player.play("focus")
-	#position.x = position.x
 	pass
 
 func _on_mouse_exited() -> void:
 	## Pop-down animation.
+	if animation_disabled: return
 	_animation_player.play("unfocus")
-	pass

@@ -14,7 +14,6 @@ var _slots: Array[InventorySlot] = []
 func set_equipment_entries(entries: Array[EquipmentEntry]) -> void:
 	for entry in entries:
 		var slot: InventorySlot = _inventory_slot_scene.instantiate()
-		_slot_container.add_child(slot)
 
 		slot.set_entry(entry)
 
@@ -22,12 +21,26 @@ func set_equipment_entries(entries: Array[EquipmentEntry]) -> void:
 		slot.mouse_entered.connect(func(): entry_entered.emit(entry))
 		slot.mouse_exited.connect(func(): entry_exited.emit(entry))
 		slot.selected.connect(func(): entry_selected.emit(entry))
+		
+		_slot_container.add_child(slot)
+		_slots.append(slot)
 
-func select_entry(new_entry: EquipmentEntry) -> void:
-	if !new_entry.is_unlocked: return
-
+func unlock_slot(entry: EquipmentEntry) -> void:
 	for slot in _slots:
-		if slot.entry != new_entry: continue
-		slot.set_entry(new_entry)
-			
-	entry_selected.emit(new_entry)
+		if slot.entry != entry: continue
+		slot.unlock()
+	vacate_slot(entry)
+
+func vacate_slot(entry: EquipmentEntry) -> void:
+	for slot in _slots:
+		slot.disable()
+		if slot.entry != entry: continue
+		slot.enable()
+		#slot.animation_disabled = true
+		slot.clear()
+
+func populate_slot(entry: EquipmentEntry) -> void:
+	for slot in _slots:
+		slot.enable()
+		if slot.entry != entry: continue
+		slot.set_entry(entry)

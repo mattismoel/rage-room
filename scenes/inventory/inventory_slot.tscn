@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://cya45llykdujp"]
+[gd_scene load_steps=13 format=3 uid="uid://cya45llykdujp"]
 
 [ext_resource type="Script" uid="uid://bxcl32ibl8vgx" path="res://scenes/inventory/inventory_slot.gd" id="1_5agom"]
+[ext_resource type="Texture2D" uid="uid://357l16nln1ge" path="res://assets/inventory_slot.png" id="2_c7w7p"]
 [ext_resource type="Texture2D" uid="uid://bx5l7h32g5k41" path="res://assets/equipment/bug_zapper.png" id="2_u6pog"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c00wg"]
@@ -27,6 +28,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(0, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../ToolTip:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_u6pog"]
 resource_name = "focus"
@@ -42,6 +55,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, -10)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../ToolTip:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_c7w7p"]
 resource_name = "unfocus"
@@ -56,6 +81,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(0.098073, 0.129408),
 "update": 0,
 "values": [Vector2(0, -10), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../ToolTip:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0uvgv"]
@@ -73,7 +110,7 @@ offset_top = 0.349066
 offset_right = 32.0
 offset_bottom = 32.3491
 script = ExtResource("1_5agom")
-_title_label = NodePath("MovableOnHover/TitleLabel")
+_title_label = NodePath("ToolTip/Container/TitleLabel")
 _item_texture = NodePath("MovableOnHover/SelectButton/EquipmentSprite")
 _animation_player = NodePath("AnimationPlayer")
 _select_button = NodePath("MovableOnHover/SelectButton")
@@ -81,17 +118,20 @@ _buy_button = NodePath("MovableOnHover/BuyButton")
 
 [node name="MovableOnHover" type="Control" parent="."]
 layout_mode = 1
-anchors_preset = 0
-offset_right = 32.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -16.0
+offset_right = 16.0
 offset_bottom = 32.0
+grow_horizontal = 2
 mouse_filter = 1
 
 [node name="SelectButton" type="Button" parent="MovableOnHover"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 1
-offset_top = 0.349066
 offset_right = 32.0
-offset_bottom = 32.3491
+offset_bottom = 32.0
 size_flags_vertical = 0
 mouse_filter = 1
 mouse_default_cursor_shape = 2
@@ -100,20 +140,19 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_td8r7")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_u6pog")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_c7w7p")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_0uvgv")
+disabled = true
+icon = ExtResource("2_c7w7p")
 
 [node name="EquipmentSprite" type="TextureRect" parent="MovableOnHover/SelectButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 1.0
-offset_top = -1.69813
-offset_right = 1.0
-offset_bottom = -1.69813
 grow_horizontal = 2
 grow_vertical = 2
 rotation = 0.0776194
 scale = Vector2(1.0364, 1.0364)
+mouse_filter = 2
 texture = ExtResource("2_u6pog")
 expand_mode = 2
 stretch_mode = 5
@@ -123,20 +162,32 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 18.0
-offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 mouse_default_cursor_shape = 2
 text = "$0"
 
-[node name="TitleLabel" type="Label" parent="MovableOnHover"]
-visible = false
+[node name="ToolTip" type="Control" parent="."]
 layout_mode = 1
-offset_top = 34.3491
-offset_right = 32.0
-offset_bottom = 42.3491
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = -20.3491
+offset_bottom = -20.3491
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="Container" type="VBoxContainer" parent="ToolTip"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 8.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="TitleLabel" type="Label" parent="ToolTip/Container"]
+layout_mode = 2
+size_flags_vertical = 0
 text = "Name"
 horizontal_alignment = 1
 

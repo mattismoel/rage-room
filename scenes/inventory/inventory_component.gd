@@ -41,20 +41,20 @@ func unequip() -> EquipmentEntry:
 	if replaced_entry != null: _equipment.append(replaced_entry)
 	_current_equipment = null
 	
-	unequipped_entry.emit()
+	unequipped_entry.emit(replaced_entry)
 	return replaced_entry
 
-## Unlocks the input entry and equips it.
-func unlock_entry(entry: EquipmentEntry, should_equip: bool = true) -> void:
+## Unlocks the input entry and equips it
+func unlock_entry(entry: EquipmentEntry, should_equip: bool = true):
 	entry.unlock()
 	unlocked_entry.emit(entry)
 	equip(entry)
 
-func deselect_all() -> void:
-	if _current_equipment != null:
-		unequip()
-
-	selection_cleared.emit()
+#func deselect_all() -> void:
+	#if _current_equipment != null:
+		#unequip()
+#
+	#selection_cleared.emit()
 
 func get_equipment_entries() -> Array[EquipmentEntry]:
 	return _equipment

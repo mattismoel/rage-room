@@ -23,11 +23,15 @@ func _on_entry_bought(entry: EquipmentEntry) -> void:
 	var bought := _currency_component.attempt_purchase(entry.cost)
 	if !bought: return
 	_inventory_component.unlock_entry(entry)
+	_game_ui.inventory.unlock_slot(entry)
 
 func _on_entry_selected(entry: EquipmentEntry) -> void:
-	_inventory_component.equip(entry)
-	_hand.set_equipment(entry)
-	_game_ui.cursor.hide()
+	if _inventory_component.current_equipment() != null:
+		_inventory_component.unequip()
+		_game_ui.inventory.populate_slot(entry)
+	else:
+		_inventory_component.equip(entry)
+		_game_ui.inventory.vacate_slot(entry)
 
 func _on_health_changed(new_health: float) -> void:
 	_game_ui.update_health(new_health)
