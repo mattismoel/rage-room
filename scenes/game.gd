@@ -56,3 +56,5 @@ func _on_entry_equipped(entry: EquipmentEntry) -> void:
 
 func _on_entry_unequipped(entry: EquipmentEntry) -> void:
 	_hand.set_equipment(_hand.initial_equipment)
+	_hand.hide()
+	_game_ui.cursor.show()
