@@ -9,7 +9,7 @@ signal took_bite(damage: float)
 signal killed(insect: Insect)
 
 ## This value will be increased if the insect is slowed down (e.g. by the spray)
-var slow_down_multiplier: float = 1.0
+var _slow_down_multiplier: float = 1.0
 
 ## The amount of damage per bite.
 @export var damage: float = 1.0
@@ -50,7 +50,7 @@ func kill() -> void:
 	killed.emit(self)
 
 func spray(slow_down: float, health_damage: float) -> void:
-	slow_down_multiplier = slow_down
+	_slow_down_multiplier = slow_down
 	slow_down()
 
 func _on_area_entered(area: Area2D) -> void:
