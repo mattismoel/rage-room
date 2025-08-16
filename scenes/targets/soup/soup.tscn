@@ -9,11 +9,10 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_4nqb7"]
 radius = 24.0208
 
-[node name="Soup" type="Area2D" node_paths=PackedStringArray("_health_component", "_timer")]
+[node name="Soup" type="Area2D" node_paths=PackedStringArray("_health_component")]
 script = ExtResource("1_4nqb7")
 consumable = ExtResource("2_c0cfm")
 _health_component = NodePath("HealthComponent")
-_timer = NodePath("Timer")
 metadata/_custom_type_script = "uid://c5esn4h1wsvqj"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

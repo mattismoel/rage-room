@@ -1,8 +1,6 @@
 extends Insect
 
-@export var _base_speed: float = 8.0
-@export var _hitbox: Area2D
-@export var _animation_player: AnimationPlayer
+@export var _speed: float = 8.0
 
 @onready var _speed: float = _base_speed
 @onready var _screen_size := Vector2(
@@ -15,7 +13,6 @@ var _velocity: Vector2
 
 func _ready() -> void:
 	super()
-	_hitbox.area_entered.connect(_on_area_entered)
 
 	var _random_point := Vector2(
 		randf_range(0, _screen_size.x),
@@ -61,9 +58,11 @@ func _on_area_entered(area: Area2D) -> void:
 	if area is not Target: return
 	_direction = _calculate_new_direction(_direction)
 
+
 func _calculate_new_direction(direction: Vector2) -> Vector2:
 	var perpendicular := Vector2(-direction.y, direction.x)
 	return perpendicular.rotated(randf() * PI)
+
 
 func _is_on_screen() -> bool:
 	return global_position.x <= _screen_size.x && global_position.x > 0.0\

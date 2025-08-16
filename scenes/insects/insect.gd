@@ -1,7 +1,7 @@
 class_name Insect
 extends Node2D
 
-## Emitted whenever the insect takes a bite. It contains the amount of damage 
+## Emitted whenever the insect takes a bite. It contains the amount of _damage_per_bite 
 ## dealt.
 signal took_bite(damage: float)
 
@@ -16,8 +16,18 @@ const BASE_SLOW_DOWN_TIME: float = 12.0
 ## The amount of damage per bite.
 @export var damage: float = 1.0
 
+@export var _hitbox: Area2D
+@export var _bite_timer: RateTimer
+
+## How resistant the insect is to _damage_per_bite.
+##
+## Values range from [0.0, 1.0].
+@export_range(0.0, 1.0) var _resistance: float = 0.0
+
+@export var _health_component: HealthComponent
 @export var _target_zone: TargetZone
 
+var _current_target: Target
 
 func _ready() -> void:
 	InsectManager.add([self])
@@ -26,13 +36,15 @@ func _ready() -> void:
 	await get_tree().physics_frame
 	await get_tree().physics_frame
 
+	_hitbox.area_entered.connect(_on_area_entered)
+	_health_component.health_depleted.connect(_on_health_depleted)
+	_bite_timer.timeout.connect(_on_bite_timer_timeout)
 
 	## If the insect has no target zone, it is considered target-less, and we do
 	## not wish to target anything.
 	if _target_zone == null:
 		return
 
-	_target_zone.area_entered.connect(_on_area_entered)
 	var t := _target_zone.find_target()
 
 	target(t)
@@ -49,7 +61,20 @@ func slow_down(effectiveness: float) -> void:
 	pass
 
 func kill() -> void:
+	InsectManager.kill(self)
 	killed.emit(self)
 
+func _calculate_damage(amount: float, resistance: float) -> float:
+	return amount - resistance * amount
+
+func _on_health_depleted() -> void:
+	kill()
+
 func _on_area_entered(area: Area2D) -> void:
-	pass
+	if area is not Target: return
+	_current_target = area
+	_bite_timer.start()
+
+func _on_bite_timer_timeout() -> void:
+	assert(_current_target != null, "The insect attempted to bit a null target!")
+	took_bite.emit(_damage_per_bite)

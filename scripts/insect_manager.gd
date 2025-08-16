@@ -69,8 +69,5 @@ func kill(insect: Insect) -> void:
 
 	count_changed.emit(new_count)
 
-	insect.kill() # This is emitting the "killed" signal twice?
-	# Is it not currently redundant?
-
 	if _debug_kill_insect:
 		print("Killed insect %s" % insect.name)
