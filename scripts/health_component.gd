@@ -59,5 +59,5 @@ func heal(amount: float) -> void:
 ## Examples: 
 ## 50 / 100 -> 0.50 (50% health)
 ## 75 / 250 -> 0.30 (30% health)
-func health_ratio() -> float:
+func calculate_health_ratio() -> float:
 	return health / max_health

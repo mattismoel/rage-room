@@ -28,7 +28,7 @@
 [ext_resource type="Script" uid="uid://dokmshyx8obwi" path="res://scripts/daycycle-component.gd" id="24_e1j6l"]
 
 [sub_resource type="Gradient" id="Gradient_bhx41"]
-colors = PackedColorArray(0.0705882, 0.0392157, 0.101961, 1, 1, 1, 1, 1)
+colors = PackedColorArray(0.164706, 0.164706, 0.254902, 1, 1, 1, 1, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0tnpc"]
 size = Vector2(32, 32)
@@ -74,7 +74,7 @@ metadata/_custom_type_script = "uid://dokmshyx8obwi"
 [node name="GameLayer" type="CanvasLayer" parent="."]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="GameLayer" node_paths=PackedStringArray("_daycycle_component")]
-color = Color(0.465646, 0.447609, 0.483684, 1)
+color = Color(0.401767, 0.401767, 0.466365, 1)
 script = ExtResource("23_pl11u")
 _gradient = SubResource("Gradient_bhx41")
 _daycycle_component = NodePath("../../DaycycleComponent")
@@ -93,18 +93,6 @@ script = ExtResource("12_trtic")
 metadata/_custom_type_script = "uid://dmds87a1jnvh0"
 
 [node name="Hand" parent="GameLayer/Player" instance=ExtResource("2_kvpfn")]
-
-[node name="Targets" type="Node" parent="GameLayer"]
-
-[node name="Soup" parent="GameLayer/Targets" instance=ExtResource("8_0tnpc")]
-light_mask = 0
-position = Vector2(124, 77)
-
-[node name="PointLight2D" type="PointLight2D" parent="GameLayer/Targets/Soup"]
-energy = 0.5
-range_layer_max = 1
-texture = ExtResource("17_bhx41")
-texture_scale = 0.15
 
 [node name="Spawners" type="Node" parent="GameLayer"]
 
@@ -188,6 +176,18 @@ shape = SubResource("RectangleShape2D_0tnpc")
 script = ExtResource("6_gee14")
 _entries = Array[ExtResource("2_lnu2h")]([SubResource("Resource_0tnpc")])
 metadata/_custom_type_script = "uid://c8f6fbvcun4wt"
+
+[node name="Targets" type="Node" parent="GameLayer"]
+
+[node name="Soup" parent="GameLayer/Targets" instance=ExtResource("8_0tnpc")]
+light_mask = 0
+position = Vector2(124, 77)
+
+[node name="PointLight2D" type="PointLight2D" parent="GameLayer/Targets/Soup"]
+energy = 0.5
+range_layer_max = 1
+texture = ExtResource("17_bhx41")
+texture_scale = 0.15
 
 [node name="UI" type="CanvasLayer" parent="."]
 

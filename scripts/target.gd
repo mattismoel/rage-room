@@ -7,12 +7,18 @@ extends Area2D
 ## The consumable associated with the target.
 @export var consumable: ConsumableEntry
 
+@export var _progress_sprite: ProgressSprite
 
 @export_group("References")
 @export var _health_component: HealthComponent
 
 func _ready() -> void:
 	area_entered.connect(_on_area_entered)
+	_health_component.health_changed.connect(_on_health_changed)
+
+	var initial_progress := _health_component.calculate_health_ratio()
+	print(initial_progress)
+	_progress_sprite.set_progress(initial_progress)
 
 ## Gets a random point on the targets circle shape perimeter.
 ##
@@ -44,3 +50,7 @@ func _get_collision_shape() -> CollisionShape2D:
 		if child is CollisionShape2D: 
 			return child
 	return null
+
+func _on_health_changed(health: float) -> void:
+	var health_ratio := _health_component.calculate_health_ratio()
+	_progress_sprite.set_progress(health_ratio)
