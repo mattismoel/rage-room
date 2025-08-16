@@ -18,6 +18,8 @@ func _ready() -> void:
 	_game_ui.inventory.entry_entered.connect(_on_entry_entered)
 	_game_ui.inventory.entry_exited.connect(_on_entry_exited)
 	_game_ui.cursor.hide()
+
+	_currency_component.balance_changed.connect(_on_balance_changed)
 	
 	_inventory_component.equipped_entry.connect(_on_entry_equipped)
 	_inventory_component.unequipped_entry.connect(_on_entry_unequipped)
@@ -58,3 +60,6 @@ func _on_entry_unequipped(entry: EquipmentEntry) -> void:
 	_hand.set_equipment(_hand.initial_equipment)
 	_hand.hide()
 	_game_ui.cursor.show()
+
+func _on_balance_changed(new_balance: float) -> void:
+	_game_ui.update_balance(new_balance)
