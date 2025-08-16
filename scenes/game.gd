@@ -18,11 +18,11 @@ func _ready() -> void:
 	_game_ui.inventory.entry_entered.connect(_on_entry_entered)
 	_game_ui.inventory.entry_exited.connect(_on_entry_exited)
 	_game_ui.cursor.hide()
-
-	_currency_component.balance_changed.connect(_on_balance_changed)
 	
 	_inventory_component.equipped_entry.connect(_on_entry_equipped)
 	_inventory_component.unequipped_entry.connect(_on_entry_unequipped)
+
+	_currency_component.balance_changed.connect(_on_balance_changed)
 
 func _on_entry_bought(entry: EquipmentEntry) -> void:
 	var bought := _currency_component.attempt_purchase(entry.cost)

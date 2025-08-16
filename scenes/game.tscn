@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dpcv78j3ky7pm"]
+[gd_scene load_steps=32 format=3 uid="uid://dpcv78j3ky7pm"]
 
 [ext_resource type="Script" uid="uid://krx438rn24sp" path="res://scenes/game.gd" id="1_bt5mj"]
 [ext_resource type="Script" uid="uid://px0ijr1h5uhl" path="res://scripts/intensity_manager.gd" id="1_kvpfn"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://bgbi2h521tu0g" path="res://scenes/currency/currency_component.gd" id="2_ir15t"]
 [ext_resource type="PackedScene" uid="uid://bxp10qpdnhpjg" path="res://scenes/hand.tscn" id="2_kvpfn"]
 [ext_resource type="Script" uid="uid://7qy2yh4bqtbv" path="res://scripts/spawner/spawn_entry.gd" id="2_lnu2h"]
+[ext_resource type="Script" uid="uid://dtqm0ir0ws2xw" path="res://scripts/camera_shake_component.gd" id="2_qnb83"]
 [ext_resource type="Script" uid="uid://hxmlfmuavfju" path="res://scripts/spawner/area_spawner.gd" id="4_gee14"]
 [ext_resource type="Resource" uid="uid://r1eajmc151of" path="res://scenes/equipment/entries/spoon.tres" id="5_bt5mj"]
 [ext_resource type="Script" uid="uid://c8f6fbvcun4wt" path="res://scripts/spawner/selectors/weighted_selector.gd" id="6_gee14"]
@@ -53,12 +54,17 @@ _currency_component = NodePath("CurrencyComponent")
 _inventory_component = NodePath("InventoryComponent")
 _player_health_component = NodePath("GameLayer/Player/HealthComponent")
 
+[node name="ShakeCamera" type="Camera2D" parent="."]
+anchor_mode = 0
+script = ExtResource("2_qnb83")
+_decay = 1.0
+metadata/_custom_type_script = "uid://dtqm0ir0ws2xw"
+
 [node name="IntensityManager" type="Node" parent="."]
 script = ExtResource("1_kvpfn")
 
 [node name="CurrencyComponent" type="Node" parent="."]
 script = ExtResource("2_ir15t")
-_initial_balance = 100
 metadata/_custom_type_script = "uid://bgbi2h521tu0g"
 
 [node name="InventoryComponent" type="Node" parent="."]
@@ -72,9 +78,10 @@ _initial_time_of_day = 0.5
 metadata/_custom_type_script = "uid://dokmshyx8obwi"
 
 [node name="GameLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="GameLayer" node_paths=PackedStringArray("_daycycle_component")]
-color = Color(0.401767, 0.401767, 0.466365, 1)
+color = Color(0.248754, 0.248754, 0.329875, 1)
 script = ExtResource("23_pl11u")
 _gradient = SubResource("Gradient_bhx41")
 _daycycle_component = NodePath("../../DaycycleComponent")

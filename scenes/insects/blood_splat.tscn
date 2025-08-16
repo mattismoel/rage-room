@@ -1,8 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://byunc756cgkpf"]
+[gd_scene load_steps=5 format=3 uid="uid://byunc756cgkpf"]
 
 [ext_resource type="Texture2D" uid="uid://cdy1vsg31jxn0" path="res://assets/blood-splats.png" id="1_70rsu"]
 [ext_resource type="Script" uid="uid://cs80fxnwigeai" path="res://scenes/insects/blood_splat.gd" id="2_02xm8"]
+[ext_resource type="AudioStream" uid="uid://dslgk2hlstcse" path="res://assets/sounds/splat-1.wav" id="3_68tbd"]
+[ext_resource type="AudioStream" uid="uid://b8nh35p1cgmar" path="res://assets/sounds/splat-2.wav" id="4_1ub6y"]
 
-[node name="BloodSplat" type="Sprite2D"]
+[node name="BloodSplat" type="Sprite2D" node_paths=PackedStringArray("_audio_stream_player")]
 texture = ExtResource("1_70rsu")
 script = ExtResource("2_02xm8")
+_splat_streams = Array[AudioStream]([ExtResource("3_68tbd"), ExtResource("4_1ub6y")])
+_audio_stream_player = NodePath("AudioStreamPlayer2D")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+max_distance = 250.0

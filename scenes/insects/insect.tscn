@@ -1,0 +1,263 @@
+[gd_scene load_steps=28 format=3 uid="uid://xqa0ewedbbsi"]
+
+[ext_resource type="Script" uid="uid://ccaa38g7o2tdg" path="res://scenes/insects/insect.gd" id="1_0e3iu"]
+[ext_resource type="Script" uid="uid://dmds87a1jnvh0" path="res://scripts/health_component.gd" id="2_h3wet"]
+[ext_resource type="Texture2D" uid="uid://bai3hwoshk7au" path="res://scenes/insects/spider/spider-spritesheet.png" id="3_ryeo8"]
+[ext_resource type="Script" uid="uid://8tvugixginf6" path="res://scripts/directional_sprite.gd" id="4_2etu2"]
+[ext_resource type="Script" uid="uid://b72oq33b8bp8v" path="res://scripts/rate_timer.gd" id="5_gk1wr"]
+[ext_resource type="Script" uid="uid://eokcg40yy5wk" path="res://scenes/target_zone.gd" id="6_h3wet"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xa5d1"]
+animation = &"n"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jg2f4"]
+animation = &"ne"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sxnj4"]
+animation = &"e"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_s7hb0"]
+animation = &"se"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1wiec"]
+animation = &"s"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ek3vu"]
+animation = &"sw"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4tb26"]
+animation = &"w"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_y50jp"]
+animation = &"nw"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_kkb77"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_xa5d1")
+blend_point_0/pos = Vector2(0, 1)
+blend_point_1/node = SubResource("AnimationNodeAnimation_jg2f4")
+blend_point_1/pos = Vector2(1, 1)
+blend_point_2/node = SubResource("AnimationNodeAnimation_sxnj4")
+blend_point_2/pos = Vector2(1, 0)
+blend_point_3/node = SubResource("AnimationNodeAnimation_s7hb0")
+blend_point_3/pos = Vector2(1, -1)
+blend_point_4/node = SubResource("AnimationNodeAnimation_1wiec")
+blend_point_4/pos = Vector2(0, -1)
+blend_point_5/node = SubResource("AnimationNodeAnimation_ek3vu")
+blend_point_5/pos = Vector2(-1, -1)
+blend_point_6/node = SubResource("AnimationNodeAnimation_4tb26")
+blend_point_6/pos = Vector2(-1, 0)
+blend_point_7/node = SubResource("AnimationNodeAnimation_y50jp")
+blend_point_7/pos = Vector2(-1, 1)
+blend_mode = 1
+
+[sub_resource type="Animation" id="Animation_jg2f4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../DirectionalSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_s7hb0"]
+resource_name = "e"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../DirectionalSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_xa5d1"]
+resource_name = "n"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../DirectionalSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [6, 7, 8]
+}
+
+[sub_resource type="Animation" id="Animation_sxnj4"]
+resource_name = "ne"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../DirectionalSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [21, 22, 23]
+}
+
+[sub_resource type="Animation" id="Animation_h3ivo"]
+resource_name = "nw"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../DirectionalSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [18, 19, 20]
+}
+
+[sub_resource type="Animation" id="Animation_ek3vu"]
+resource_name = "s"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../DirectionalSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_1wiec"]
+resource_name = "se"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../DirectionalSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [14, 13, 14]
+}
+
+[sub_resource type="Animation" id="Animation_4tb26"]
+resource_name = "sw"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../DirectionalSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [15, 16, 17]
+}
+
+[sub_resource type="Animation" id="Animation_y50jp"]
+resource_name = "w"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../DirectionalSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s7hb0"]
+_data = {
+&"RESET": SubResource("Animation_jg2f4"),
+&"e": SubResource("Animation_s7hb0"),
+&"n": SubResource("Animation_xa5d1"),
+&"ne": SubResource("Animation_sxnj4"),
+&"nw": SubResource("Animation_h3ivo"),
+&"s": SubResource("Animation_ek3vu"),
+&"se": SubResource("Animation_1wiec"),
+&"sw": SubResource("Animation_4tb26"),
+&"w": SubResource("Animation_y50jp")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sji5c"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ryeo8"]
+radius = 256.0
+
+[node name="Insect" type="Node2D"]
+script = ExtResource("1_0e3iu")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("2_h3wet")
+metadata/_custom_type_script = "uid://dmds87a1jnvh0"
+
+[node name="DirectionalSprite" type="Sprite2D" parent="."]
+texture = ExtResource("3_ryeo8")
+hframes = 3
+vframes = 8
+script = ExtResource("4_2etu2")
+metadata/_custom_type_script = "uid://8tvugixginf6"
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath(".")
+tree_root = SubResource("AnimationNodeBlendSpace2D_kkb77")
+anim_player = NodePath("../AnimationPlayer")
+parameters/blend_position = Vector2(0.861418, 0.551563)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../AnimationTree")
+libraries = {
+&"": SubResource("AnimationLibrary_s7hb0")
+}
+
+[node name="RateTimer" type="Timer" parent="."]
+script = ExtResource("5_gk1wr")
+metadata/_custom_type_script = "uid://b72oq33b8bp8v"
+
+[node name="CollisionDetector" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionDetector"]
+shape = SubResource("CircleShape2D_sji5c")
+
+[node name="TargetZone" type="Area2D" parent="."]
+monitorable = false
+script = ExtResource("6_h3wet")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TargetZone"]
+shape = SubResource("CircleShape2D_ryeo8")
