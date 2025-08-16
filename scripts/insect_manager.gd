@@ -45,6 +45,10 @@ func add(new_insects: Array[Insect]) -> void:
 		max_count_reached.emit()
 
 	_insects.append_array(insects_to_add)
+
+	for insect in new_insects:
+		insect.killed.connect(_on_insect_killed)
+
 	count_changed.emit(_insects.size())
 	added.emit(insects_to_add)
 
@@ -58,8 +62,9 @@ func kill(insect: Insect) -> void:
 
 	assert(index != -1, "Attempted to find and kill %s, but not found in array." % insect.name)
 
-	insect.queue_free()
+	# insect.queue_free()
 	killed.emit(insect)
+	insect.splat()
 
 	_insects.remove_at(index)
 
@@ -71,3 +76,6 @@ func kill(insect: Insect) -> void:
 
 	if _debug_kill_insect:
 		print("Killed insect %s" % insect.name)
+
+func _on_insect_killed(insect: Insect) -> void:
+	kill(insect)

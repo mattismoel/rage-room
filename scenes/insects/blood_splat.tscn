@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://byunc756cgkpf"]
+
+[ext_resource type="Texture2D" uid="uid://cdy1vsg31jxn0" path="res://assets/blood-splats.png" id="1_70rsu"]
+[ext_resource type="Script" uid="uid://cs80fxnwigeai" path="res://scenes/insects/blood_splat.gd" id="2_02xm8"]
+
+[node name="BloodSplat" type="Sprite2D"]
+texture = ExtResource("1_70rsu")
+script = ExtResource("2_02xm8")

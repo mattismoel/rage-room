@@ -1,6 +1,8 @@
 class_name Insect
 extends Node2D
 
+const SPLAT_DURATION: float = 10.0
+
 ## Emitted whenever the insect takes a bite. It contains the amount of _damage_per_bite 
 ## dealt.
 signal took_bite(damage: float)
@@ -9,6 +11,8 @@ signal took_bite(damage: float)
 signal killed(insect: Insect)
 
 const BASE_SLOW_DOWN_TIME: float = 12.0
+
+@export var _blood_splat_scene: PackedScene
 
 ## The amount of damage per bite.
 @export var damage: float = 1.0
@@ -58,8 +62,13 @@ func slow_down(effectiveness: float) -> void:
 	assert(false, "The 'slow_down()' method must be implemented by descendant!")
 	pass
 
+func splat() -> void:
+	var blood_splat: Node2D = _blood_splat_scene.instantiate()
+	get_parent().add_child(blood_splat)
+	blood_splat.global_position = global_position
+	queue_free()
+
 func kill() -> void:
-	InsectManager.kill(self)
 	killed.emit(self)
 
 func take_damage(amount: float) -> void:
