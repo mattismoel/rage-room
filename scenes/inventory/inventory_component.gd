@@ -48,7 +48,7 @@ func unequip() -> EquipmentEntry:
 func unlock_entry(entry: EquipmentEntry, should_equip: bool = true):
 	entry.unlock()
 	unlocked_entry.emit(entry)
-	equip(entry)
+	if should_equip: equip(entry)
 
 #func deselect_all() -> void:
 	#if _current_equipment != null:
