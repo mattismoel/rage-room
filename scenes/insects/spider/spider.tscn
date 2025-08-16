@@ -216,8 +216,9 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_xa5d1"]
 radius = 5.0
 
-[node name="Spider" type="Node2D" node_paths=PackedStringArray("_hitbox", "_bite_timer", "_health_component")]
+[node name="Spider" type="Node2D" node_paths=PackedStringArray("_animation_player", "_hitbox", "_bite_timer", "_health_component")]
 script = ExtResource("1_rfuxy")
+_animation_player = NodePath("AnimationPlayer")
 _hitbox = NodePath("CollisionDetector")
 _bite_timer = NodePath("RateTimer")
 _health_component = NodePath("HealthComponent")

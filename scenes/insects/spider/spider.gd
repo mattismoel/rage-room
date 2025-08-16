@@ -1,6 +1,7 @@
 extends Insect
 
-@export var _speed: float = 8.0
+@export var _base_speed: float = 8.0
+@export var _animation_player: AnimationPlayer
 
 @onready var _speed: float = _base_speed
 @onready var _screen_size := Vector2(
