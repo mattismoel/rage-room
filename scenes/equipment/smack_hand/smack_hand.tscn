@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://dowvmhrglkm7v" path="res://scenes/equipment/smack_hand/smack_state.gd" id="3_elhpo"]
 [ext_resource type="Texture2D" uid="uid://badrntcjnvwgj" path="res://assets/player/hand.png" id="3_garvd"]
 [ext_resource type="Texture2D" uid="uid://bqkybbohwmj75" path="res://assets/player/test arm.png" id="5_v4a0k"]
-[ext_resource type="Script" uid="uid://b1xr1cqdvx040" path="res://scripts/struggle_component.gd" id="7_vp4i8"]
+[ext_resource type="Script" path="res://scripts/struggle_component.gd" id="7_vp4i8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v4a0k"]
 
