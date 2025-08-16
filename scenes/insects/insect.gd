@@ -10,12 +10,10 @@ signal killed(insect: Insect)
 
 const BASE_SLOW_DOWN_TIME: float = 12.0
 
-## This value will be increased if the insect is slowed down (e.g. by the spray)
-@export var _resistance: float = 0.0
-
 ## The amount of damage per bite.
 @export var damage: float = 1.0
 
+@export var _damage_per_bite: float = 1.0
 @export var _hitbox: Area2D
 @export var _bite_timer: RateTimer
 
@@ -63,6 +61,11 @@ func slow_down(effectiveness: float) -> void:
 func kill() -> void:
 	InsectManager.kill(self)
 	killed.emit(self)
+
+func take_damage(amount: float) -> void:
+	var damage_taken := _calculate_damage(amount, _resistance)
+	_health_component.take_damage(damage_taken)
+	pass
 
 func _calculate_damage(amount: float, resistance: float) -> float:
 	return amount - resistance * amount
