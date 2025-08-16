@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://b1xr1cqdvx040" path="res://scripts/struggle_component.gd" id="7_rv44h"]
 
 [sub_resource type="Gradient" id="Gradient_rv44h"]
+offsets = PackedFloat32Array(0, 0.991342)
 colors = PackedColorArray(0.86572, 0.946333, 0.833933, 1, 0.63154, 0.911392, 0, 1)
 
 [sub_resource type="Animation" id="Animation_5dnex"]
@@ -137,6 +138,7 @@ texture = ExtResource("4_3t4sn")
 
 [node name="SprayState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("_idle_state", "_hit_area", "_animation_player")]
 script = ExtResource("4_p4y8h")
+effectiveness = 5.0
 _idle_state = NodePath("../IdleState")
 _hit_area = NodePath("Area2D")
 _animation_player = NodePath("../../AnimationPlayer")

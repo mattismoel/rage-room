@@ -5,6 +5,7 @@ extends Insect
 
 ## The max amount of variance in speed.
 @export var _speed_variance: float = 8.0
+@export var _animation_player: AnimationPlayer
 
 @export_group("Waypoint System")
 ## The max distance from the straight line to the target, that the ant deviates. 
@@ -19,19 +20,44 @@ extends Insect
 ## The max amount of variance to wait between waypoints.
 @export var _waypoint_wait_duration_variance: float = 0.5
 
+var current_tween: Tween
+var current_speed_scale: float
+
 func target(t: Target) -> void:
 	var target_pos := t.get_random_perimeter_point_from_point(global_position)
 
-	var tween := create_tween()
 	var segment_count := _calculate_segment_count(global_position, target_pos, _segment_length)
 
 	var waypoints := _generate_waypoints(global_position, target_pos, segment_count, _wiggle_width)
 	var speed := _calculate_randomized_speed(_base_speed, _speed_variance)
+	
+	## Saves a reference of the tween, so it can be stopped in case of slow down
+	current_tween = get_tree().create_tween()
 
 	var prev_pos := global_position
 	for wp_pos in waypoints:
 		var wait_duration := _calculate_random_wait_duration(_waypoint_wait_duration, _waypoint_wait_duration_variance)
-		prev_pos = _add_waypoint_tween_step(tween, prev_pos, wp_pos, wait_duration, speed)
+		prev_pos = _add_waypoint_tween_step(prev_pos, wp_pos, wait_duration, speed)
+
+func slow_down(effectiveness: float):
+	## Calculate how much the insect should be slowed down
+	assert(effectiveness != 0 or _resistance != 1, "Invalid resistance or effectiveess resulting in divide by 0")
+	var new_speed_scale := 1/(effectiveness*(1-_resistance))
+	current_speed_scale = new_speed_scale
+	
+	var deccleration_tween = create_tween()
+	deccleration_tween.set_parallel()
+	deccleration_tween.tween_method(current_tween.set_speed_scale, current_speed_scale, new_speed_scale, 1)
+	deccleration_tween.tween_property(_animation_player, "speed_scale", new_speed_scale, 1)
+	deccleration_tween.tween_property(self, "modulate", Color.GREEN, 1)
+	
+	deccleration_tween.tween_interval((1-_resistance)*BASE_SLOW_DOWN_TIME)
+	await deccleration_tween.finished
+	
+	var accleration_tween = create_tween()
+	accleration_tween.tween_property(self, "modulate", Color.WHITE, 1)
+	accleration_tween.tween_method(current_tween.set_speed_scale, new_speed_scale, 1 , 1)
+	accleration_tween.tween_property(_animation_player, "speed_scale", 1, 1)
 
 ## Returns a randomized speed given a variance. 
 func _calculate_randomized_speed(speed: float, variance: float) -> float:
@@ -67,11 +93,13 @@ func _generate_waypoints(start_pos: Vector2, end_pos: Vector2, segment_count: in
 ## Adds a step for moving from the "from_pos" to the "to_pos" to the input 
 ## tween, as well as adding a wait interval to the end, pausing the sequence 
 ## until next step is run.
-func _add_waypoint_tween_step(tween: Tween, from_pos: Vector2, to_pos: Vector2, wait_duration: float, speed: float) -> Vector2:
+func _add_waypoint_tween_step(from_pos: Vector2, to_pos: Vector2, wait_duration: float, speed: float) -> Vector2:
 	var distance := from_pos.distance_to(to_pos)
 	var duration := distance / speed
-	tween.tween_property(self, "global_position", to_pos, duration)
-	tween.tween_interval(wait_duration)
+	
+	current_tween.tween_property(self, "global_position", to_pos, duration)
+	current_tween.tween_interval(wait_duration)
+
 	return to_pos
 
 ## Calculates a random duration given the base wait duration and a maximum 

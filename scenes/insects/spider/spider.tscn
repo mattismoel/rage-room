@@ -214,9 +214,10 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_xa5d1"]
 radius = 5.0
 
-[node name="Spider" type="Node2D" node_paths=PackedStringArray("_hitbox")]
+[node name="Spider" type="Node2D" node_paths=PackedStringArray("_hitbox", "_animation_player")]
 script = ExtResource("1_rfuxy")
 _hitbox = NodePath("CollisionDetector")
+_animation_player = NodePath("AnimationPlayer")
 
 [node name="DirectionalSprite" type="Sprite2D" parent="." node_paths=PackedStringArray("_target", "_animation_tree")]
 texture = ExtResource("2_jg2f4")

@@ -1,8 +1,7 @@
 class_name SprayState
 extends State
 
-@export var slow_down_multiplier: float = 3
-@export var health_damage: float = 10
+@export var effectiveness: float = 3
 
 @export_category("References")
 @export var _idle_state: State
@@ -26,4 +25,4 @@ func _spray_intersecting_insects() -> void:
 	for area in overlapping_areas:
 		if area.get_parent() is Insect:
 			var insect = area.get_parent()
-			insect.spray(slow_down_multiplier, health_damage)
+			insect.slow_down(effectiveness)
