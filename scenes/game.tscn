@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dpcv78j3ky7pm"]
+[gd_scene load_steps=31 format=3 uid="uid://dpcv78j3ky7pm"]
 
 [ext_resource type="Script" uid="uid://krx438rn24sp" path="res://scenes/game.gd" id="1_bt5mj"]
 [ext_resource type="Script" uid="uid://px0ijr1h5uhl" path="res://scripts/intensity_manager.gd" id="1_kvpfn"]
@@ -19,10 +19,16 @@
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="16_5newe"]
 [ext_resource type="Script" uid="uid://clj4yaht54h7c" path="res://scenes/inventory/inventory_component.gd" id="16_ca42v"]
 [ext_resource type="Script" uid="uid://c3n2s4jlpujkh" path="res://scenes/equipment/equipment_entry.gd" id="17_264po"]
+[ext_resource type="Texture2D" uid="uid://bhqetre23l1v" path="res://assets/lights/soft-light.png" id="17_bhx41"]
 [ext_resource type="Resource" uid="uid://dy1f754kra1gv" path="res://scenes/equipment/entries/bug_zapper.tres" id="18_1kice"]
 [ext_resource type="Resource" uid="uid://crrud54yx74ob" path="res://scenes/equipment/entries/flyswatter.tres" id="19_5newe"]
 [ext_resource type="PackedScene" uid="uid://7ffbbl45ypej" path="res://scenes/mouth/mouth.tscn" id="20_37s47"]
 [ext_resource type="PackedScene" uid="uid://bgxj30mwiqb0w" path="res://scenes/game_ui.tscn" id="23_bt5mj"]
+[ext_resource type="Script" uid="uid://de4c1y632jm02" path="res://scripts/daycycle_canvas_modulate.gd" id="23_pl11u"]
+[ext_resource type="Script" uid="uid://dokmshyx8obwi" path="res://scripts/daycycle-component.gd" id="24_e1j6l"]
+
+[sub_resource type="Gradient" id="Gradient_bhx41"]
+colors = PackedColorArray(0.0705882, 0.0392157, 0.101961, 1, 1, 1, 1, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0tnpc"]
 size = Vector2(32, 32)
@@ -42,10 +48,10 @@ metadata/_custom_type_script = "uid://7qy2yh4bqtbv"
 [node name="Game" type="Node2D" node_paths=PackedStringArray("_game_ui", "_hand", "_currency_component", "_inventory_component", "_player_health_component")]
 script = ExtResource("1_bt5mj")
 _game_ui = NodePath("UI/GameUI")
-_hand = NodePath("PlayerLayer/Player/Hand")
+_hand = NodePath("GameLayer/Player/Hand")
 _currency_component = NodePath("CurrencyComponent")
 _inventory_component = NodePath("InventoryComponent")
-_player_health_component = NodePath("PlayerLayer/Player/HealthComponent")
+_player_health_component = NodePath("GameLayer/Player/HealthComponent")
 
 [node name="IntensityManager" type="Node" parent="."]
 script = ExtResource("1_kvpfn")
@@ -60,18 +66,49 @@ script = ExtResource("16_ca42v")
 _equipment = Array[ExtResource("17_264po")]([ExtResource("5_bt5mj"), ExtResource("19_5newe"), ExtResource("18_1kice"), ExtResource("9_bt5mj")])
 metadata/_custom_type_script = "uid://clj4yaht54h7c"
 
-[node name="TableCloth" type="Sprite2D" parent="."]
+[node name="DaycycleComponent" type="Node" parent="."]
+script = ExtResource("24_e1j6l")
+_initial_time_of_day = 0.5
+metadata/_custom_type_script = "uid://dokmshyx8obwi"
+
+[node name="GameLayer" type="CanvasLayer" parent="."]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="GameLayer" node_paths=PackedStringArray("_daycycle_component")]
+color = Color(0.34267, 0.320482, 0.364858, 1)
+script = ExtResource("23_pl11u")
+_gradient = SubResource("Gradient_bhx41")
+_daycycle_component = NodePath("../../DaycycleComponent")
+
+[node name="TableCloth" type="Sprite2D" parent="GameLayer"]
 texture = ExtResource("9_0tnpc")
 centered = false
 
-[node name="Targets" type="Node" parent="."]
+[node name="Player" type="Node" parent="GameLayer" node_paths=PackedStringArray("_health_component")]
+script = ExtResource("16_5newe")
+_health_component = NodePath("HealthComponent")
+_hunger_per_second = 1.0
 
-[node name="Soup" parent="Targets" instance=ExtResource("8_0tnpc")]
-position = Vector2(121, 101)
+[node name="HealthComponent" type="Node" parent="GameLayer/Player"]
+script = ExtResource("12_trtic")
+metadata/_custom_type_script = "uid://dmds87a1jnvh0"
 
-[node name="Spawners" type="Node" parent="."]
+[node name="Hand" parent="GameLayer/Player" instance=ExtResource("2_kvpfn")]
 
-[node name="AntSpawner" type="Node2D" parent="Spawners" node_paths=PackedStringArray("_spawn_timer", "_spawner_component")]
+[node name="Targets" type="Node" parent="GameLayer"]
+
+[node name="Soup" parent="GameLayer/Targets" instance=ExtResource("8_0tnpc")]
+light_mask = 0
+position = Vector2(124, 77)
+
+[node name="PointLight2D" type="PointLight2D" parent="GameLayer/Targets/Soup"]
+energy = 0.5
+range_layer_max = 1
+texture = ExtResource("17_bhx41")
+texture_scale = 0.15
+
+[node name="Spawners" type="Node" parent="GameLayer"]
+
+[node name="AntSpawner" type="Node2D" parent="GameLayer/Spawners" node_paths=PackedStringArray("_spawn_timer", "_spawner_component")]
 position = Vector2(270, 28)
 script = ExtResource("1_lnu2h")
 _spawn_timer = NodePath("SpawnTimer")
@@ -79,26 +116,26 @@ _spawner_component = NodePath("AreaSpawner")
 metadata/_custom_type_script = "uid://dvfp0i6u6ksgu"
 metadata/_edit_group_ = true
 
-[node name="SpawnTimer" type="Timer" parent="Spawners/AntSpawner"]
+[node name="SpawnTimer" type="Timer" parent="GameLayer/Spawners/AntSpawner"]
 autostart = true
 script = ExtResource("8_gee14")
 
-[node name="AreaSpawner" type="Area2D" parent="Spawners/AntSpawner" node_paths=PackedStringArray("_container", "_entry_selector")]
+[node name="AreaSpawner" type="Area2D" parent="GameLayer/Spawners/AntSpawner" node_paths=PackedStringArray("_container", "_entry_selector")]
 script = ExtResource("4_gee14")
 _container = NodePath(".")
 _entry_selector = NodePath("WeightedSpawnEntrySelector2")
 metadata/_custom_type_script = "uid://hxmlfmuavfju"
 metadata/_edit_group_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Spawners/AntSpawner/AreaSpawner"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameLayer/Spawners/AntSpawner/AreaSpawner"]
 shape = SubResource("RectangleShape2D_0tnpc")
 
-[node name="WeightedSpawnEntrySelector2" type="Node" parent="Spawners/AntSpawner/AreaSpawner"]
+[node name="WeightedSpawnEntrySelector2" type="Node" parent="GameLayer/Spawners/AntSpawner/AreaSpawner"]
 script = ExtResource("6_gee14")
 _entries = Array[ExtResource("2_lnu2h")]([SubResource("Resource_0tnpc"), SubResource("Resource_kvuet")])
 metadata/_custom_type_script = "uid://c8f6fbvcun4wt"
 
-[node name="AntSpawner2" type="Node2D" parent="Spawners" node_paths=PackedStringArray("_spawn_timer", "_spawner_component")]
+[node name="AntSpawner2" type="Node2D" parent="GameLayer/Spawners" node_paths=PackedStringArray("_spawn_timer", "_spawner_component")]
 position = Vector2(-23, 92)
 script = ExtResource("1_lnu2h")
 _spawn_timer = NodePath("SpawnTimer")
@@ -106,26 +143,26 @@ _spawner_component = NodePath("AreaSpawner")
 metadata/_custom_type_script = "uid://dvfp0i6u6ksgu"
 metadata/_edit_group_ = true
 
-[node name="SpawnTimer" type="Timer" parent="Spawners/AntSpawner2"]
+[node name="SpawnTimer" type="Timer" parent="GameLayer/Spawners/AntSpawner2"]
 autostart = true
 script = ExtResource("8_gee14")
 
-[node name="AreaSpawner" type="Area2D" parent="Spawners/AntSpawner2" node_paths=PackedStringArray("_container", "_entry_selector")]
+[node name="AreaSpawner" type="Area2D" parent="GameLayer/Spawners/AntSpawner2" node_paths=PackedStringArray("_container", "_entry_selector")]
 script = ExtResource("4_gee14")
 _container = NodePath(".")
 _entry_selector = NodePath("WeightedSpawnEntrySelector2")
 metadata/_custom_type_script = "uid://hxmlfmuavfju"
 metadata/_edit_group_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Spawners/AntSpawner2/AreaSpawner"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameLayer/Spawners/AntSpawner2/AreaSpawner"]
 shape = SubResource("RectangleShape2D_0tnpc")
 
-[node name="WeightedSpawnEntrySelector2" type="Node" parent="Spawners/AntSpawner2/AreaSpawner"]
+[node name="WeightedSpawnEntrySelector2" type="Node" parent="GameLayer/Spawners/AntSpawner2/AreaSpawner"]
 script = ExtResource("6_gee14")
 _entries = Array[ExtResource("2_lnu2h")]([SubResource("Resource_0tnpc")])
 metadata/_custom_type_script = "uid://c8f6fbvcun4wt"
 
-[node name="AntSpawner3" type="Node2D" parent="Spawners" node_paths=PackedStringArray("_spawn_timer", "_spawner_component")]
+[node name="AntSpawner3" type="Node2D" parent="GameLayer/Spawners" node_paths=PackedStringArray("_spawn_timer", "_spawner_component")]
 position = Vector2(86, -27)
 script = ExtResource("1_lnu2h")
 _spawn_timer = NodePath("SpawnTimer")
@@ -133,46 +170,33 @@ _spawner_component = NodePath("AreaSpawner")
 metadata/_custom_type_script = "uid://dvfp0i6u6ksgu"
 metadata/_edit_group_ = true
 
-[node name="SpawnTimer" type="Timer" parent="Spawners/AntSpawner3"]
+[node name="SpawnTimer" type="Timer" parent="GameLayer/Spawners/AntSpawner3"]
 autostart = true
 script = ExtResource("8_gee14")
 
-[node name="AreaSpawner" type="Area2D" parent="Spawners/AntSpawner3" node_paths=PackedStringArray("_container", "_entry_selector")]
+[node name="AreaSpawner" type="Area2D" parent="GameLayer/Spawners/AntSpawner3" node_paths=PackedStringArray("_container", "_entry_selector")]
 script = ExtResource("4_gee14")
 _container = NodePath(".")
 _entry_selector = NodePath("WeightedSpawnEntrySelector2")
 metadata/_custom_type_script = "uid://hxmlfmuavfju"
 metadata/_edit_group_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Spawners/AntSpawner3/AreaSpawner"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameLayer/Spawners/AntSpawner3/AreaSpawner"]
 shape = SubResource("RectangleShape2D_0tnpc")
 
-[node name="WeightedSpawnEntrySelector2" type="Node" parent="Spawners/AntSpawner3/AreaSpawner"]
+[node name="WeightedSpawnEntrySelector2" type="Node" parent="GameLayer/Spawners/AntSpawner3/AreaSpawner"]
 script = ExtResource("6_gee14")
 _entries = Array[ExtResource("2_lnu2h")]([SubResource("Resource_0tnpc")])
 metadata/_custom_type_script = "uid://c8f6fbvcun4wt"
-
-[node name="PlayerLayer" type="CanvasLayer" parent="."]
-layer = 2
-
-[node name="Player" type="Node" parent="PlayerLayer" node_paths=PackedStringArray("_health_component")]
-script = ExtResource("16_5newe")
-_health_component = NodePath("HealthComponent")
-_hunger_per_second = 1.0
-
-[node name="HealthComponent" type="Node" parent="PlayerLayer/Player"]
-script = ExtResource("12_trtic")
-
-[node name="Hand" parent="PlayerLayer/Player" instance=ExtResource("2_kvpfn")]
 
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="Mouth" parent="UI" node_paths=PackedStringArray("_player_health_component") instance=ExtResource("20_37s47")]
 position = Vector2(118, 21)
-_player_health_component = NodePath("../../PlayerLayer/Player/HealthComponent")
+_player_health_component = NodePath("../../GameLayer/Player/HealthComponent")
 
 [node name="GameUI" parent="UI" node_paths=PackedStringArray("_player_health_component", "_currency_component") instance=ExtResource("23_bt5mj")]
-_player_health_component = NodePath("../../PlayerLayer/Player/HealthComponent")
+_player_health_component = NodePath("../../GameLayer/Player/HealthComponent")
 _currency_component = NodePath("../../CurrencyComponent")
 
 [editable path="UI/GameUI"]

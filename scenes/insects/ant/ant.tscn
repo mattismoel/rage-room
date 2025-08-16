@@ -1,8 +1,9 @@
-[gd_scene load_steps=30 format=3 uid="uid://ic6q7foo7ydh"]
+[gd_scene load_steps=29 format=3 uid="uid://ic6q7foo7ydh"]
 
 [ext_resource type="Script" uid="uid://bbhqwf7bsqwm2" path="res://scenes/insects/ant/ant.gd" id="1_jvi1b"]
 [ext_resource type="Script" uid="uid://dmds87a1jnvh0" path="res://scripts/health_component.gd" id="2_03jqh"]
 [ext_resource type="Script" uid="uid://eokcg40yy5wk" path="res://scenes/target_zone.gd" id="2_c26io"]
+[ext_resource type="Texture2D" uid="uid://bhqetre23l1v" path="res://assets/lights/soft-light.png" id="3_1taww"]
 [ext_resource type="Texture2D" uid="uid://cdyfo2uwqvl5a" path="res://scenes/insects/ant/ant-spritesheet.png" id="3_ta8b7"]
 [ext_resource type="Script" uid="uid://8tvugixginf6" path="res://scripts/directional_sprite.gd" id="4_ta8b7"]
 [ext_resource type="Script" uid="uid://b72oq33b8bp8v" path="res://scripts/rate_timer.gd" id="6_x4q1v"]
@@ -220,14 +221,6 @@ _data = {
 &"w": SubResource("Animation_xjbm2")
 }
 
-[sub_resource type="Gradient" id="Gradient_ta8b7"]
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_03jqh"]
-gradient = SubResource("Gradient_ta8b7")
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-
 [node name="Ant" type="Node2D" node_paths=PackedStringArray("_hitbox", "_bite_timer", "_health_component", "_target_zone")]
 script = ExtResource("1_jvi1b")
 _hitbox = NodePath("Hitbox")
@@ -240,6 +233,13 @@ script = ExtResource("2_03jqh")
 initial_health = 2.0
 max_health = 2.0
 metadata/_custom_type_script = "uid://dmds87a1jnvh0"
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.8, 0.0941176, 0.145098, 1)
+energy = 0.25
+range_layer_max = 1
+texture = ExtResource("3_1taww")
+texture_scale = 0.1
 
 [node name="TargetZone" type="Area2D" parent="."]
 monitorable = false
@@ -254,6 +254,7 @@ shape = SubResource("CircleShape2D_cwltk")
 shape = SubResource("CircleShape2D_c26io")
 
 [node name="DirectionalSprite" type="Sprite2D" parent="." node_paths=PackedStringArray("_target", "_animation_tree")]
+light_mask = 0
 texture = ExtResource("3_ta8b7")
 hframes = 3
 vframes = 8
@@ -266,17 +267,13 @@ metadata/_custom_type_script = "uid://8tvugixginf6"
 root_node = NodePath("../..")
 tree_root = SubResource("AnimationNodeBlendSpace2D_x4q1v")
 anim_player = NodePath("../AnimationPlayer")
-parameters/blend_position = Vector2(-1.00554, -1.11092)
+parameters/blend_position = Vector2(0.681513, 0.651571)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="DirectionalSprite"]
 root_node = NodePath("../..")
 libraries = {
 &"": SubResource("AnimationLibrary_1taww")
 }
-
-[node name="PointLight2D" type="PointLight2D" parent="."]
-color = Color(1, 0, 0, 1)
-texture = SubResource("GradientTexture2D_03jqh")
 
 [node name="RateTimer" type="Timer" parent="."]
 wait_time = 2.0
