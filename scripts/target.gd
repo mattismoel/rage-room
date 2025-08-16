@@ -17,7 +17,6 @@ func _ready() -> void:
 	_health_component.health_changed.connect(_on_health_changed)
 
 	var initial_progress := _health_component.calculate_health_ratio()
-	print(initial_progress)
 	_progress_sprite.set_progress(initial_progress)
 
 ## Gets a random point on the targets circle shape perimeter.
