@@ -42,7 +42,7 @@ func target(t: Target) -> void:
 func slow_down(effectiveness: float):
 	## Calculate how much the insect should be slowed down
 	assert(effectiveness != 0 or _resistance != 1, "Invalid resistance or effectiveess resulting in divide by 0")
-	var new_speed_scale := 1/(effectiveness*(1-_resistance))
+	var new_speed_scale := 1.0 / (effectiveness * (1.0 - _resistance))
 	current_speed_scale = new_speed_scale
 	
 	var deccleration_tween = create_tween()
