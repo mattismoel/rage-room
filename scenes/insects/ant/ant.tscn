@@ -221,8 +221,9 @@ _data = {
 &"w": SubResource("Animation_xjbm2")
 }
 
-[node name="Ant" type="Node2D" node_paths=PackedStringArray("_hitbox", "_bite_timer", "_health_component", "_target_zone")]
+[node name="Ant" type="Node2D" node_paths=PackedStringArray("_animation_player", "_hitbox", "_bite_timer", "_health_component", "_target_zone")]
 script = ExtResource("1_jvi1b")
+_animation_player = NodePath("DirectionalSprite/AnimationPlayer")
 _hitbox = NodePath("Hitbox")
 _bite_timer = NodePath("RateTimer")
 _health_component = NodePath("HealthComponent")
