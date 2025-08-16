@@ -1,8 +1,7 @@
-[gd_scene load_steps=27 format=3 uid="uid://c60qb2i7f4vto"]
+[gd_scene load_steps=26 format=3 uid="uid://c60qb2i7f4vto"]
 
 [ext_resource type="Script" uid="uid://bqe1kga3lopem" path="res://scenes/insects/spider/spider.gd" id="1_rfuxy"]
 [ext_resource type="Texture2D" uid="uid://bai3hwoshk7au" path="res://scenes/insects/spider/spider-spritesheet.png" id="2_jg2f4"]
-[ext_resource type="PackedScene" uid="uid://byunc756cgkpf" path="res://scenes/insects/blood_splat.tscn" id="2_s7hb0"]
 [ext_resource type="Script" uid="uid://dmds87a1jnvh0" path="res://scripts/health_component.gd" id="2_sxnj4"]
 [ext_resource type="Script" uid="uid://8tvugixginf6" path="res://scripts/directional_sprite.gd" id="2_xa5d1"]
 [ext_resource type="Script" uid="uid://b72oq33b8bp8v" path="res://scripts/rate_timer.gd" id="5_sxnj4"]
@@ -220,7 +219,6 @@ radius = 5.0
 [node name="Spider" type="Node2D" node_paths=PackedStringArray("_animation_player", "_hitbox", "_bite_timer", "_health_component")]
 script = ExtResource("1_rfuxy")
 _animation_player = NodePath("AnimationPlayer")
-_blood_splat_scene = ExtResource("2_s7hb0")
 _hitbox = NodePath("CollisionDetector")
 _bite_timer = NodePath("RateTimer")
 _health_component = NodePath("HealthComponent")

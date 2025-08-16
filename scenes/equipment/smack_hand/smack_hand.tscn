@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://b0mmkvnp2vjq5" path="res://scenes/equipment/smack_hand/idle_state.gd" id="2_r0jqn"]
 [ext_resource type="Script" uid="uid://dowvmhrglkm7v" path="res://scenes/equipment/smack_hand/smack_state.gd" id="3_elhpo"]
 [ext_resource type="Texture2D" uid="uid://btmm8ieofv0nd" path="res://assets/hands.png" id="4_nbm5f"]
-[ext_resource type="Script" path="res://scripts/struggle_component.gd" id="7_vp4i8"]
+[ext_resource type="Script" uid="uid://b1xr1cqdvx040" path="res://scripts/struggle_component.gd" id="7_vp4i8"]
 [ext_resource type="AudioStream" uid="uid://bjt56y036gmxq" path="res://assets/sounds/table-slam.wav" id="8_nbm5f"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v4a0k"]
@@ -125,7 +125,6 @@ _initial_state = NodePath("IdleState")
 metadata/_custom_type_script = "uid://ca42s16x5547g"
 
 [node name="IdleState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("_smack_state", "_animation_player")]
-visible = false
 script = ExtResource("2_r0jqn")
 _smack_state = NodePath("../SmackState")
 _animation_player = NodePath("../../AnimationPlayer")
@@ -137,6 +136,7 @@ offset = Vector2(-3, -3)
 hframes = 3
 
 [node name="SmackState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("_idle_state", "_hit_area", "_animation_player", "_audio_player")]
+visible = false
 script = ExtResource("3_elhpo")
 _idle_state = NodePath("../IdleState")
 _hit_area = NodePath("Area2D")

@@ -1,9 +1,7 @@
 class_name Hand
 extends Node2D
 
-@export var struggle_component: StruggleComponent
 @export var _equipment_container: Node2D
-
 @export var initial_equipment: EquipmentEntry
 
 func _ready() -> void:
