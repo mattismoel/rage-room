@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://c0bsbae23ovcl"]
+[gd_scene load_steps=8 format=3 uid="uid://c0bsbae23ovcl"]
 
 [ext_resource type="Script" uid="uid://dnk61d4pc5l28" path="res://scenes/equipment/cutlery/cutlery.gd" id="1_u1s1i"]
 [ext_resource type="Texture2D" uid="uid://j7e2jf2fnaq2" path="res://assets/utensils.png" id="2_ewx4k"]
-[ext_resource type="Texture2D" uid="uid://dtj8s1car5ria" path="res://icon.svg" id="3_e0t4f"]
 [ext_resource type="Script" uid="uid://ca42s16x5547g" path="res://scripts/state_machine/state_machine.gd" id="4_fmm11"]
 [ext_resource type="Script" uid="uid://bahkthmjnmyy7" path="res://scenes/equipment/cutlery/idle_state.gd" id="5_ev6ap"]
 [ext_resource type="Script" uid="uid://dst6xhvtl70qp" path="res://scenes/equipment/cutlery/holding_state.gd" id="8_qjqi5"]
@@ -23,9 +22,6 @@ region_enabled = true
 region_rect = Rect2(14, 3, 11, 44)
 
 [node name="Food" type="Sprite2D" parent="."]
-visible = false
-scale = Vector2(0.078125, 0.078125)
-texture = ExtResource("3_e0t4f")
 
 [node name="PickupArea" type="Area2D" parent="."]
 
@@ -37,10 +33,11 @@ script = ExtResource("4_fmm11")
 _initial_state = NodePath("IdleState")
 metadata/_custom_type_script = "uid://ca42s16x5547g"
 
-[node name="IdleState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("_pickup_area", "_holding_state")]
+[node name="IdleState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("_pickup_area", "_holding_state", "_sprite")]
 script = ExtResource("5_ev6ap")
 _pickup_area = NodePath("../../PickupArea")
 _holding_state = NodePath("../HoldingState")
+_sprite = NodePath("../../Food")
 metadata/_custom_type_script = "uid://cjgkt6mw5ow4l"
 
 [node name="HoldingState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("_pickup_area", "_food_sprite", "_idle_state", "_feeding_state")]

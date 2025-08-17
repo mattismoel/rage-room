@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://c43xu7mlwapvw"]
+
+[ext_resource type="PackedScene" uid="uid://mumlnje5vclx" path="res://scenes/targets/target.tscn" id="1_ljjc4"]
+[ext_resource type="Resource" uid="uid://bmxdqxteyuxof" path="res://scenes/targets/bread.tres" id="2_1xa6t"]
+[ext_resource type="Texture2D" uid="uid://ckmee8u0byenw" path="res://scenes/targets/bread.png" id="2_e138v"]
+
+[node name="Bread" node_paths=PackedStringArray("_health_component") instance=ExtResource("1_ljjc4")]
+consumable = ExtResource("2_1xa6t")
+_health_component = NodePath("HealthComponent")
+
+[node name="ProgressSprite" parent="." index="0"]
+texture = ExtResource("2_e138v")
+hframes = 9

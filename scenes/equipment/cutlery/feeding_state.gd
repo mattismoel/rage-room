@@ -20,7 +20,6 @@ func enter() -> void:
 
 func exit() -> void:
 	super()
-	_food_sprite.hide()
 
 func set_consumable(consumable: ConsumableEntry) -> void:
 	_consumable = consumable

@@ -1,13 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://cak3be8wnme7m"]
+[gd_scene load_steps=5 format=3 uid="uid://cak3be8wnme7m"]
 
 [ext_resource type="PackedScene" uid="uid://c0bsbae23ovcl" path="res://scenes/equipment/cutlery/cutlery.tscn" id="1_1hm7l"]
 [ext_resource type="Script" uid="uid://do5w6ug5c1u2a" path="res://scenes/targets/target_entry.gd" id="2_c6y68"]
 [ext_resource type="Resource" uid="uid://bi73gxy1n58xd" path="res://assets/consumables/olives.tres" id="3_e4xa3"]
+[ext_resource type="Resource" uid="uid://bmxdqxteyuxof" path="res://scenes/targets/bread.tres" id="4_0ajt1"]
 
 [node name="Fork" instance=ExtResource("1_1hm7l")]
 
 [node name="Sprite2D" parent="." index="0"]
 region_rect = Rect2(28, 3, 11, 44)
 
+[node name="Food" parent="." index="1"]
+position = Vector2(0, -5)
+
 [node name="IdleState" parent="StateMachine" index="0"]
-_allowed_consumables = Array[ExtResource("2_c6y68")]([ExtResource("3_e4xa3")])
+_allowed_consumables = Array[ExtResource("2_c6y68")]([ExtResource("3_e4xa3"), ExtResource("4_0ajt1")])

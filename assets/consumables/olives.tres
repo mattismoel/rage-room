@@ -1,9 +1,15 @@
-[gd_resource type="Resource" script_class="ConsumableEntry" load_steps=2 format=3 uid="uid://bi73gxy1n58xd"]
+[gd_resource type="Resource" script_class="ConsumableEntry" load_steps=4 format=3 uid="uid://bi73gxy1n58xd"]
 
 [ext_resource type="Script" uid="uid://do5w6ug5c1u2a" path="res://scenes/targets/target_entry.gd" id="1_f4x6h"]
+[ext_resource type="Texture2D" uid="uid://bldpuuwynueyp" path="res://assets/food.png" id="1_rgwsr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rgwsr"]
+atlas = ExtResource("1_rgwsr")
+region = Rect2(22, 1, 10, 8)
 
 [resource]
 script = ExtResource("1_f4x6h")
 name = "Olives"
+food_sprite = SubResource("AtlasTexture_rgwsr")
 heal_amount = 5.0
 metadata/_custom_type_script = "uid://do5w6ug5c1u2a"

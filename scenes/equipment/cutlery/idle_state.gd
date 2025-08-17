@@ -3,6 +3,7 @@ extends State
 @export var _allowed_consumables: Array[ConsumableEntry] = []
 @export var _pickup_area: Area2D
 @export var _holding_state: SpoonHoldingState
+@export var _sprite: Sprite2D
 
 func input(event: InputEvent) -> void:
 	super(event)
@@ -22,6 +23,9 @@ func input(event: InputEvent) -> void:
 
 		if !_is_allowed_consumable(consumable): return
 
+		_sprite.set_texture(consumable.food_sprite)
+		
+		
 		_holding_state.set_consumable(consumable)
 		changed_state.emit(_holding_state)
 

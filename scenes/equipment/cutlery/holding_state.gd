@@ -15,19 +15,17 @@ func enter() -> void:
 	if enter_count <= 1:
 		Globals.said.emit("Feed meeeeeeee!")
 
-	_food_sprite.show()
-
 func input(event: InputEvent) -> void:
 	if !event.is_action_pressed("interact"): return
 
 	var overlapping_areas := _pickup_area.get_overlapping_areas()
 	for area in overlapping_areas:
 		if area is Target:
-			_food_sprite.hide()
 			changed_state.emit(_idle_state)
 			return
 
 		if area is Mouth:
+			_food_sprite.set_texture(null)
 			_feeding_state.set_consumable(_current_consumable)
 			changed_state.emit(_feeding_state)
 			return
