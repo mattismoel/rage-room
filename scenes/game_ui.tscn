@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bgxj30mwiqb0w"]
+[gd_scene load_steps=15 format=3 uid="uid://bgxj30mwiqb0w"]
 
 [ext_resource type="Script" uid="uid://cgqttha6wp5wb" path="res://scenes/ui/game_ui.gd" id="1_bt76a"]
 [ext_resource type="Texture2D" uid="uid://7qknjlhhtrjs" path="res://assets/backboard.png" id="1_rns2u"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cxer3yx4am1vw" path="res://assets/healthbar-fill.png" id="3_bt76a"]
 [ext_resource type="Script" uid="uid://ch1oyr7wphxnm" path="res://scenes/ui/health_bar.gd" id="5_djwj0"]
 [ext_resource type="AudioStream" uid="uid://beg3qkd15mqeo" path="res://assets/sounds/register.wav" id="6_5kh4o"]
+[ext_resource type="PackedScene" uid="uid://bymdx3s2fj57h" path="res://scenes/speech_bubble/speech_bubble.tscn" id="7_s2npe"]
 [ext_resource type="Texture2D" uid="uid://bna8u8bcj3hdn" path="res://assets/mouse-pointing.png" id="8_3huio"]
 [ext_resource type="Script" uid="uid://btdc8u1y6l15i" path="res://scenes/ui/cursor.gd" id="8_o3bws"]
 [ext_resource type="Script" uid="uid://d064u8c578k76" path="res://scenes/ui/cursor_entry.gd" id="8_sjwyb"]
@@ -24,7 +25,7 @@ texture = ExtResource("2_o3bws")
 offset = Vector2(-6, 0)
 metadata/_custom_type_script = "uid://d064u8c578k76"
 
-[node name="GameUI" type="Control" node_paths=PackedStringArray("cursor", "inventory", "_currency_label", "_health_label", "_health_bar", "_register_audio_player")]
+[node name="GameUI" type="Control" node_paths=PackedStringArray("cursor", "inventory", "_currency_label", "_health_label", "_health_bar", "_speech_bubble", "_callout_timer", "_register_audio_player")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,6 +39,9 @@ inventory = NodePath("VBoxContainer/Inventory")
 _currency_label = NodePath("VBoxContainer/MarginContainer/PlayerStats/Currency/HBoxContainer/CenterContainer/CurrencyLabel")
 _health_label = NodePath("VBoxContainer/MarginContainer/PlayerStats/Health/HBoxContainer/HealthLabel")
 _health_bar = NodePath("VBoxContainer/MarginContainer/PlayerStats/Health/HBoxContainer/CenterContainer/HealthBar")
+_speech_bubble = NodePath("VBoxContainer/MarginContainer/Control/SpeechBubble")
+_callouts = Array[String](["Fuck, I'm starving to death!", "These DAMN insects!", "Kill! Kill! Kill!", "Let me eat! Stupid insects!", "I just want to eat in peace. Please?", "Wish there weren't this many insects...", "King of the world!"])
+_callout_timer = NodePath("CalloutTimer")
 _register_audio_player = NodePath("VBoxContainer/MarginContainer/PlayerStats/Currency/CashRegisterPlayer")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -131,6 +135,23 @@ text = "$0"
 [node name="CashRegisterPlayer" type="AudioStreamPlayer" parent="VBoxContainer/MarginContainer/PlayerStats/Currency"]
 stream = ExtResource("6_5kh4o")
 
+[node name="Control" type="Control" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="SpeechBubble" parent="VBoxContainer/MarginContainer/Control" instance=ExtResource("7_s2npe")]
+layout_mode = 1
+anchors_preset = 1
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_left = -81.0
+offset_top = 20.0
+offset_bottom = 69.0
+grow_vertical = 1
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
 [node name="Inventory" parent="VBoxContainer" instance=ExtResource("1_yubou")]
 layout_mode = 2
 
@@ -153,3 +174,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
 stretch_mode = 2
+
+[node name="CalloutTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true

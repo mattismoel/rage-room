@@ -1,0 +1,61 @@
+[gd_scene load_steps=6 format=3 uid="uid://bymdx3s2fj57h"]
+
+[ext_resource type="Texture2D" uid="uid://bt21pawx7rmms" path="res://assets/ui-spritesheet.png" id="1_u1dx8"]
+[ext_resource type="Script" uid="uid://qrki1au3pkxk" path="res://scripts/typed_label.gd" id="2_j2lwm"]
+[ext_resource type="Script" uid="uid://dwi46qpyhuga" path="res://scenes/speech_bubble/speech_bubble.gd" id="2_xbxgb"]
+[ext_resource type="AudioStream" uid="uid://djckwfavajks2" path="res://assets/sounds/speech.wav" id="3_rybbg"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j2lwm"]
+content_margin_left = 43.0
+texture = ExtResource("1_u1dx8")
+texture_margin_left = 12.0
+texture_margin_top = 7.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+region_rect = Rect2(48, 32, 32, 32)
+
+[node name="SpeechBubble" type="Panel" node_paths=PackedStringArray("_label", "_audio_player")]
+custom_minimum_size = Vector2(64, 32)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -32.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 10
+size_flags_vertical = 10
+theme_override_styles/panel = SubResource("StyleBoxTexture_j2lwm")
+script = ExtResource("2_xbxgb")
+_text = "Example text..."
+_label = NodePath("MarginContainer/TypedLabel")
+_audio_player = NodePath("AudioStreamPlayer")
+_hover_transparency = 0.5
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="TypedLabel" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.0705882, 0.0392157, 0.101961, 1)
+autowrap_mode = 2
+script = ExtResource("2_j2lwm")
+
+[node name="ReferenceRect" type="ReferenceRect" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_rybbg")
+volume_db = -10.0

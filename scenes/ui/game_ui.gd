@@ -4,6 +4,7 @@ extends Control
 signal inventory_entry_entered(entry: EquipmentEntry)
 signal inventory_entry_exited(entry: EquipmentEntry)
 
+
 @export var cursor: Cursor
 @export var inventory: InventoryUI
 
@@ -12,6 +13,12 @@ signal inventory_entry_exited(entry: EquipmentEntry)
 @export var _currency_label: Label
 @export var _health_label: Label
 @export var _health_bar: HealthBar
+
+@export_group("Callouts")
+@export var _speech_bubble: SpeechBubble
+@export var _callouts: Array[String] = []
+@export var _callout_timer: Timer
+@export var _callout_hang_duration: float = 3.0
 
 @export_group("Audio")
 @export var _cash_required_for_register: float = 2.0
@@ -33,6 +40,8 @@ func _ready() -> void:
 	_register_timer.wait_time = _register_buffer_duration
 	_register_timer.one_shot = true
 	_register_timer.timeout.connect(_on_register_timer_timeout)
+
+	_callout_timer.timeout.connect(_on_callout_timer_timeout)
 	add_child(_register_timer)
 
 func update_balance(value: float) -> void:
@@ -45,6 +54,8 @@ func update_balance(value: float) -> void:
 		_register_timer.start()
 
 		
+	inventory.update_balance(value)
+
 	_currency_label.text = "$%d" % value
 	_prev_balance = value
 
@@ -56,3 +67,11 @@ func _on_register_timer_timeout() -> void:
 	if _balance_accumulator >= _cash_required_for_register:
 		_register_audio_player.play()
 	_balance_accumulator = 0.0
+
+func _on_callout_timer_timeout() -> void:
+	var health_ratio := _player_health_component.calculate_health_ratio()
+	var idx := int(round((_callouts.size() - 1) * health_ratio))
+	var callout := _callouts[idx]
+	await _speech_bubble.write(callout)
+	await get_tree().create_timer(_callout_hang_duration).timeout
+	_speech_bubble.close()
