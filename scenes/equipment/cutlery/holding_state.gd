@@ -6,6 +6,8 @@ extends State
 @export var _idle_state: State
 @export var _feeding_state: SpoonFeedingState
 
+@export var _sound_player: AudioStreamPlayer2D
+
 var _current_consumable: ConsumableEntry
 
 func enter() -> void:
@@ -27,6 +29,7 @@ func input(event: InputEvent) -> void:
 		if area is Mouth:
 			_food_sprite.set_texture(null)
 			_feeding_state.set_consumable(_current_consumable)
+			_sound_player.play()
 			changed_state.emit(_feeding_state)
 			return
 

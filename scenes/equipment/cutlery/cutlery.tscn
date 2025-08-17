@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://c0bsbae23ovcl"]
+[gd_scene load_steps=9 format=3 uid="uid://c0bsbae23ovcl"]
 
 [ext_resource type="Script" uid="uid://dnk61d4pc5l28" path="res://scenes/equipment/cutlery/cutlery.gd" id="1_u1s1i"]
 [ext_resource type="Texture2D" uid="uid://j7e2jf2fnaq2" path="res://assets/utensils.png" id="2_ewx4k"]
 [ext_resource type="Script" uid="uid://ca42s16x5547g" path="res://scripts/state_machine/state_machine.gd" id="4_fmm11"]
 [ext_resource type="Script" uid="uid://bahkthmjnmyy7" path="res://scenes/equipment/cutlery/idle_state.gd" id="5_ev6ap"]
+[ext_resource type="AudioStream" uid="uid://dgpsa3xljoty" path="res://assets/sounds/eating.wav" id="7_5u4pr"]
 [ext_resource type="Script" uid="uid://dst6xhvtl70qp" path="res://scenes/equipment/cutlery/holding_state.gd" id="8_qjqi5"]
 [ext_resource type="Script" uid="uid://bw6elx7we86pn" path="res://scenes/equipment/cutlery/feeding_state.gd" id="9_16r7v"]
 
@@ -40,12 +41,13 @@ _holding_state = NodePath("../HoldingState")
 _sprite = NodePath("../../Food")
 metadata/_custom_type_script = "uid://cjgkt6mw5ow4l"
 
-[node name="HoldingState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("_pickup_area", "_food_sprite", "_idle_state", "_feeding_state")]
+[node name="HoldingState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("_pickup_area", "_food_sprite", "_idle_state", "_feeding_state", "_sound_player")]
 script = ExtResource("8_qjqi5")
 _pickup_area = NodePath("../../PickupArea")
 _food_sprite = NodePath("../../Food")
 _idle_state = NodePath("../IdleState")
 _feeding_state = NodePath("../FeedingState")
+_sound_player = NodePath("../../EatingSound")
 metadata/_custom_type_script = "uid://cjgkt6mw5ow4l"
 
 [node name="FeedingState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("_pickup_area", "_idle_state", "_food_sprite")]
@@ -54,3 +56,6 @@ _pickup_area = NodePath("../../PickupArea")
 _idle_state = NodePath("../IdleState")
 _food_sprite = NodePath("../../Food")
 metadata/_custom_type_script = "uid://cjgkt6mw5ow4l"
+
+[node name="EatingSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_5u4pr")
