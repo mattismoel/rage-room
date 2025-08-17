@@ -1,17 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://bxp10qpdnhpjg"]
+[gd_scene load_steps=3 format=3 uid="uid://bxp10qpdnhpjg"]
 
 [ext_resource type="Script" uid="uid://b6nrrg1f2vfcl" path="res://scenes/hand.gd" id="1_y4r1p"]
 [ext_resource type="Resource" uid="uid://6pny6l2hfd1o" path="res://scenes/equipment/entries/smack_hand.tres" id="2_cmdsa"]
-[ext_resource type="Script" path="res://scripts/struggle_component.gd" id="3_k7pjy"]
 
-[node name="Hand" type="Node2D" node_paths=PackedStringArray("struggle_component", "_equipment_container")]
+[node name="Hand" type="Node2D" node_paths=PackedStringArray("_equipment_container")]
 z_index = 1
 script = ExtResource("1_y4r1p")
-struggle_component = NodePath("StruggleComponent")
 _equipment_container = NodePath("EquipmentContainer")
 initial_equipment = ExtResource("2_cmdsa")
 
 [node name="EquipmentContainer" type="Node2D" parent="."]
-
-[node name="StruggleComponent" type="Node2D" parent="."]
-script = ExtResource("3_k7pjy")

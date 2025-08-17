@@ -235,9 +235,8 @@ _data = {
 &"swat": SubResource("Animation_wfkgx")
 }
 
-[node name="Flyswatter" type="Node2D" node_paths=PackedStringArray("struggle_component")]
+[node name="Flyswatter" type="Node2D"]
 script = ExtResource("1_fu6hv")
-struggle_component = NodePath("StruggleComponent")
 
 [node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("_initial_state")]
 script = ExtResource("2_d5ya8")

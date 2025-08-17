@@ -1,6 +1,8 @@
 class_name StruggleComponent
 extends Node2D
 
+@export var slave: Node2D
+
 @export var _max_vertical_arm_extension: float = 110
 @export var _struggle_extension: float = 80
 @onready var _logistic_constant: float = -log((_max_vertical_arm_extension/\
@@ -28,3 +30,7 @@ func apply_struggle(y_pos: float) -> float:
 		*(vert_extension-_max_vertical_arm_extension/2)))
 		
 	return _coords_convert(vert_extension)
+	
+func _process(delta: float) -> void:
+	assert(slave != null, "No slave specified")
+	slave.global_position = get_struggling_mouse_pos()
