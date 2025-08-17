@@ -30,10 +30,11 @@ func _ready() -> void:
 	_hand.set_equipment(_initial_equipment)
 
 func _on_entry_bought(entry: EquipmentEntry) -> void:
-	var bought := _currency_component.attempt_purchase(entry.cost)
-	if !bought: return
-	_inventory_component.unlock_entry(entry)
-	_game_ui.inventory.unlock_slot(entry)
+	if _inventory_component.current_equipment() == SMACK_HAND_ENTRY:
+		var bought := _currency_component.attempt_purchase(entry.cost)
+		if !bought: return
+		_inventory_component.unlock_entry(entry)
+		_game_ui.inventory.unlock_slot(entry)
 
 func _on_entry_pressed(entry: EquipmentEntry) -> void:
 	## Equip entry

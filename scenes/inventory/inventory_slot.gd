@@ -27,8 +27,10 @@ var _hover_animation_disabled: bool = true
 func _ready() -> void:
 	_buy_button.pressed.connect(bought.emit)
 	_select_button.pressed.connect(pressed.emit)
-	mouse_entered.connect(_on_mouse_entered)
-	mouse_exited.connect(_on_mouse_exited)
+	_buy_button.mouse_entered.connect(_on_mouse_entered)
+	_buy_button.mouse_exited.connect(_on_mouse_exited)
+	_select_button.mouse_entered.connect(_on_mouse_entered)
+	_select_button.mouse_exited.connect(_on_mouse_exited)
 
 func unlock() -> void:
 	_buy_button.hide()
