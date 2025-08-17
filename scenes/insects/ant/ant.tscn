@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://bbhqwf7bsqwm2" path="res://scenes/insects/ant/ant.gd" id="1_jvi1b"]
 [ext_resource type="Script" uid="uid://dmds87a1jnvh0" path="res://scripts/health_component.gd" id="2_03jqh"]
-[ext_resource type="Script" path="res://scenes/target_zone.gd" id="2_c26io"]
+[ext_resource type="Script" uid="uid://eokcg40yy5wk" path="res://scenes/target_zone.gd" id="2_c26io"]
 [ext_resource type="Texture2D" uid="uid://bhqetre23l1v" path="res://assets/lights/soft-light.png" id="3_1taww"]
 [ext_resource type="Texture2D" uid="uid://cdyfo2uwqvl5a" path="res://scenes/insects/ant/ant-spritesheet.png" id="3_ta8b7"]
 [ext_resource type="Script" uid="uid://8tvugixginf6" path="res://scripts/directional_sprite.gd" id="4_ta8b7"]
-[ext_resource type="Script" path="res://scripts/rate_timer.gd" id="6_x4q1v"]
+[ext_resource type="Script" uid="uid://b72oq33b8bp8v" path="res://scripts/rate_timer.gd" id="6_x4q1v"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cwltk"]
 radius = 256.0
