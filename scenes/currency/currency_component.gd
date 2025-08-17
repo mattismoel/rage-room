@@ -15,7 +15,7 @@ func _ready() -> void:
 
 ## Returns false if the balance is not high enough to complete the purchase.
 func attempt_purchase(cost: int) -> bool:
-	if cost >= balance: return false
+	if balance < cost: return false
 
 	balance -= cost
 	balance_changed.emit(balance)
