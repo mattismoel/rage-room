@@ -35,6 +35,7 @@ func _on_entry_bought(entry: EquipmentEntry) -> void:
 		if !bought: return
 		_inventory_component.unlock_entry(entry)
 		_game_ui.inventory.unlock_slot(entry)
+		_hand.set_equipment(entry)
 
 func _on_entry_pressed(entry: EquipmentEntry) -> void:
 	## Equip entry
