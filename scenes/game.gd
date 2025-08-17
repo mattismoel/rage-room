@@ -61,7 +61,7 @@ func _on_entry_exited(_entry: EquipmentEntry) -> void:
 	_hand.enable_equipment()
 
 func _on_entry_equipped(entry: EquipmentEntry) -> void:
-	_hand.set_equipment(entry)
+	# _hand.set_equipment(entry)
 	_hand.show()
 	_game_ui.cursor.hide()
 
