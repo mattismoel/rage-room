@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://di7611xjcb4da"]
+
+[ext_resource type="AudioStream" uid="uid://byktu6bkw4uhy" path="res://assets/sounds/click.wav" id="1_cvvs4"]
+[ext_resource type="Script" uid="uid://chmc5y80tf57d" path="res://scripts/audible_button.gd" id="1_ry5ap"]
+
+[node name="AudibleButton" type="Button" node_paths=PackedStringArray("_audio_player")]
+offset_right = 4.0
+offset_bottom = 6.0
+script = ExtResource("1_ry5ap")
+_audio_player = NodePath("AudioStreamPlayer")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_cvvs4")

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bc8r7c2gun5km"]
+
+[ext_resource type="AudioStream" uid="uid://byktu6bkw4uhy" path="res://assets/sounds/click.wav" id="1_di1ux"]
+
+[node name="Button" type="Button"]
+offset_right = 4.0
+offset_bottom = 6.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_di1ux")

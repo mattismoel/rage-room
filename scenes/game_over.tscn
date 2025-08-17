@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://buermiek6qti3"]
+[gd_scene load_steps=12 format=3 uid="uid://buermiek6qti3"]
 
 [ext_resource type="Script" uid="uid://cinnkdjxhrss3" path="res://scenes/game_over.gd" id="1_racf3"]
 [ext_resource type="Texture2D" uid="uid://dnjqkath5ion4" path="res://scenes/gameover.png" id="1_wqhvx"]
@@ -6,10 +6,38 @@
 [ext_resource type="AudioStream" uid="uid://bmlorpyou2ycu" path="res://assets/sounds/restaurant.wav" id="3_tbwuq"]
 [ext_resource type="FontFile" uid="uid://csvw500mqbgm" path="res://assets/fonts/GothicPixels.ttf" id="5_v3hpu"]
 [ext_resource type="Script" uid="uid://qrki1au3pkxk" path="res://scripts/typed_label.gd" id="6_irg28"]
+[ext_resource type="PackedScene" uid="uid://di7611xjcb4da" path="res://scenes/ui/audible_button.tscn" id="7_irg28"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_racf3"]
 atlas = ExtResource("1_wqhvx")
 region = Rect2(0, 0, 240, 180)
+
+[sub_resource type="Animation" id="Animation_7m3ot"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatableTextureRect:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Content/VBoxContainer/ButtonContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_racf3"]
 resource_name = "game_over"
@@ -51,33 +79,6 @@ tracks/2/keys = {
 "args": [],
 "method": &"start"
 }]
-}
-
-[sub_resource type="Animation" id="Animation_7m3ot"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatableTextureRect:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Content/VBoxContainer/ButtonContainer:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_v3hpu"]
@@ -150,12 +151,12 @@ metadata/_custom_type_script = "uid://qrki1au3pkxk"
 layout_mode = 2
 theme_override_constants/separation = 1
 
-[node name="RestartButton" type="Button" parent="Content/VBoxContainer/ButtonContainer"]
+[node name="RestartButton" parent="Content/VBoxContainer/ButtonContainer" instance=ExtResource("7_irg28")]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 text = "Restart"
 
-[node name="QuitButton" type="Button" parent="Content/VBoxContainer/ButtonContainer"]
+[node name="QuitButton" parent="Content/VBoxContainer/ButtonContainer" instance=ExtResource("7_irg28")]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 text = "Quit"
