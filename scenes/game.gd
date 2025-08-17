@@ -69,6 +69,7 @@ func _on_entry_unequipped() -> void:
 	_hand.set_equipment(_initial_equipment)
 	_hand.hide()
 	_game_ui.cursor.show()
+	_game_ui.inventory.enable_affordable_slots(_currency_component.balance)
 
 func _on_balance_changed(new_balance: float) -> void:
 	_game_ui.update_balance(new_balance)

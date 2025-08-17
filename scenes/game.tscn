@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://dpcv78j3ky7pm"]
+[gd_scene load_steps=35 format=3 uid="uid://dpcv78j3ky7pm"]
 
 [ext_resource type="Script" uid="uid://krx438rn24sp" path="res://scenes/game.gd" id="1_bt5mj"]
 [ext_resource type="Script" uid="uid://px0ijr1h5uhl" path="res://scripts/intensity_manager.gd" id="1_kvpfn"]
@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://bgbi2h521tu0g" path="res://scenes/currency/currency_component.gd" id="2_ir15t"]
 [ext_resource type="PackedScene" uid="uid://bxp10qpdnhpjg" path="res://scenes/hand.tscn" id="2_kvpfn"]
 [ext_resource type="Script" uid="uid://7qy2yh4bqtbv" path="res://scripts/spawner/spawn_entry.gd" id="2_lnu2h"]
-[ext_resource type="Script" uid="uid://dtqm0ir0ws2xw" path="res://scripts/camera_shake_component.gd" id="2_qnb83"]
+[ext_resource type="Script" path="res://scripts/camera_shake_component.gd" id="2_qnb83"]
 [ext_resource type="Resource" uid="uid://6pny6l2hfd1o" path="res://scenes/equipment/entries/smack_hand.tres" id="2_suyxu"]
 [ext_resource type="Script" uid="uid://hxmlfmuavfju" path="res://scripts/spawner/area_spawner.gd" id="4_gee14"]
 [ext_resource type="Resource" uid="uid://r1eajmc151of" path="res://scenes/equipment/entries/spoon.tres" id="5_bt5mj"]
@@ -17,7 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://ddi0wkwb1ocpm" path="res://assets/table.png" id="9_0tnpc"]
 [ext_resource type="Resource" uid="uid://ds5rt67ugbq6o" path="res://scenes/equipment/entries/spray.tres" id="9_bt5mj"]
 [ext_resource type="PackedScene" uid="uid://c60qb2i7f4vto" path="res://scenes/insects/spider/spider.tscn" id="10_dinhu"]
-[ext_resource type="PackedScene" uid="uid://c0vx885bh5275" path="res://scenes/equipment/small_zapper/small_zapper.tscn" id="10_qnb83"]
+[ext_resource type="Resource" uid="uid://btdhig2x11d8o" path="res://scenes/equipment/entries/small_zapper.tres" id="10_sgl2t"]
 [ext_resource type="Script" uid="uid://dmds87a1jnvh0" path="res://scripts/health_component.gd" id="12_trtic"]
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="16_5newe"]
 [ext_resource type="Script" uid="uid://clj4yaht54h7c" path="res://scenes/inventory/inventory_component.gd" id="16_ca42v"]
@@ -27,8 +27,8 @@
 [ext_resource type="Resource" uid="uid://crrud54yx74ob" path="res://scenes/equipment/entries/flyswatter.tres" id="19_5newe"]
 [ext_resource type="PackedScene" uid="uid://7ffbbl45ypej" path="res://scenes/mouth/mouth.tscn" id="20_37s47"]
 [ext_resource type="PackedScene" uid="uid://bgxj30mwiqb0w" path="res://scenes/game_ui.tscn" id="23_bt5mj"]
-[ext_resource type="Script" uid="uid://de4c1y632jm02" path="res://scripts/daycycle_canvas_modulate.gd" id="23_pl11u"]
-[ext_resource type="Script" uid="uid://dokmshyx8obwi" path="res://scripts/daycycle-component.gd" id="24_e1j6l"]
+[ext_resource type="Script" path="res://scripts/daycycle_canvas_modulate.gd" id="23_pl11u"]
+[ext_resource type="Script" path="res://scripts/daycycle-component.gd" id="24_e1j6l"]
 [ext_resource type="AudioStream" uid="uid://bmlorpyou2ycu" path="res://assets/sounds/restaurant.wav" id="28_sww3w"]
 
 [sub_resource type="Gradient" id="Gradient_bhx41"]
@@ -62,7 +62,6 @@ _initial_equipment = ExtResource("2_suyxu")
 anchor_mode = 0
 script = ExtResource("2_qnb83")
 _decay = 1.0
-metadata/_custom_type_script = "uid://dtqm0ir0ws2xw"
 
 [node name="IntensityManager" type="Node" parent="."]
 script = ExtResource("1_kvpfn")
@@ -73,7 +72,7 @@ metadata/_custom_type_script = "uid://bgbi2h521tu0g"
 
 [node name="InventoryComponent" type="Node" parent="."]
 script = ExtResource("16_ca42v")
-_equipment = Array[ExtResource("17_264po")]([ExtResource("5_bt5mj"), ExtResource("19_5newe"), ExtResource("18_1kice"), ExtResource("9_bt5mj"), SubResource("Resource_bhx41")])
+_equipment = Array[ExtResource("17_264po")]([ExtResource("5_bt5mj"), ExtResource("19_5newe"), ExtResource("10_sgl2t"), ExtResource("18_1kice"), ExtResource("9_bt5mj")])
 metadata/_custom_type_script = "uid://clj4yaht54h7c"
 
 [node name="DaycycleComponent" type="Node" parent="."]
@@ -84,7 +83,7 @@ _initial_time_of_day = 0.5
 follow_viewport_enabled = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="GameLayer" node_paths=PackedStringArray("_daycycle_component")]
-color = Color(0.173755, 0.173755, 0.262974, 1)
+color = Color(0.431669, 0.431669, 0.493038, 1)
 script = ExtResource("23_pl11u")
 _gradient = SubResource("Gradient_bhx41")
 _daycycle_component = NodePath("../../DaycycleComponent")

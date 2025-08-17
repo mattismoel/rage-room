@@ -27,6 +27,7 @@ func set_equipment_entries(entries: Array[EquipmentEntry]) -> void:
 		## Remove the buy button etc. if the entry is already unlocked
 		if entry.is_unlocked:
 			slot.unlock()
+			slot.enable()
 		
 		_slot_container.add_child(slot)
 		_slots.append(slot)
@@ -49,11 +50,11 @@ func vacate_slot(entry: EquipmentEntry) -> void:
 
 func populate_slot(entry: EquipmentEntry) -> void:
 	for slot in _slots:
-		slot.enable()
+		#slot.enable()
 		if slot.entry != entry: continue
 		slot.set_entry(entry)
 
-func update_balance(new_balance: float) -> void:
+func enable_affordable_slots(new_balance: float) -> void:
 	for slot in _slots:
 		if new_balance >= slot.entry.cost:
 			slot.enable()
