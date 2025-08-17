@@ -19,6 +19,8 @@ signal inventory_entry_exited(entry: EquipmentEntry)
 @export var _callouts: Array[String] = []
 @export var _callout_timer: Timer
 @export var _callout_hang_duration: float = 3.0
+@export var _mouth_animation_player: AnimationPlayer
+@export var _talk_duration: float = 1.0
 
 @export_group("Audio")
 @export var _cash_required_for_register: float = 2.0
@@ -29,7 +31,11 @@ var _prev_balance: float
 var _balance_accumulator: float = 0.0
 var _register_timer: Timer
 
+var _is_talking: bool = false
+
 func _ready() -> void:
+	Globals.said.connect(say)
+
 	_health_bar.max_value = _player_health_component.max_health
 	_health_bar.value = _player_health_component.initial_health
 
@@ -72,6 +78,22 @@ func _on_callout_timer_timeout() -> void:
 	var health_ratio := _player_health_component.calculate_health_ratio()
 	var idx := int(round((_callouts.size() - 1) * health_ratio))
 	var callout := _callouts[idx]
-	await _speech_bubble.write(callout)
+	say(callout)
+
+func say(text: String) -> void:
+	_callout_timer.stop()
+
+	if _is_talking:
+		await _speech_bubble.close()
+
+	_is_talking = true
+
+	_mouth_animation_player.play("talk")
+	await _speech_bubble.write(text)
+	await get_tree().create_timer(_talk_duration).timeout
+	_mouth_animation_player.play("idle")
 	await get_tree().create_timer(_callout_hang_duration).timeout
-	_speech_bubble.close()
+	await _speech_bubble.close()
+
+	_is_talking = false
+	_callout_timer.start()

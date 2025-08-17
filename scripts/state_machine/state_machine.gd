@@ -50,6 +50,7 @@ func change_state(to: State) -> void:
 	var prev_state_name := _current_state.name if _current_state != null else StringName("null")
 
 	_current_state = to
+	_current_state.enter_count += 1
 	_current_state.enter()
 	_current_state.active = true
 

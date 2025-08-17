@@ -32,7 +32,12 @@ func _ready() -> void:
 func _on_entry_bought(entry: EquipmentEntry) -> void:
 	if _inventory_component.current_equipment() == SMACK_HAND_ENTRY:
 		var bought := _currency_component.attempt_purchase(entry.cost)
-		if !bought: return
+		if !bought: 
+			Globals.said.emit("Hmm... Too expensive..")
+			return
+
+		_game_ui.say("Yes! New equipment!")
+
 		_inventory_component.unlock_entry(entry)
 		_game_ui.inventory.unlock_slot(entry)
 		_hand.set_equipment(entry)

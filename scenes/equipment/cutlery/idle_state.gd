@@ -16,7 +16,10 @@ func input(event: InputEvent) -> void:
 		var target := area as Target
 		var consumable := (area as Target).consumable
 
-		if target.is_empty(): continue
+		if target.is_empty(): 
+			Globals.said.emit("Ah crap. They ate it all!")
+			continue
+
 		if !_is_allowed_consumable(consumable): return
 
 		_holding_state.set_consumable(consumable)

@@ -13,6 +13,8 @@ signal changed_state(to: State)
 @export var debug_exit: bool = false
 
 var active: bool = false
+var enter_count: int = 0
+
 var _state_machine: StateMachine
 
 func initialise(state_machine: StateMachine) -> void:

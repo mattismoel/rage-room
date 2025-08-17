@@ -8,6 +8,8 @@ extends Panel
 @export var _auto_start: bool = false
 @export var _hover_transparency: float = 0.75
 
+var is_writing: bool = false
+
 func _ready() -> void:
 	_label.wrote_letter.connect(_on_wrote_letter)
 	pivot_offset = size
@@ -16,12 +18,17 @@ func _ready() -> void:
 	if _auto_start: 
 		write(_text)
 
-
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
 
 func write(text: String) -> void:
 	show()
+
+	if is_writing:
+		_label.stop()
+		_label.text = ""
+
+	is_writing = true
 	var tween := create_tween()
 
 	tween.tween_property(self, "modulate", Color.WHITE, 0.2)
@@ -29,6 +36,8 @@ func write(text: String) -> void:
 	await tween.finished
 	_label.text = text
 	_label.start()
+	await _label.finished
+	is_writing = false
 
 func close() -> void:
 	var tween := create_tween()
@@ -50,3 +59,4 @@ func _on_mouse_entered() -> void:
 func _on_mouse_exited() -> void:
 	var tween := create_tween()
 	tween.tween_property(self, "modulate:a", 1.0, 0.2)
+

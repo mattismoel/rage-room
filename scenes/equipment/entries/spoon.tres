@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="EquipmentEntry" load_steps=5 format=3 uid="uid://cq3ysdea1jee2"]
+[gd_resource type="Resource" script_class="EquipmentEntry" load_steps=5 format=3 uid="uid://r1eajmc151of"]
 
 [ext_resource type="Script" uid="uid://c3n2s4jlpujkh" path="res://scenes/equipment/equipment_entry.gd" id="1_8uwef"]
 [ext_resource type="Texture2D" uid="uid://da2w7etroqbp1" path="res://assets/equipment/small tools.png" id="1_o117j"]

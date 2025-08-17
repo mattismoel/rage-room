@@ -10,6 +10,11 @@ var _current_consumable: ConsumableEntry
 
 func enter() -> void:
 	super()
+
+	print(enter_count)
+	if enter_count <= 1:
+		Globals.said.emit("Feed meeeeeeee!")
+
 	_food_sprite.show()
 
 func input(event: InputEvent) -> void:

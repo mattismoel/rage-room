@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bgxj30mwiqb0w"]
+[gd_scene load_steps=21 format=3 uid="uid://bgxj30mwiqb0w"]
 
 [ext_resource type="Script" uid="uid://cgqttha6wp5wb" path="res://scenes/ui/game_ui.gd" id="1_bt76a"]
 [ext_resource type="Texture2D" uid="uid://7qknjlhhtrjs" path="res://assets/backboard.png" id="1_rns2u"]
@@ -10,7 +10,67 @@
 [ext_resource type="PackedScene" uid="uid://bymdx3s2fj57h" path="res://scenes/speech_bubble/speech_bubble.tscn" id="7_s2npe"]
 [ext_resource type="Texture2D" uid="uid://bna8u8bcj3hdn" path="res://assets/mouse-pointing.png" id="8_3huio"]
 [ext_resource type="Script" uid="uid://btdc8u1y6l15i" path="res://scenes/ui/cursor.gd" id="8_o3bws"]
-[ext_resource type="Script" path="res://scenes/ui/cursor_entry.gd" id="8_sjwyb"]
+[ext_resource type="Script" uid="uid://b6ys66fwmkkcx" path="res://scripts/animated_texture_rect.gd" id="8_s2npe"]
+[ext_resource type="Script" uid="uid://d064u8c578k76" path="res://scenes/ui/cursor_entry.gd" id="8_sjwyb"]
+[ext_resource type="Texture2D" uid="uid://df3mlu2odfcn7" path="res://assets/mouth.png" id="9_g2v8e"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1kaiv"]
+atlas = ExtResource("9_g2v8e")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="Animation" id="Animation_g2v8e"]
+resource_name = "talk"
+length = 0.6
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 0, 2, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_1kaiv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_upmhx"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_upmhx"]
+_data = {
+&"RESET": SubResource("Animation_1kaiv"),
+&"idle": SubResource("Animation_upmhx"),
+&"talk": SubResource("Animation_g2v8e")
+}
 
 [sub_resource type="Resource" id="Resource_5kh4o"]
 script = ExtResource("8_sjwyb")
@@ -24,7 +84,7 @@ texture = ExtResource("2_o3bws")
 offset = Vector2(-6, 0)
 metadata/_custom_type_script = "uid://d064u8c578k76"
 
-[node name="GameUI" type="Control" node_paths=PackedStringArray("cursor", "_currency_label", "_health_label", "_health_bar", "_speech_bubble", "_callout_timer", "_register_audio_player")]
+[node name="GameUI" type="Control" node_paths=PackedStringArray("cursor", "_currency_label", "_health_label", "_health_bar", "_speech_bubble", "_callout_timer", "_mouth_animation_player", "_register_audio_player")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -37,9 +97,10 @@ cursor = NodePath("Cursor")
 _currency_label = NodePath("VBoxContainer/MarginContainer/PlayerStats/Currency/HBoxContainer/CenterContainer/CurrencyLabel")
 _health_label = NodePath("VBoxContainer/MarginContainer/PlayerStats/Health/HBoxContainer/HealthLabel")
 _health_bar = NodePath("VBoxContainer/MarginContainer/PlayerStats/Health/HBoxContainer/CenterContainer/HealthBar")
-_speech_bubble = NodePath("VBoxContainer/MarginContainer/Control/SpeechBubble")
+_speech_bubble = NodePath("VBoxContainer/MarginContainer/Mouth/SpeechBubble")
 _callouts = Array[String](["Fuck, I'm starving to death!", "These DAMN insects!", "Kill! Kill! Kill!", "Let me eat! Stupid insects!", "I just want to eat in peace. Please?", "Wish there weren't this many insects...", "King of the world!"])
 _callout_timer = NodePath("CalloutTimer")
+_mouth_animation_player = NodePath("VBoxContainer/MarginContainer/Mouth/AnimationPlayer")
 _register_audio_player = NodePath("VBoxContainer/MarginContainer/PlayerStats/Currency/CashRegisterPlayer")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -133,22 +194,49 @@ text = "$0"
 [node name="CashRegisterPlayer" type="AudioStreamPlayer" parent="VBoxContainer/MarginContainer/PlayerStats/Currency"]
 stream = ExtResource("6_5kh4o")
 
-[node name="Control" type="Control" parent="VBoxContainer/MarginContainer"]
+[node name="Mouth" type="Control" parent="VBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 
-[node name="SpeechBubble" parent="VBoxContainer/MarginContainer/Control" instance=ExtResource("7_s2npe")]
+[node name="SpeechBubble" parent="VBoxContainer/MarginContainer/Mouth" instance=ExtResource("7_s2npe")]
 layout_mode = 1
 anchors_preset = 1
 anchor_top = 0.0
 anchor_bottom = 0.0
-offset_left = -81.0
-offset_top = 20.0
-offset_bottom = 69.0
+offset_left = -91.0
+offset_top = 8.0
+offset_right = -10.0
+offset_bottom = 57.0
 grow_vertical = 1
 size_flags_horizontal = 8
 size_flags_vertical = 8
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer/Mouth"]
+z_as_relative = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_1kaiv")
+script = ExtResource("8_s2npe")
+_texture = SubResource("AtlasTexture_1kaiv")
+hframes = 3
+metadata/_custom_type_script = "uid://b6ys66fwmkkcx"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="VBoxContainer/MarginContainer/Mouth"]
+root_node = NodePath("../TextureRect")
+libraries = {
+&"": SubResource("AnimationLibrary_upmhx")
+}
 
 [node name="Cursor" type="Control" parent="." node_paths=PackedStringArray("_texture_rect")]
 layout_mode = 1
