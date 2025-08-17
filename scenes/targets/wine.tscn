@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bksvv7j4436ya"]
+[gd_scene load_steps=4 format=3 uid="uid://tf2srtac81dx"]
 
 [ext_resource type="PackedScene" uid="uid://mumlnje5vclx" path="res://scenes/targets/target.tscn" id="1_fb7nd"]
 [ext_resource type="Texture2D" uid="uid://dnf8thg6t4301" path="res://scenes/targets/wine.png" id="2_0n2lh"]

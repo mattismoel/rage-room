@@ -1,14 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://dbign8wqcaups"]
 
-[ext_resource type="PackedScene" uid="uid://c43xu7mlwapvw" path="res://scenes/targets/bread.tscn" id="1_tu3hs"]
+[ext_resource type="PackedScene" uid="uid://mumlnje5vclx" path="res://scenes/targets/target.tscn" id="1_tu3hs"]
 [ext_resource type="Resource" uid="uid://tcg8jwtwqq2b" path="res://assets/consumables/soup.tres" id="2_tu3hs"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_be3mi"]
 load_path = "res://.godot/imported/soup.png-686d67b1daa01b3532d3a049b432efc4.ctex"
 
-[node name="Soup" instance=ExtResource("1_tu3hs")]
+[node name="Soup" node_paths=PackedStringArray("_health_component") instance=ExtResource("1_tu3hs")]
 consumable = ExtResource("2_tu3hs")
+_health_component = NodePath("HealthComponent")
 
 [node name="ProgressSprite" parent="." index="0"]
 texture = SubResource("CompressedTexture2D_be3mi")
-hframes = 10

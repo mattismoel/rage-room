@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bwkl2l5fndl67"]
+[gd_scene load_steps=4 format=3 uid="uid://d3o02kntj3j8v"]
 
 [ext_resource type="PackedScene" uid="uid://mumlnje5vclx" path="res://scenes/targets/target.tscn" id="1_v84ig"]
 [ext_resource type="Texture2D" uid="uid://dlts7unnouylu" path="res://scenes/targets/butter.png" id="2_15qxt"]

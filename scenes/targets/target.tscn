@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://mumlnje5vclx"]
 
 [ext_resource type="Script" uid="uid://c5esn4h1wsvqj" path="res://scripts/target.gd" id="1_1xa6t"]
-[ext_resource type="Script" path="res://scripts/progress_sprite.gd" id="4_5yhh2"]
+[ext_resource type="Script" uid="uid://btrj2auwfgkcc" path="res://scripts/progress_sprite.gd" id="4_5yhh2"]
 [ext_resource type="Script" uid="uid://dmds87a1jnvh0" path="res://scripts/health_component.gd" id="5_e6sc2"]
 [ext_resource type="PackedScene" uid="uid://be4hlj50qjqxx" path="res://scenes/ui/health_bar.tscn" id="6_7xc2t"]
 
