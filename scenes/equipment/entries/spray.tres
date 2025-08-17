@@ -13,6 +13,6 @@ script = ExtResource("3_0ambg")
 name = "Spray"
 icon_preview = SubResource("AtlasTexture_dgeam")
 scene = ExtResource("2_dgeam")
-cost = 90
+cost = 20
 is_unlocked = false
 metadata/_custom_type_script = "uid://c3n2s4jlpujkh"

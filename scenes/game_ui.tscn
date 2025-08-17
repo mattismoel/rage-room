@@ -11,8 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://bna8u8bcj3hdn" path="res://assets/mouse-pointing.png" id="8_3huio"]
 [ext_resource type="Texture2D" uid="uid://bhu3s4sj2so0f" path="res://scenes/mouth/mouth.png" id="8_g2v8e"]
 [ext_resource type="Script" uid="uid://btdc8u1y6l15i" path="res://scenes/ui/cursor.gd" id="8_o3bws"]
-[ext_resource type="Script" uid="uid://b6ys66fwmkkcx" path="res://scripts/animated_texture_rect.gd" id="8_s2npe"]
-[ext_resource type="Script" uid="uid://d064u8c578k76" path="res://scenes/ui/cursor_entry.gd" id="8_sjwyb"]
+[ext_resource type="Script" path="res://scripts/animated_texture_rect.gd" id="8_s2npe"]
+[ext_resource type="Script" path="res://scenes/ui/cursor_entry.gd" id="8_sjwyb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1kaiv"]
 atlas = ExtResource("8_g2v8e")
@@ -225,7 +225,6 @@ texture = SubResource("AtlasTexture_1kaiv")
 script = ExtResource("8_s2npe")
 _texture = SubResource("AtlasTexture_1kaiv")
 hframes = 3
-metadata/_custom_type_script = "uid://b6ys66fwmkkcx"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="VBoxContainer/MarginContainer/Mouth"]
 root_node = NodePath("../TextureRect")

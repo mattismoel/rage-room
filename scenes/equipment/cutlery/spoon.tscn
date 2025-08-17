@@ -1,10 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://cxf3is8nrir28"]
+[gd_scene load_steps=5 format=3 uid="uid://cxf3is8nrir28"]
 
 [ext_resource type="PackedScene" uid="uid://c0bsbae23ovcl" path="res://scenes/equipment/cutlery/cutlery.tscn" id="1_a6ah0"]
+[ext_resource type="Resource" uid="uid://c4g37fl4canfs" path="res://scenes/targets/butter.tres" id="4_5bt1c"]
 [ext_resource type="Script" uid="uid://do5w6ug5c1u2a" path="res://scenes/targets/target_entry.gd" id="6_lrdkn"]
 [ext_resource type="Resource" uid="uid://tcg8jwtwqq2b" path="res://assets/consumables/soup.tres" id="7_fyw4f"]
 
 [node name="Spoon" instance=ExtResource("1_a6ah0")]
 
 [node name="IdleState" parent="StateMachine" index="0"]
-_allowed_consumables = Array[ExtResource("6_lrdkn")]([ExtResource("7_fyw4f")])
+_allowed_consumables = Array[ExtResource("6_lrdkn")]([ExtResource("7_fyw4f"), ExtResource("4_5bt1c")])

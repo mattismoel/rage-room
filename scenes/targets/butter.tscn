@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwkl2l5fndl67"]
+
+[ext_resource type="PackedScene" uid="uid://mumlnje5vclx" path="res://scenes/targets/target.tscn" id="1_v84ig"]
+[ext_resource type="Texture2D" uid="uid://dlts7unnouylu" path="res://scenes/targets/butter.png" id="2_15qxt"]
+[ext_resource type="Resource" uid="uid://c4g37fl4canfs" path="res://scenes/targets/butter.tres" id="2_ysf6h"]
+
+[node name="Butter" node_paths=PackedStringArray("_health_component") instance=ExtResource("1_v84ig")]
+consumable = ExtResource("2_ysf6h")
+_health_component = NodePath("HealthComponent")
+
+[node name="ProgressSprite" parent="." index="0"]
+texture = ExtResource("2_15qxt")
+hframes = 8
+frame = 4
+
+[node name="HealthComponent" parent="." index="1"]
+initial_health = 45.0
+max_health = 45.0

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="EquipmentEntry" load_steps=5 format=3 uid="uid://duylv5w7sty45"]
 
 [ext_resource type="Script" uid="uid://c3n2s4jlpujkh" path="res://scenes/equipment/equipment_entry.gd" id="1_0577e"]
-[ext_resource type="Texture2D" uid="uid://c1og3sxbsc2mh" path="res://assets/equipment/small fork.png" id="1_864h7"]
+[ext_resource type="Texture2D" uid="uid://dbshjonbeqr6a" path="res://assets/equipment/small fork.png" id="1_864h7"]
 [ext_resource type="PackedScene" uid="uid://cak3be8wnme7m" path="res://scenes/equipment/cutlery/fork.tscn" id="1_ph57n"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j8hye"]

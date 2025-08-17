@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://dpcv78j3ky7pm"]
+[gd_scene load_steps=38 format=3 uid="uid://dpcv78j3ky7pm"]
 
 [ext_resource type="Script" uid="uid://krx438rn24sp" path="res://scenes/game.gd" id="1_bt5mj"]
 [ext_resource type="Script" uid="uid://px0ijr1h5uhl" path="res://scripts/intensity_manager.gd" id="1_kvpfn"]
@@ -31,6 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://1x3wgp6jt8ba" path="res://scenes/targets/olives.tscn" id="27_sgl2t"]
 [ext_resource type="PackedScene" uid="uid://c43xu7mlwapvw" path="res://scenes/targets/bread.tscn" id="27_wljb1"]
 [ext_resource type="AudioStream" uid="uid://bmlorpyou2ycu" path="res://assets/sounds/restaurant.wav" id="28_sww3w"]
+[ext_resource type="PackedScene" uid="uid://bwkl2l5fndl67" path="res://scenes/targets/butter.tscn" id="28_v2yb1"]
 [ext_resource type="PackedScene" uid="uid://fkur1724phpe" path="res://scenes/inventory.tscn" id="29_qouja"]
 
 [sub_resource type="Gradient" id="Gradient_bhx41"]
@@ -86,7 +87,7 @@ _initial_time_of_day = 0.5
 follow_viewport_enabled = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="GameLayer" node_paths=PackedStringArray("_daycycle_component")]
-color = Color(0.926723, 0.926723, 0.934636, 1)
+color = Color(0.27789, 0.27789, 0.355864, 1)
 script = ExtResource("23_pl11u")
 _gradient = SubResource("Gradient_bhx41")
 _daycycle_component = NodePath("../../DaycycleComponent")
@@ -190,13 +191,16 @@ metadata/_custom_type_script = "uid://c8f6fbvcun4wt"
 [node name="Targets" type="Node" parent="GameLayer"]
 
 [node name="Soup" parent="GameLayer/Targets" instance=ExtResource("26_suyxu")]
-position = Vector2(105, 110)
+position = Vector2(85, 107)
 
 [node name="Olives" parent="GameLayer/Targets" instance=ExtResource("27_sgl2t")]
-position = Vector2(128, 70)
+position = Vector2(108, 67)
 
 [node name="Bread" parent="GameLayer/Targets" instance=ExtResource("27_wljb1")]
-position = Vector2(163, 102)
+position = Vector2(143, 99)
+
+[node name="Butter" parent="GameLayer/Targets" instance=ExtResource("28_v2yb1")]
+position = Vector2(177, 82)
 
 [node name="UI" type="CanvasLayer" parent="."]
 

@@ -9,7 +9,7 @@
 load_path = "res://.godot/imported/soup.png-686d67b1daa01b3532d3a049b432efc4.ctex"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e138v"]
-radius = 20.0
+radius = 9.05539
 
 [node name="Target" type="Area2D" node_paths=PackedStringArray("_progress_sprite")]
 script = ExtResource("1_1xa6t")
