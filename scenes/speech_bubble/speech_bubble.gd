@@ -35,7 +35,7 @@ func write(text: String) -> void:
 
 	await tween.finished
 	_label.text = text
-	_label.start()
+	_label.start(text)
 	await _label.finished
 	is_writing = false
 

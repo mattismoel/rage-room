@@ -9,19 +9,22 @@ signal wrote_letter
 @export var _auto_start: bool = false
 
 var _stopped: bool = false
-
-@onready var _initial_text: String = text
+var _initial_text: String
 
 func _ready() -> void:
-	if !_auto_start: 
-		text = ""
+	_initial_text = text
+	text = ""
+
+	if _auto_start: 
+		start(_initial_text)
 		return
 
-	start()
-
-func start() -> void:
+func start(v: String = "") -> void:
 	text = ""
-	for letter in _initial_text:
+
+	if v == "": v = _initial_text
+
+	for letter in v:
 		if _stopped: return 
 		await _type_letter(letter)
 
