@@ -59,9 +59,6 @@ func update_balance(value: float) -> void:
 	else:
 		_register_timer.start()
 
-		
-	inventory.enable_affordable_slots(value)
-
 	_currency_label.text = "$%d" % value
 	_prev_balance = value
 
