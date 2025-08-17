@@ -148,10 +148,10 @@ script = ExtResource("2_hmjqj")
 _initial_state = NodePath("IdleState")
 metadata/_custom_type_script = "uid://ca42s16x5547g"
 
-[node name="IdleState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("_zap_state")]
-visible = false
+[node name="IdleState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("_zap_state", "_struggle_component")]
 script = ExtResource("3_pne81")
 _zap_state = NodePath("../ZapState")
+_struggle_component = NodePath("StruggleComponent")
 metadata/_custom_type_script = "uid://cjgkt6mw5ow4l"
 
 [node name="Sprite2D" type="Sprite2D" parent="StateMachine/IdleState"]
@@ -165,6 +165,7 @@ slave = NodePath("..")
 metadata/_custom_type_script = "uid://b1xr1cqdvx040"
 
 [node name="ZapState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("_idle_state", "_hit_area", "_animation_player", "_audio_player")]
+visible = false
 script = ExtResource("6_pne81")
 _idle_state = NodePath("../IdleState")
 _hit_area = NodePath("Area2D")

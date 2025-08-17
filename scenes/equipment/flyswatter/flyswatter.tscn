@@ -244,10 +244,11 @@ script = ExtResource("2_d5ya8")
 _initial_state = NodePath("IdleState")
 metadata/_custom_type_script = "uid://ca42s16x5547g"
 
-[node name="IdleState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("_swat_state", "_animation_player")]
+[node name="IdleState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("_swat_state", "_animation_player", "_struggle_component")]
 script = ExtResource("3_fu6hv")
 _swat_state = NodePath("../SwatState")
 _animation_player = NodePath("../../AnimationPlayer")
+_struggle_component = NodePath("StruggleComponent")
 metadata/_custom_type_script = "uid://cjgkt6mw5ow4l"
 
 [node name="IdleSprit" type="Sprite2D" parent="StateMachine/IdleState"]

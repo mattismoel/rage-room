@@ -124,11 +124,11 @@ script = ExtResource("2_ke2wq")
 _initial_state = NodePath("IdleState")
 metadata/_custom_type_script = "uid://ca42s16x5547g"
 
-[node name="IdleState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("_spray_state", "_animation_player")]
-visible = false
+[node name="IdleState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("_spray_state", "_animation_player", "_struggle_component")]
 script = ExtResource("3_746jq")
 _spray_state = NodePath("../SprayState")
 _animation_player = NodePath("../../AnimationPlayer")
+_struggle_component = NodePath("StruggleComponent")
 metadata/_custom_type_script = "uid://cjgkt6mw5ow4l"
 
 [node name="IdleSprite" type="Sprite2D" parent="StateMachine/IdleState"]
@@ -142,6 +142,7 @@ slave = NodePath("..")
 metadata/_custom_type_script = "uid://b1xr1cqdvx040"
 
 [node name="SprayState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("_idle_state", "_hit_area", "_animation_player")]
+visible = false
 script = ExtResource("4_p4y8h")
 effectiveness = 5.0
 _idle_state = NodePath("../IdleState")
