@@ -1,11 +1,17 @@
-[gd_resource type="Resource" script_class="EquipmentEntry" load_steps=3 format=3 uid="uid://btdhig2x11d8o"]
+[gd_resource type="Resource" script_class="EquipmentEntry" load_steps=5 format=3 uid="uid://btdhig2x11d8o"]
 
+[ext_resource type="Texture2D" uid="uid://da2w7etroqbp1" path="res://assets/equipment/small tools.png" id="1_ntl0m"]
 [ext_resource type="PackedScene" uid="uid://c0vx885bh5275" path="res://scenes/equipment/small_zapper/small_zapper.tscn" id="1_o2xry"]
 [ext_resource type="Script" uid="uid://c3n2s4jlpujkh" path="res://scenes/equipment/equipment_entry.gd" id="2_ntl0m"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_js68e"]
+atlas = ExtResource("1_ntl0m")
+region = Rect2(192, 0, 64, 64)
+
 [resource]
 script = ExtResource("2_ntl0m")
-name = "Small Zapper"
+name = "Zapper"
+icon_preview = SubResource("AtlasTexture_js68e")
 scene = ExtResource("1_o2xry")
 cost = 20
 is_unlocked = false

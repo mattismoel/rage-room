@@ -56,25 +56,26 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -51.0
-offset_bottom = -19.0
+offset_top = -12.0
+offset_bottom = 5.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/separation = 16
 
 [node name="Belt" type="TextureRect" parent="Toolbar"]
 layout_mode = 0
+offset_top = 1.0
 offset_right = 240.0
-offset_bottom = 22.0
+offset_bottom = 23.0
 mouse_filter = 2
 texture = SubResource("AtlasTexture_sr8g6")
 stretch_mode = 2
 
 [node name="Straps" type="TextureRect" parent="Toolbar"]
 layout_mode = 0
-offset_top = 2.0
+offset_top = 3.0
 offset_right = 240.0
-offset_bottom = 23.0
+offset_bottom = 24.0
 mouse_filter = 2
 texture = SubResource("AtlasTexture_p7iul")
 stretch_mode = 2

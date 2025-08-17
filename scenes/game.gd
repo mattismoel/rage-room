@@ -36,12 +36,14 @@ func _on_entry_bought(entry: EquipmentEntry) -> void:
 	_game_ui.inventory.unlock_slot(entry)
 
 func _on_entry_pressed(entry: EquipmentEntry) -> void:
+	## Equip entry
 	if _inventory_component.current_equipment() == SMACK_HAND_ENTRY:
 		_inventory_component.equip(entry)
 		_game_ui.inventory.vacate_slot(entry)
 		_hand.set_equipment(entry)
 		return
 
+	## Unequip entry
 	_inventory_component.unequip()
 	_game_ui.inventory.populate_slot(entry)
 

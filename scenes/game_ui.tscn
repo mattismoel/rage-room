@@ -1,8 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://bgxj30mwiqb0w"]
+[gd_scene load_steps=14 format=3 uid="uid://bgxj30mwiqb0w"]
 
 [ext_resource type="Script" uid="uid://cgqttha6wp5wb" path="res://scenes/ui/game_ui.gd" id="1_bt76a"]
 [ext_resource type="Texture2D" uid="uid://7qknjlhhtrjs" path="res://assets/backboard.png" id="1_rns2u"]
-[ext_resource type="PackedScene" uid="uid://fkur1724phpe" path="res://scenes/inventory.tscn" id="1_yubou"]
 [ext_resource type="Texture2D" uid="uid://x5n2nc5j1mjx" path="res://assets/mouse-arrow.png" id="2_o3bws"]
 [ext_resource type="Texture2D" uid="uid://bqasjl8cvigx3" path="res://assets/healthbar-background.png" id="2_u2dgd"]
 [ext_resource type="Texture2D" uid="uid://cxer3yx4am1vw" path="res://assets/healthbar-fill.png" id="3_bt76a"]
@@ -10,8 +9,8 @@
 [ext_resource type="AudioStream" uid="uid://beg3qkd15mqeo" path="res://assets/sounds/register.wav" id="6_5kh4o"]
 [ext_resource type="PackedScene" uid="uid://bymdx3s2fj57h" path="res://scenes/speech_bubble/speech_bubble.tscn" id="7_s2npe"]
 [ext_resource type="Texture2D" uid="uid://bna8u8bcj3hdn" path="res://assets/mouse-pointing.png" id="8_3huio"]
-[ext_resource type="Script" uid="uid://btdc8u1y6l15i" path="res://scenes/ui/cursor.gd" id="8_o3bws"]
-[ext_resource type="Script" uid="uid://d064u8c578k76" path="res://scenes/ui/cursor_entry.gd" id="8_sjwyb"]
+[ext_resource type="Script" path="res://scenes/ui/cursor.gd" id="8_o3bws"]
+[ext_resource type="Script" path="res://scenes/ui/cursor_entry.gd" id="8_sjwyb"]
 
 [sub_resource type="Resource" id="Resource_5kh4o"]
 script = ExtResource("8_sjwyb")
@@ -25,7 +24,7 @@ texture = ExtResource("2_o3bws")
 offset = Vector2(-6, 0)
 metadata/_custom_type_script = "uid://d064u8c578k76"
 
-[node name="GameUI" type="Control" node_paths=PackedStringArray("cursor", "inventory", "_currency_label", "_health_label", "_health_bar", "_speech_bubble", "_callout_timer", "_register_audio_player")]
+[node name="GameUI" type="Control" node_paths=PackedStringArray("cursor", "_currency_label", "_health_label", "_health_bar", "_speech_bubble", "_callout_timer", "_register_audio_player")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -35,7 +34,6 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_bt76a")
 cursor = NodePath("Cursor")
-inventory = NodePath("VBoxContainer/Inventory")
 _currency_label = NodePath("VBoxContainer/MarginContainer/PlayerStats/Currency/HBoxContainer/CenterContainer/CurrencyLabel")
 _health_label = NodePath("VBoxContainer/MarginContainer/PlayerStats/Health/HBoxContainer/HealthLabel")
 _health_bar = NodePath("VBoxContainer/MarginContainer/PlayerStats/Health/HBoxContainer/CenterContainer/HealthBar")
@@ -151,9 +149,6 @@ offset_bottom = 69.0
 grow_vertical = 1
 size_flags_horizontal = 8
 size_flags_vertical = 8
-
-[node name="Inventory" parent="VBoxContainer" instance=ExtResource("1_yubou")]
-layout_mode = 2
 
 [node name="Cursor" type="Control" parent="." node_paths=PackedStringArray("_texture_rect")]
 layout_mode = 1

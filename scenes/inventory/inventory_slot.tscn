@@ -1,8 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://cya45llykdujp"]
 
 [ext_resource type="Script" uid="uid://bxcl32ibl8vgx" path="res://scenes/inventory/inventory_slot.gd" id="1_5agom"]
-[ext_resource type="Texture2D" uid="uid://357l16nln1ge" path="res://scenes/inventory/inventory_slot.png" id="2_c7w7p"]
-[ext_resource type="Texture2D" uid="uid://c3n6gq3kiutqc" path="res://assets/equipment/flyswatter.png" id="3_c7w7p"]
+[ext_resource type="Texture2D" uid="uid://da2w7etroqbp1" path="res://assets/equipment/small tools.png" id="2_u6pog"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c00wg"]
 
@@ -14,33 +13,51 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0uvgv"]
 
-[node name="InventorySlot" type="Control" node_paths=PackedStringArray("_title_label", "_item_texture", "_select_button", "_buy_button")]
-custom_minimum_size = Vector2(32, 0)
-layout_mode = 3
-anchors_preset = 0
+[sub_resource type="AtlasTexture" id="AtlasTexture_c7w7p"]
+atlas = ExtResource("2_u6pog")
+region = Rect2(0, 0, 64, 64)
+
+[node name="VBoxContainer" type="VBoxContainer" node_paths=PackedStringArray("_title_label", "_item_texture", "_select_button", "_equipment_sprite", "_buy_button")]
 offset_right = 32.0
-offset_bottom = 64.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
+offset_bottom = 62.0
 mouse_default_cursor_shape = 2
+theme_override_constants/separation = 2
+alignment = 2
 script = ExtResource("1_5agom")
-_title_label = NodePath("ToolTip/Container/TitleLabel")
+_title_label = NodePath("VBoxContainer2/TitleLabel")
 _item_texture = NodePath("SelectButton/EquipmentSprite")
 _select_button = NodePath("SelectButton")
-_buy_button = NodePath("BuyButton")
-_hover_height_px = null
-_hover_trans = 4
-_hover_duration = null
+_equipment_sprite = NodePath("SelectButton/EquipmentSprite")
+_buy_button = NodePath("VBoxContainer2/BuyButton")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+theme_override_constants/separation = 2
+
+[node name="TitleLabel" type="Label" parent="VBoxContainer2"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 0
+mouse_default_cursor_shape = 2
+text = "Name"
+horizontal_alignment = 1
+clip_text = true
+
+[node name="BuyButton" type="Button" parent="VBoxContainer2"]
+custom_minimum_size = Vector2(32, 16)
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+text = "$0"
+icon_alignment = 1
 
 [node name="SelectButton" type="Button" parent="."]
-custom_minimum_size = Vector2(32, 32)
+custom_minimum_size = Vector2(32, 40)
 layout_mode = 2
-offset_top = -10.0
-offset_right = 32.0
-offset_bottom = 54.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_vertical = 0
+size_flags_vertical = 3
 mouse_filter = 1
 mouse_default_cursor_shape = 2
 theme_override_styles/focus = SubResource("StyleBoxEmpty_c00wg")
@@ -48,48 +65,31 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_td8r7")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_u6pog")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_c7w7p")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_0uvgv")
-icon = ExtResource("2_c7w7p")
+
+[node name="Panel" type="Panel" parent="SelectButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 11.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
 
 [node name="EquipmentSprite" type="TextureRect" parent="SelectButton"]
 layout_mode = 1
-anchors_preset = 10
+anchors_preset = 15
 anchor_right = 1.0
-offset_bottom = 32.0
+anchor_bottom = 1.0
+offset_left = -16.0
+offset_top = -17.0
+offset_right = 16.0
+offset_bottom = 15.0
 grow_horizontal = 2
-mouse_filter = 2
-mouse_default_cursor_shape = 2
-texture = ExtResource("3_c7w7p")
-expand_mode = 2
-stretch_mode = 5
-
-[node name="ToolTip" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 0
-offset_top = -19.0
-offset_right = 32.0
-mouse_filter = 2
-
-[node name="Container" type="VBoxContainer" parent="ToolTip"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 19.0
-grow_horizontal = 2
-mouse_filter = 2
-
-[node name="TitleLabel" type="Label" parent="ToolTip/Container"]
-layout_mode = 2
-size_flags_vertical = 0
-text = "Name"
-horizontal_alignment = 1
-
-[node name="BuyButton" type="Button" parent="."]
-layout_mode = 2
-offset_top = 18.0
-offset_right = 32.0
-offset_bottom = 32.0
 grow_vertical = 2
-mouse_filter = 1
+scale = Vector2(0.996746, 1)
+mouse_filter = 2
 mouse_default_cursor_shape = 2
-text = "$0"
-icon_alignment = 1
+texture = SubResource("AtlasTexture_c7w7p")
+stretch_mode = 3

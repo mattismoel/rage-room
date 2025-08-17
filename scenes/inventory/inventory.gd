@@ -50,11 +50,12 @@ func vacate_slot(entry: EquipmentEntry) -> void:
 
 func populate_slot(entry: EquipmentEntry) -> void:
 	for slot in _slots:
-		#slot.enable()
+		if slot._buy_button.visible: continue
+		slot.enable()
 		if slot.entry != entry: continue
 		slot.set_entry(entry)
 
 func enable_affordable_slots(new_balance: float) -> void:
 	for slot in _slots:
 		if new_balance >= slot.entry.cost:
-			slot.enable()
+			slot._buy_button.disabled = false

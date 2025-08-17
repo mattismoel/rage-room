@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://dpcv78j3ky7pm"]
+[gd_scene load_steps=36 format=3 uid="uid://dpcv78j3ky7pm"]
 
 [ext_resource type="Script" uid="uid://krx438rn24sp" path="res://scenes/game.gd" id="1_bt5mj"]
 [ext_resource type="Script" uid="uid://px0ijr1h5uhl" path="res://scripts/intensity_manager.gd" id="1_kvpfn"]
@@ -30,6 +30,7 @@
 [ext_resource type="PackedScene" uid="uid://dbign8wqcaups" path="res://scenes/targets/soup.tscn" id="26_suyxu"]
 [ext_resource type="PackedScene" uid="uid://1x3wgp6jt8ba" path="res://scenes/targets/olives.tscn" id="27_sgl2t"]
 [ext_resource type="AudioStream" uid="uid://bmlorpyou2ycu" path="res://assets/sounds/restaurant.wav" id="28_sww3w"]
+[ext_resource type="PackedScene" uid="uid://fkur1724phpe" path="res://scenes/inventory.tscn" id="29_qouja"]
 
 [sub_resource type="Gradient" id="Gradient_bhx41"]
 colors = PackedColorArray(0.164706, 0.164706, 0.254902, 1, 1, 1, 1, 1)
@@ -52,7 +53,7 @@ metadata/_custom_type_script = "uid://7qy2yh4bqtbv"
 [node name="Game" type="Node2D" node_paths=PackedStringArray("_game_ui", "_hand", "_currency_component", "_inventory_component", "_player_health_component")]
 script = ExtResource("1_bt5mj")
 _game_ui = NodePath("UI/GameUI")
-_hand = NodePath("GameLayer/Player/Hand")
+_hand = NodePath("UI/Hand")
 _currency_component = NodePath("CurrencyComponent")
 _inventory_component = NodePath("InventoryComponent")
 _player_health_component = NodePath("GameLayer/Player/HealthComponent")
@@ -68,7 +69,7 @@ script = ExtResource("1_kvpfn")
 
 [node name="CurrencyComponent" type="Node" parent="."]
 script = ExtResource("2_ir15t")
-_initial_balance = 100
+_initial_balance = 20
 metadata/_custom_type_script = "uid://bgbi2h521tu0g"
 
 [node name="InventoryComponent" type="Node" parent="."]
@@ -101,8 +102,6 @@ _hunger_per_second = 1.0
 [node name="HealthComponent" type="Node" parent="GameLayer/Player"]
 script = ExtResource("12_trtic")
 metadata/_custom_type_script = "uid://dmds87a1jnvh0"
-
-[node name="Hand" parent="GameLayer/Player" instance=ExtResource("2_kvpfn")]
 
 [node name="Spawners" type="Node" parent="GameLayer"]
 
@@ -201,13 +200,28 @@ position = Vector2(71, 79)
 position = Vector2(118, 21)
 _player_health_component = NodePath("../../GameLayer/Player/HealthComponent")
 
-[node name="GameUI" parent="UI" node_paths=PackedStringArray("_player_health_component") instance=ExtResource("23_bt5mj")]
+[node name="GameUI" parent="UI" node_paths=PackedStringArray("inventory", "_player_health_component") instance=ExtResource("23_bt5mj")]
+z_index = 2
+inventory = NodePath("Inventory")
 _player_health_component = NodePath("../../GameLayer/Player/HealthComponent")
+
+[node name="Inventory" parent="UI/GameUI" instance=ExtResource("29_qouja")]
+z_as_relative = false
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -19.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Hand" parent="UI" instance=ExtResource("2_kvpfn")]
 
 [node name="Audio" type="Node" parent="."]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("28_sww3w")
 autoplay = true
-
-[editable path="UI/GameUI"]
