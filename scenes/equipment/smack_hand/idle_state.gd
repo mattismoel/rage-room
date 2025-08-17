@@ -20,4 +20,3 @@ func input(event) -> void:
 func _on_state_machine_disabled() -> void:
 	super()
 	set_process(false)
-	pass

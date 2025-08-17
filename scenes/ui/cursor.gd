@@ -5,7 +5,7 @@ extends Control
 @export var _cursor_sprite_dict: Dictionary[Input.CursorShape, CursorEntry] = {}
 
 func _ready() -> void:
-	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 	pass
 
 func _input(event: InputEvent) -> void:

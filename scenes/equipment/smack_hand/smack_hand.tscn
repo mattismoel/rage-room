@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://cvykrvotigoc5"]
+[gd_scene load_steps=14 format=3 uid="uid://cvykrvotigoc5"]
 
 [ext_resource type="Script" uid="uid://ca42s16x5547g" path="res://scripts/state_machine/state_machine.gd" id="1_gdlno"]
 [ext_resource type="Script" uid="uid://cng50qi8ac087" path="res://scenes/equipment/equipment.gd" id="1_tgmp8"]
 [ext_resource type="Script" uid="uid://b0mmkvnp2vjq5" path="res://scenes/equipment/smack_hand/idle_state.gd" id="2_r0jqn"]
 [ext_resource type="Script" uid="uid://dowvmhrglkm7v" path="res://scenes/equipment/smack_hand/smack_state.gd" id="3_elhpo"]
 [ext_resource type="Texture2D" uid="uid://btmm8ieofv0nd" path="res://assets/hands.png" id="4_nbm5f"]
+[ext_resource type="Script" uid="uid://bsk71qkeisg5v" path="res://scenes/equipment/smack_hand/transition_state.gd" id="7_nbm5f"]
 [ext_resource type="Script" uid="uid://b1xr1cqdvx040" path="res://scripts/struggle_component.gd" id="7_vp4i8"]
 [ext_resource type="AudioStream" uid="uid://bjt56y036gmxq" path="res://assets/sounds/table-slam.wav" id="8_nbm5f"]
 
@@ -119,11 +120,6 @@ _data = {
 script = ExtResource("1_tgmp8")
 _state_machine = NodePath("StateMachine")
 
-[node name="StruggleComponent" type="Node2D" parent="." node_paths=PackedStringArray("slave")]
-script = ExtResource("7_vp4i8")
-slave = NodePath("../StateMachine/IdleState")
-metadata/_custom_type_script = "uid://b1xr1cqdvx040"
-
 [node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("_initial_state")]
 script = ExtResource("1_gdlno")
 _initial_state = NodePath("IdleState")
@@ -140,14 +136,22 @@ texture = ExtResource("4_nbm5f")
 offset = Vector2(-3, -3)
 hframes = 3
 
-[node name="SmackState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("_idle_state", "_hit_area", "_animation_player", "_audio_player", "_struggle_component")]
+[node name="StruggleComponent" type="Node2D" parent="StateMachine/IdleState" node_paths=PackedStringArray("slave")]
+script = ExtResource("7_vp4i8")
+slave = NodePath("..")
+metadata/_custom_type_script = "uid://b1xr1cqdvx040"
+
+[node name="SmackState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("_transition_state", "_hit_area", "_animation_player", "_audio_player", "_struggle_component")]
 visible = false
 script = ExtResource("3_elhpo")
-_idle_state = NodePath("../IdleState")
+_hold_duration = 0.8
+_transition_state = NodePath("../Transition")
 _hit_area = NodePath("Area2D")
 _animation_player = NodePath("../../AnimationPlayer")
 _audio_player = NodePath("../../AudioStreamPlayer2D")
-_struggle_component = NodePath("../../StruggleComponent")
+_struggle_component = NodePath("../IdleState/StruggleComponent")
+debug_enter = true
+debug_exit = true
 metadata/_custom_type_script = "uid://cjgkt6mw5ow4l"
 
 [node name="SmackSprite" type="Sprite2D" parent="StateMachine/SmackState"]
@@ -159,6 +163,19 @@ hframes = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/SmackState/Area2D"]
 shape = SubResource("CapsuleShape2D_v4a0k")
+
+[node name="Transition" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("_idle_state", "_struggle_component", "_smack_state")]
+visible = false
+script = ExtResource("7_nbm5f")
+_idle_state = NodePath("../IdleState")
+_struggle_component = NodePath("../IdleState/StruggleComponent")
+_smack_state = NodePath("../SmackState")
+metadata/_custom_type_script = "uid://cjgkt6mw5ow4l"
+
+[node name="IdleSprite" type="Sprite2D" parent="StateMachine/Transition"]
+texture = ExtResource("4_nbm5f")
+offset = Vector2(-3, -3)
+hframes = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
