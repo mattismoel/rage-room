@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://b0mmkvnp2vjq5" path="res://scenes/equipment/smack_hand/idle_state.gd" id="2_r0jqn"]
 [ext_resource type="Script" uid="uid://dowvmhrglkm7v" path="res://scenes/equipment/smack_hand/smack_state.gd" id="3_elhpo"]
 [ext_resource type="Texture2D" uid="uid://btmm8ieofv0nd" path="res://assets/hands.png" id="4_nbm5f"]
-[ext_resource type="Script" uid="uid://bsk71qkeisg5v" path="res://scenes/equipment/smack_hand/transition_state.gd" id="7_nbm5f"]
+[ext_resource type="Script" path="res://scenes/equipment/smack_hand/transition_state.gd" id="7_nbm5f"]
 [ext_resource type="Script" uid="uid://b1xr1cqdvx040" path="res://scripts/struggle_component.gd" id="7_vp4i8"]
 [ext_resource type="AudioStream" uid="uid://bjt56y036gmxq" path="res://assets/sounds/table-slam.wav" id="8_nbm5f"]
 
