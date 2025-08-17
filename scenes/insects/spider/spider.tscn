@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bai3hwoshk7au" path="res://scenes/insects/spider/spider-spritesheet.png" id="2_jg2f4"]
 [ext_resource type="Script" uid="uid://dmds87a1jnvh0" path="res://scripts/health_component.gd" id="2_sxnj4"]
 [ext_resource type="Script" uid="uid://8tvugixginf6" path="res://scripts/directional_sprite.gd" id="2_xa5d1"]
-[ext_resource type="Script" uid="uid://b72oq33b8bp8v" path="res://scripts/rate_timer.gd" id="5_sxnj4"]
+[ext_resource type="Script" path="res://scripts/rate_timer.gd" id="5_sxnj4"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xa5d1"]
 animation = &"n"
