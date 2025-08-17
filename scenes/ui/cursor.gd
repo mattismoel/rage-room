@@ -13,7 +13,8 @@ func _input(event: InputEvent) -> void:
 		global_position = event.global_position
 
 	var cursor_shape := Input.get_current_cursor_shape()
-
+	if not _cursor_sprite_dict.has(cursor_shape): return
+	
 	var entry := _cursor_sprite_dict[cursor_shape]
 	_texture_rect.texture = entry.texture
 	_texture_rect.position = entry.offset
