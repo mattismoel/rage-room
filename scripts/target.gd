@@ -53,3 +53,6 @@ func _get_collision_shape() -> CollisionShape2D:
 func _on_health_changed(health: float) -> void:
 	var health_ratio := _health_component.calculate_health_ratio()
 	_progress_sprite.set_progress(health_ratio)
+
+func is_empty() -> bool:
+	return _health_component.health <= 0

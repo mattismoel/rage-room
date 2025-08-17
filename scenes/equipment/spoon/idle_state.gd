@@ -10,7 +10,10 @@ func input(event: InputEvent) -> void:
 
 	for area in _pickup_area.get_overlapping_areas():
 		if area is not Target: continue
-		var consumable := (area as Target).consumable
+		var target := area as Target
+		var consumable := target.consumable
+
+		if target.is_empty(): continue
 		if !_is_allowed_consumable(consumable): continue
 
 		_holding_state.set_consumable(consumable)
