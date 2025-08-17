@@ -10,15 +10,18 @@ signal wrote_letter
 
 var _stopped: bool = false
 
+@onready var _initial_text: String = text
+
 func _ready() -> void:
-	if !_auto_start: return
+	if !_auto_start: 
+		text = ""
+		return
+
 	start()
 
 func start() -> void:
-	var init_text = text
-
 	text = ""
-	for letter in init_text:
+	for letter in _initial_text:
 		if _stopped: return 
 		await _type_letter(letter)
 
