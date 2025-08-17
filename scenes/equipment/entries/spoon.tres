@@ -1,14 +1,18 @@
-[gd_resource type="Resource" script_class="EquipmentEntry" load_steps=5 format=3 uid="uid://r1eajmc151of"]
+[gd_resource type="Resource" script_class="EquipmentEntry" load_steps=5 format=3 uid="uid://cq3ysdea1jee2"]
 
 [ext_resource type="Script" uid="uid://c3n2s4jlpujkh" path="res://scenes/equipment/equipment_entry.gd" id="1_8uwef"]
-[ext_resource type="PackedScene" uid="uid://cxf3is8nrir28" path="res://scenes/equipment/cutlery/spoon.tscn" id="1_em57d"]
-[ext_resource type="Texture2D" uid="uid://dabwqdcstrb3b" path="res://assets/equipment/spoon.png" id="1_o117j"]
+[ext_resource type="Texture2D" uid="uid://da2w7etroqbp1" path="res://assets/equipment/small tools.png" id="1_o117j"]
+[ext_resource type="PackedScene" uid="uid://cxf3is8nrir28" path="res://scenes/equipment/cutlery/spoon.tscn" id="2_5lwwa"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x4ybe"]
+atlas = ExtResource("1_o117j")
+region = Rect2(0, 64, 64, 64)
 
 [resource]
 script = ExtResource("1_8uwef")
 name = "Spoon"
-icon_preview = SubResource("AtlasTexture_5lwwa")
-scene = ExtResource("1_em57d")
+icon_preview = SubResource("AtlasTexture_x4ybe")
+scene = ExtResource("2_5lwwa")
 cost = 0
 is_unlocked = true
 metadata/_custom_type_script = "uid://c3n2s4jlpujkh"
