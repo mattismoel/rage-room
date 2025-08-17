@@ -3,37 +3,34 @@
 [ext_resource type="Script" uid="uid://cng50qi8ac087" path="res://scenes/equipment/equipment.gd" id="1_pjcbh"]
 [ext_resource type="Script" uid="uid://ca42s16x5547g" path="res://scripts/state_machine/state_machine.gd" id="2_hmjqj"]
 [ext_resource type="Script" uid="uid://bbkeoo0ffmxc0" path="res://scenes/equipment/small_zapper/idle_state.gd" id="3_pne81"]
-[ext_resource type="Texture2D" uid="uid://8rk07k1elxg2" path="res://assets/equipment/zapper.png" id="4_xip3n"]
+[ext_resource type="Texture2D" uid="uid://c65qb1oewe7ta" path="res://assets/equipment/zapper.png" id="4_xip3n"]
 [ext_resource type="Script" uid="uid://babe34hoh1w77" path="res://scenes/equipment/small_zapper/zap_state.gd" id="6_pne81"]
 [ext_resource type="Script" uid="uid://b1xr1cqdvx040" path="res://scripts/struggle_component.gd" id="7_etsb1"]
 [ext_resource type="Texture2D" uid="uid://bhqetre23l1v" path="res://assets/lights/soft-light.png" id="7_hmjqj"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_pne81"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_hmjqj"]
 atlas = ExtResource("4_xip3n")
 region = Rect2(0, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hmjqj"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_xip3n"]
 atlas = ExtResource("4_xip3n")
 region = Rect2(128, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xip3n"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ltnt"]
 atlas = ExtResource("4_xip3n")
 region = Rect2(256, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4ltnt"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_dj08w"]
 atlas = ExtResource("4_xip3n")
 region = Rect2(384, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dj08w"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ehaoe"]
 atlas = ExtResource("4_xip3n")
 region = Rect2(512, 0, 128, 128)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ehaoe"]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pne81")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hmjqj")
 }, {
@@ -45,6 +42,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_dj08w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ehaoe")
 }],
 "loop": false,
 "name": &"zap",
@@ -54,6 +54,33 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oskdr"]
 radius = 5.0
 height = 16.0
+
+[sub_resource type="Animation" id="Animation_xip3n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StateMachine/ZapState/AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StateMachine/ZapState/PointLight2D:energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.25]
+}
 
 [sub_resource type="Animation" id="Animation_pne81"]
 resource_name = "idle"
@@ -103,33 +130,6 @@ tracks/2/keys = {
 "values": [0.0, 0.7, 0.2, 0.5, 0.0]
 }
 
-[sub_resource type="Animation" id="Animation_xip3n"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("StateMachine/ZapState/AnimatedSprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("StateMachine/ZapState/PointLight2D:energy")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.25]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hmjqj"]
 _data = {
 &"RESET": SubResource("Animation_xip3n"),
@@ -137,8 +137,9 @@ _data = {
 &"zap": SubResource("Animation_hmjqj")
 }
 
-[node name="SmallZapper" type="Node2D"]
+[node name="SmallZapper" type="Node2D" node_paths=PackedStringArray("_state_machine")]
 script = ExtResource("1_pjcbh")
+_state_machine = NodePath("StateMachine")
 metadata/_custom_type_script = "uid://cng50qi8ac087"
 
 [node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("_initial_state")]

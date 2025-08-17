@@ -9,11 +9,14 @@ extends State
 @export var _animation_player: AnimationPlayer
 @export var _audio_player: AudioStreamPlayer2D
 
+@export var _struggle_component: StruggleComponent
+
 @export_group("Audio")
 @export var _damage_per_smack: float = 10.0
 @export var _pitch_variance: float = 0.05
 
 func enter() -> void:
+	global_position = _struggle_component.get_struggling_mouse_pos()
 	super()
 	show()
 

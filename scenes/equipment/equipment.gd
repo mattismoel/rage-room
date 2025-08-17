@@ -3,8 +3,6 @@ extends Node2D
 
 signal was_disabled
 
-## Here an optional struggle component can be added to limit the movement
-@export var struggle_component: StruggleComponent
 @export var _state_machine: StateMachine
 
 ## Emitted whenever the equipment is used.

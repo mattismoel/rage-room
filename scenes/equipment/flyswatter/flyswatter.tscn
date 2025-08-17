@@ -235,9 +235,8 @@ _data = {
 &"swat": SubResource("Animation_wfkgx")
 }
 
-[node name="Flyswatter" type="Node2D" node_paths=PackedStringArray("struggle_component", "_state_machine")]
+[node name="Flyswatter" type="Node2D" node_paths=PackedStringArray("_state_machine")]
 script = ExtResource("1_fu6hv")
-struggle_component = NodePath("StruggleComponent")
 _state_machine = NodePath("StateMachine")
 
 [node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("_initial_state")]
@@ -261,6 +260,11 @@ texture = ExtResource("4_mfq0e")
 position = Vector2(-4.46555, 8.26333)
 scale = Vector2(0.367436, 0.367436)
 texture = ExtResource("5_ik38o")
+
+[node name="StruggleComponent" type="Node2D" parent="StateMachine/IdleState" node_paths=PackedStringArray("slave")]
+script = ExtResource("7_d5ya8")
+slave = NodePath("..")
+metadata/_custom_type_script = "uid://b1xr1cqdvx040"
 
 [node name="SwatState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("_idle_state", "_hit_area", "_animation_player")]
 visible = false
@@ -289,8 +293,9 @@ position = Vector2(0, -67)
 position = Vector2(3, 2)
 shape = SubResource("CapsuleShape2D_k8dx3")
 
-[node name="StruggleComponent" type="Node2D" parent="."]
+[node name="StruggleComponent" type="Node2D" parent="StateMachine/SwatState" node_paths=PackedStringArray("slave")]
 script = ExtResource("7_d5ya8")
+slave = NodePath("..")
 metadata/_custom_type_script = "uid://b1xr1cqdvx040"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

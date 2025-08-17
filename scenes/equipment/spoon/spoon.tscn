@@ -15,8 +15,9 @@
 radius = 6.0
 height = 18.0
 
-[node name="Spoon" type="Node2D"]
+[node name="Spoon" type="Node2D" node_paths=PackedStringArray("_state_machine")]
 script = ExtResource("1_b5e8w")
+_state_machine = NodePath("StateMachine")
 
 [node name="Spoon" type="Sprite2D" parent="."]
 texture = ExtResource("4_ue2ih")
