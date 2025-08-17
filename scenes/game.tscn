@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://bgbi2h521tu0g" path="res://scenes/currency/currency_component.gd" id="2_ir15t"]
 [ext_resource type="PackedScene" uid="uid://bxp10qpdnhpjg" path="res://scenes/hand.tscn" id="2_kvpfn"]
 [ext_resource type="Script" uid="uid://7qy2yh4bqtbv" path="res://scripts/spawner/spawn_entry.gd" id="2_lnu2h"]
-[ext_resource type="Script" path="res://scripts/camera_shake_component.gd" id="2_qnb83"]
+[ext_resource type="Script" uid="uid://dtqm0ir0ws2xw" path="res://scripts/camera_shake_component.gd" id="2_qnb83"]
 [ext_resource type="Resource" uid="uid://6pny6l2hfd1o" path="res://scenes/equipment/entries/smack_hand.tres" id="2_suyxu"]
 [ext_resource type="Script" uid="uid://hxmlfmuavfju" path="res://scripts/spawner/area_spawner.gd" id="4_gee14"]
 [ext_resource type="Resource" uid="uid://r1eajmc151of" path="res://scenes/equipment/entries/spoon.tres" id="5_bt5mj"]
@@ -19,7 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://c60qb2i7f4vto" path="res://scenes/insects/spider/spider.tscn" id="10_dinhu"]
 [ext_resource type="Resource" uid="uid://btdhig2x11d8o" path="res://scenes/equipment/entries/small_zapper.tres" id="10_sgl2t"]
 [ext_resource type="Script" uid="uid://dmds87a1jnvh0" path="res://scripts/health_component.gd" id="12_trtic"]
-[ext_resource type="Script" path="res://scenes/player/player.gd" id="16_5newe"]
+[ext_resource type="Script" uid="uid://dokle3afjp1y3" path="res://scenes/player/player.gd" id="16_5newe"]
 [ext_resource type="Script" uid="uid://clj4yaht54h7c" path="res://scenes/inventory/inventory_component.gd" id="16_ca42v"]
 [ext_resource type="Script" uid="uid://c3n2s4jlpujkh" path="res://scenes/equipment/equipment_entry.gd" id="17_264po"]
 [ext_resource type="Texture2D" uid="uid://bhqetre23l1v" path="res://assets/lights/soft-light.png" id="17_bhx41"]
@@ -27,8 +27,8 @@
 [ext_resource type="Resource" uid="uid://crrud54yx74ob" path="res://scenes/equipment/entries/flyswatter.tres" id="19_5newe"]
 [ext_resource type="PackedScene" uid="uid://7ffbbl45ypej" path="res://scenes/mouth/mouth.tscn" id="20_37s47"]
 [ext_resource type="PackedScene" uid="uid://bgxj30mwiqb0w" path="res://scenes/game_ui.tscn" id="23_bt5mj"]
-[ext_resource type="Script" path="res://scripts/daycycle_canvas_modulate.gd" id="23_pl11u"]
-[ext_resource type="Script" path="res://scripts/daycycle-component.gd" id="24_e1j6l"]
+[ext_resource type="Script" uid="uid://de4c1y632jm02" path="res://scripts/daycycle_canvas_modulate.gd" id="23_pl11u"]
+[ext_resource type="Script" uid="uid://dokmshyx8obwi" path="res://scripts/daycycle-component.gd" id="24_e1j6l"]
 [ext_resource type="AudioStream" uid="uid://bmlorpyou2ycu" path="res://assets/sounds/restaurant.wav" id="28_sww3w"]
 
 [sub_resource type="Gradient" id="Gradient_bhx41"]
@@ -68,6 +68,7 @@ script = ExtResource("1_kvpfn")
 
 [node name="CurrencyComponent" type="Node" parent="."]
 script = ExtResource("2_ir15t")
+_initial_balance = 100
 metadata/_custom_type_script = "uid://bgbi2h521tu0g"
 
 [node name="InventoryComponent" type="Node" parent="."]
@@ -83,7 +84,7 @@ _initial_time_of_day = 0.5
 follow_viewport_enabled = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="GameLayer" node_paths=PackedStringArray("_daycycle_component")]
-color = Color(0.431669, 0.431669, 0.493038, 1)
+color = Color(0.816916, 0.816916, 0.836686, 1)
 script = ExtResource("23_pl11u")
 _gradient = SubResource("Gradient_bhx41")
 _daycycle_component = NodePath("../../DaycycleComponent")
