@@ -9,31 +9,14 @@
 [ext_resource type="AudioStream" uid="uid://beg3qkd15mqeo" path="res://assets/sounds/register.wav" id="6_5kh4o"]
 [ext_resource type="PackedScene" uid="uid://bymdx3s2fj57h" path="res://scenes/speech_bubble/speech_bubble.tscn" id="7_s2npe"]
 [ext_resource type="Texture2D" uid="uid://bna8u8bcj3hdn" path="res://assets/mouse-pointing.png" id="8_3huio"]
+[ext_resource type="Texture2D" uid="uid://bhu3s4sj2so0f" path="res://scenes/mouth/mouth.png" id="8_g2v8e"]
 [ext_resource type="Script" uid="uid://btdc8u1y6l15i" path="res://scenes/ui/cursor.gd" id="8_o3bws"]
 [ext_resource type="Script" uid="uid://b6ys66fwmkkcx" path="res://scripts/animated_texture_rect.gd" id="8_s2npe"]
 [ext_resource type="Script" uid="uid://d064u8c578k76" path="res://scenes/ui/cursor_entry.gd" id="8_sjwyb"]
-[ext_resource type="Texture2D" uid="uid://df3mlu2odfcn7" path="res://assets/mouth.png" id="9_g2v8e"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1kaiv"]
-atlas = ExtResource("9_g2v8e")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="Animation" id="Animation_g2v8e"]
-resource_name = "talk"
-length = 0.6
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 0, 2, 1, 2]
-}
+atlas = ExtResource("8_g2v8e")
+region = Rect2(0, 0, 32, 27)
 
 [sub_resource type="Animation" id="Animation_1kaiv"]
 length = 0.001
@@ -63,6 +46,23 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_g2v8e"]
+resource_name = "talk"
+length = 0.6
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 0, 2, 1, 2]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_upmhx"]
@@ -204,10 +204,10 @@ layout_mode = 1
 anchors_preset = 1
 anchor_top = 0.0
 anchor_bottom = 0.0
-offset_left = -91.0
-offset_top = 8.0
-offset_right = -10.0
-offset_bottom = 57.0
+offset_left = -110.0
+offset_top = 21.0
+offset_right = -29.0
+offset_bottom = 69.0
 grow_vertical = 1
 size_flags_horizontal = 8
 size_flags_vertical = 8
@@ -215,17 +215,12 @@ size_flags_vertical = 8
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer/Mouth"]
 z_as_relative = false
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
 offset_left = -32.0
-offset_top = -32.0
-offset_right = 32.0
-offset_bottom = 32.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_bottom = 27.0
+grow_horizontal = 0
 texture = SubResource("AtlasTexture_1kaiv")
 script = ExtResource("8_s2npe")
 _texture = SubResource("AtlasTexture_1kaiv")
