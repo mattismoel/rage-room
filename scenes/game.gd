@@ -1,11 +1,14 @@
 extends Node
 
+const SMACK_HAND_ENTRY = preload("uid://6pny6l2hfd1o")
+
 @export var _game_ui: GameUI
 @export var _hand: Hand
 
 @export var _currency_component: CurrencyComponent
 @export var _inventory_component: InventoryComponent
 @export var _player_health_component: HealthComponent
+@export var _initial_equipment: EquipmentEntry
 
 func _ready() -> void:
 	var inventory_entries := _inventory_component.get_equipment_entries()
@@ -21,8 +24,10 @@ func _ready() -> void:
 	
 	_inventory_component.equipped_entry.connect(_on_entry_equipped)
 	_inventory_component.unequipped_entry.connect(_on_entry_unequipped)
+	_inventory_component.equip(_initial_equipment)
 
 	_currency_component.balance_changed.connect(_on_balance_changed)
+	_hand.set_equipment(_initial_equipment)
 
 func _on_entry_bought(entry: EquipmentEntry) -> void:
 	var bought := _currency_component.attempt_purchase(entry.cost)
@@ -31,13 +36,14 @@ func _on_entry_bought(entry: EquipmentEntry) -> void:
 	_game_ui.inventory.unlock_slot(entry)
 
 func _on_entry_pressed(entry: EquipmentEntry) -> void:
-	if _inventory_component.current_equipment() != null:
-		_inventory_component.unequip()
-		_game_ui.inventory.populate_slot(entry)
-	else:
+	if _inventory_component.current_equipment() == SMACK_HAND_ENTRY:
 		_inventory_component.equip(entry)
 		_game_ui.inventory.vacate_slot(entry)
 		_hand.set_equipment(entry)
+		return
+
+	_inventory_component.unequip()
+	_game_ui.inventory.populate_slot(entry)
 
 func _on_health_changed(new_health: float) -> void:
 	_game_ui.update_health(new_health)
@@ -59,8 +65,8 @@ func _on_entry_equipped(entry: EquipmentEntry) -> void:
 	_hand.show()
 	_game_ui.cursor.hide()
 
-func _on_entry_unequipped(entry: EquipmentEntry) -> void:
-	_hand.set_equipment(_hand.initial_equipment)
+func _on_entry_unequipped() -> void:
+	_hand.set_equipment(_initial_equipment)
 	_hand.hide()
 	_game_ui.cursor.show()
 

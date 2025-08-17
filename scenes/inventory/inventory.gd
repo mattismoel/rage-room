@@ -17,6 +17,7 @@ func set_equipment_entries(entries: Array[EquipmentEntry]) -> void:
 		var slot: InventorySlot = _inventory_slot_scene.instantiate()
 
 		slot.set_entry(entry)
+		slot.disable()
 
 		slot.bought.connect(func(): entry_bought.emit(entry))
 		slot.mouse_entered.connect(func(): entry_entered.emit(entry))
@@ -51,3 +52,8 @@ func populate_slot(entry: EquipmentEntry) -> void:
 		slot.enable()
 		if slot.entry != entry: continue
 		slot.set_entry(entry)
+
+func update_balance(new_balance: float) -> void:
+	for slot in _slots:
+		if new_balance >= slot.entry.cost:
+			slot.enable()

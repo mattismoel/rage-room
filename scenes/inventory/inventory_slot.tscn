@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cya45llykdujp"]
+[gd_scene load_steps=9 format=3 uid="uid://cya45llykdujp"]
 
 [ext_resource type="Script" uid="uid://bxcl32ibl8vgx" path="res://scenes/inventory/inventory_slot.gd" id="1_5agom"]
 [ext_resource type="Texture2D" uid="uid://357l16nln1ge" path="res://scenes/inventory/inventory_slot.png" id="2_c7w7p"]
@@ -14,95 +14,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0uvgv"]
 
-[sub_resource type="Animation" id="Animation_0uvgv"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("..:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../../ToolTip:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_u6pog"]
-resource_name = "focus"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("..:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.733333),
-"transitions": PackedFloat32Array(0.0853777, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, -10)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../../ToolTip:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.133333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_c7w7p"]
-resource_name = "unfocus"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("..:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.733333),
-"transitions": PackedFloat32Array(0.098073, 0.129408),
-"update": 0,
-"values": [Vector2(0, -10), Vector2(0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../../ToolTip:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.233333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_0uvgv"]
-_data = {
-&"RESET": SubResource("Animation_0uvgv"),
-&"focus": SubResource("Animation_u6pog"),
-&"unfocus": SubResource("Animation_c7w7p")
-}
-
-[node name="InventorySlot" type="Control" node_paths=PackedStringArray("_title_label", "_item_texture", "_animation_player", "_select_button", "_buy_button")]
+[node name="InventorySlot" type="Control" node_paths=PackedStringArray("_title_label", "_item_texture", "_select_button", "_buy_button")]
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 3
 anchors_preset = 0
@@ -113,33 +25,21 @@ size_flags_vertical = 0
 mouse_default_cursor_shape = 2
 script = ExtResource("1_5agom")
 _title_label = NodePath("ToolTip/Container/TitleLabel")
-_item_texture = NodePath("MovableOnHover/SelectButton/EquipmentSprite")
-_animation_player = NodePath("AnimationPlayer")
-_select_button = NodePath("MovableOnHover/SelectButton")
-_buy_button = NodePath("MovableOnHover/BuyButton")
+_item_texture = NodePath("SelectButton/EquipmentSprite")
+_select_button = NodePath("SelectButton")
+_buy_button = NodePath("BuyButton")
+_hover_height_px = null
+_hover_trans = 4
+_hover_duration = null
 
-[node name="MovableOnHover" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 0
-offset_right = 32.0
-offset_bottom = 32.0
-mouse_filter = 1
-mouse_default_cursor_shape = 2
-
-[node name="ReferenceRect" type="ReferenceRect" parent="MovableOnHover"]
-layout_mode = 0
-offset_right = 32.0
-offset_bottom = 64.0
-mouse_filter = 1
-mouse_default_cursor_shape = 2
-border_color = Color(1, 0, 0, 0)
-
-[node name="SelectButton" type="Button" parent="MovableOnHover"]
+[node name="SelectButton" type="Button" parent="."]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-offset_top = 1.0
+offset_top = -10.0
 offset_right = 32.0
-offset_bottom = 65.0
+offset_bottom = 54.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 0
 mouse_filter = 1
 mouse_default_cursor_shape = 2
@@ -150,7 +50,7 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_c7w7p")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_0uvgv")
 icon = ExtResource("2_c7w7p")
 
-[node name="EquipmentSprite" type="TextureRect" parent="MovableOnHover/SelectButton"]
+[node name="EquipmentSprite" type="TextureRect" parent="SelectButton"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -162,20 +62,7 @@ texture = ExtResource("3_c7w7p")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="BuyButton" type="Button" parent="MovableOnHover"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-offset_right = 32.0
-offset_bottom = 32.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-mouse_default_cursor_shape = 2
-text = "$0"
-icon_alignment = 1
-
 [node name="ToolTip" type="Control" parent="."]
-modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 0
 offset_top = -19.0
@@ -196,9 +83,13 @@ size_flags_vertical = 0
 text = "Name"
 horizontal_alignment = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../MovableOnHover/BuyButton")
-libraries = {
-&"": SubResource("AnimationLibrary_0uvgv")
-}
-autoplay = "RESET"
+[node name="BuyButton" type="Button" parent="."]
+layout_mode = 2
+offset_top = 18.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_vertical = 2
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+text = "$0"
+icon_alignment = 1
