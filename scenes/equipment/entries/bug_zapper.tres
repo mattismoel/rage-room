@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="EquipmentEntry" load_steps=4 format=3 uid="uid://dy1f754kra1gv"]
 
-[ext_resource type="PackedScene" uid="uid://ytos3fkkwwof" path="res://scenes/equipment/bug_zapper.tscn" id="1_5h4gw"]
+[ext_resource type="PackedScene" uid="uid://ytos3fkkwwof" path="res://scenes/equipment/bug_zapper/bug_zapper.tscn" id="1_5h4gw"]
 [ext_resource type="Texture2D" uid="uid://bx5l7h32g5k41" path="res://assets/equipment/bug_zapper.png" id="1_67b5n"]
 [ext_resource type="Script" uid="uid://c3n2s4jlpujkh" path="res://scenes/equipment/equipment_entry.gd" id="2_67b5n"]
 
