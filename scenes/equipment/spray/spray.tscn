@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://3xbdyo1d8l8i"]
 
-[ext_resource type="Script" uid="uid://cng50qi8ac087" path="res://scenes/equipment/equipment.gd" id="1_utgya"]
+[ext_resource type="Script" uid="uid://cnrmmkam81rw2" path="res://scenes/equipment/spray/spray.gd" id="1_rv44h"]
 [ext_resource type="Script" uid="uid://ca42s16x5547g" path="res://scripts/state_machine/state_machine.gd" id="2_ke2wq"]
 [ext_resource type="Script" uid="uid://ieqav2lophcu" path="res://scenes/equipment/spray/idle_state.gd" id="3_746jq"]
 [ext_resource type="Script" uid="uid://4hwkqdhd1861" path="res://scenes/equipment/spray/spray_state.gd" id="4_p4y8h"]
@@ -127,8 +127,9 @@ _data = {
 &"spray": SubResource("Animation_3aq3i")
 }
 
-[node name="Spray" type="Node2D" node_paths=PackedStringArray("_state_machine")]
-script = ExtResource("1_utgya")
+[node name="Spray" type="Node2D" node_paths=PackedStringArray("_struggle_component", "_state_machine")]
+script = ExtResource("1_rv44h")
+_struggle_component = NodePath("StruggleComponent")
 _state_machine = NodePath("StateMachine")
 metadata/_custom_type_script = "uid://cng50qi8ac087"
 
@@ -146,11 +147,10 @@ script = ExtResource("2_ke2wq")
 _initial_state = NodePath("IdleState")
 metadata/_custom_type_script = "uid://ca42s16x5547g"
 
-[node name="IdleState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("_spray_state", "_animation_player", "_struggle_component")]
+[node name="IdleState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("_spray_state", "_animation_player")]
 script = ExtResource("3_746jq")
 _spray_state = NodePath("../SprayState")
 _animation_player = NodePath("../../AnimationPlayer")
-_struggle_component = NodePath("../../StruggleComponent")
 metadata/_custom_type_script = "uid://cjgkt6mw5ow4l"
 
 [node name="SprayState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("_idle_state", "_hit_area", "_animation_player", "_audio_player")]
