@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bksvv7j4436ya"]
+
+[ext_resource type="PackedScene" uid="uid://mumlnje5vclx" path="res://scenes/targets/target.tscn" id="1_fb7nd"]
+[ext_resource type="Texture2D" uid="uid://dnf8thg6t4301" path="res://scenes/targets/wine.png" id="2_0n2lh"]
+[ext_resource type="Resource" uid="uid://q6g5hl3grsu" path="res://scenes/targets/wine.tres" id="2_uewgn"]
+
+[node name="Target" node_paths=PackedStringArray("_health_component") instance=ExtResource("1_fb7nd")]
+consumable = ExtResource("2_uewgn")
+_health_component = NodePath("HealthComponent")
+
+[node name="ProgressSprite" parent="." index="0"]
+texture = ExtResource("2_0n2lh")
+hframes = 8
+
+[node name="HealthComponent" parent="." index="1"]
+initial_health = 30.0
+max_health = 30.0
