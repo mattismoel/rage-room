@@ -86,7 +86,7 @@ _data = {
 &"game_over": SubResource("Animation_racf3")
 }
 
-[node name="GameOver" type="Control" node_paths=PackedStringArray("_audio_player")]
+[node name="GameOver" type="Control" node_paths=PackedStringArray("_restart_button", "_quit_button", "_audio_player")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -94,6 +94,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_racf3")
+_game_file = "uid://dpcv78j3ky7pm"
+_restart_button = NodePath("Content/VBoxContainer/ButtonContainer/RestartButton")
+_quit_button = NodePath("Content/VBoxContainer/ButtonContainer/QuitButton")
 _audio_player = NodePath("AudioStreamPlayer")
 
 [node name="AnimatableTextureRect" type="TextureRect" parent="."]

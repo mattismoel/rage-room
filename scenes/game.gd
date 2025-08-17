@@ -1,6 +1,7 @@
 extends Node
 
 const SMACK_HAND_ENTRY = preload("uid://6pny6l2hfd1o")
+const GAME_OVER_SCENE = preload("uid://buermiek6qti3")
 
 @export var _game_ui: GameUI
 @export var _hand: Hand
@@ -12,7 +13,9 @@ const SMACK_HAND_ENTRY = preload("uid://6pny6l2hfd1o")
 
 func _ready() -> void:
 	var inventory_entries := _inventory_component.get_equipment_entries()
+
 	_player_health_component.health_changed.connect(_on_health_changed)
+	_player_health_component.health_depleted.connect(_on_player_health_depleted)
 
 	_game_ui.inventory.set_equipment_entries(inventory_entries)
 	_game_ui.inventory.entry_bought.connect(_on_entry_bought)
@@ -82,3 +85,11 @@ func _on_entry_unequipped() -> void:
 
 func _on_balance_changed(new_balance: float) -> void:
 	_game_ui.update_balance(new_balance)
+
+func _on_player_health_depleted() -> void:
+	game_over()
+	pass
+
+func game_over() -> void:
+	get_tree().change_scene_to_packed(GAME_OVER_SCENE)
+	pass
