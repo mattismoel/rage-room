@@ -13,6 +13,7 @@ extends Control
 var _time_since_start: float = 0.0
 
 func _ready() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	_audio_player.play()
 
 	_restart_button.pressed.connect(_on_restart_button_pressed)
