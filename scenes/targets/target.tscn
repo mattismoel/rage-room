@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://c43xu7mlwapvw"]
+
+[ext_resource type="Script" uid="uid://c5esn4h1wsvqj" path="res://scripts/target.gd" id="1_1xa6t"]
+[ext_resource type="Script" uid="uid://btrj2auwfgkcc" path="res://scripts/progress_sprite.gd" id="4_5yhh2"]
+[ext_resource type="Script" uid="uid://dmds87a1jnvh0" path="res://scripts/health_component.gd" id="5_e6sc2"]
+[ext_resource type="PackedScene" uid="uid://be4hlj50qjqxx" path="res://scenes/ui/health_bar.tscn" id="6_7xc2t"]
+
+[node name="Target" type="Area2D" node_paths=PackedStringArray("_progress_sprite", "_health_component")]
+script = ExtResource("1_1xa6t")
+_progress_sprite = NodePath("ProgressSprite")
+_health_component = NodePath("HealthComponent")
+metadata/_custom_type_script = "uid://c5esn4h1wsvqj"
+
+[node name="ProgressSprite" type="Sprite2D" parent="."]
+script = ExtResource("4_5yhh2")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("5_e6sc2")
+metadata/_custom_type_script = "uid://dmds87a1jnvh0"
+
+[node name="HealthBar" parent="." instance=ExtResource("6_7xc2t")]
+offset_left = -36.0
+offset_top = 10.0
+offset_right = 36.0
+offset_bottom = 16.0
+metadata/_edit_use_anchors_ = true

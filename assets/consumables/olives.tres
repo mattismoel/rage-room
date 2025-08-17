@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ConsumableEntry" load_steps=2 format=3 uid="uid://bi73gxy1n58xd"]
+
+[ext_resource type="Script" uid="uid://do5w6ug5c1u2a" path="res://scenes/targets/target_entry.gd" id="1_f4x6h"]
+
+[resource]
+script = ExtResource("1_f4x6h")
+name = "Olives"
+heal_amount = 5.0
+metadata/_custom_type_script = "uid://do5w6ug5c1u2a"
