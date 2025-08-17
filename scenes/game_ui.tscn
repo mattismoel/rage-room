@@ -211,6 +211,7 @@ offset_bottom = 69.0
 grow_vertical = 1
 size_flags_horizontal = 8
 size_flags_vertical = 8
+mouse_filter = 2
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer/Mouth"]
 z_as_relative = false
