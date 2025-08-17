@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cmso83akppnpg" path="res://scenes/targets/soup/soup.png" id="2_5kyck"]
 [ext_resource type="Resource" uid="uid://tcg8jwtwqq2b" path="res://assets/consumables/soup.tres" id="2_c0cfm"]
 [ext_resource type="PackedScene" uid="uid://be4hlj50qjqxx" path="res://scenes/ui/health_bar.tscn" id="3_yrrjs"]
-[ext_resource type="Script" uid="uid://btrj2auwfgkcc" path="res://scripts/progress_sprite.gd" id="4_87vqt"]
+[ext_resource type="Script" path="res://scripts/progress_sprite.gd" id="4_87vqt"]
 [ext_resource type="Script" uid="uid://dmds87a1jnvh0" path="res://scripts/health_component.gd" id="4_c0cfm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4nqb7"]
@@ -21,7 +21,6 @@ metadata/_custom_type_script = "uid://c5esn4h1wsvqj"
 texture = ExtResource("2_5kyck")
 hframes = 10
 script = ExtResource("4_87vqt")
-metadata/_custom_type_script = "uid://btrj2auwfgkcc"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_4nqb7")

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dtj8s1car5ria" path="res://icon.svg" id="3_y0pof"]
 [ext_resource type="Texture2D" uid="uid://j7e2jf2fnaq2" path="res://assets/utensils.png" id="4_ue2ih"]
 [ext_resource type="Script" uid="uid://ca42s16x5547g" path="res://scripts/state_machine/state_machine.gd" id="5_dp4ym"]
-[ext_resource type="Script" uid="uid://do5w6ug5c1u2a" path="res://scenes/targets/target_entry.gd" id="6_lrdkn"]
+[ext_resource type="Script" path="res://scenes/targets/target_entry.gd" id="6_lrdkn"]
 [ext_resource type="Script" uid="uid://bahkthmjnmyy7" path="res://scenes/equipment/spoon/idle_state.gd" id="6_me6in"]
 [ext_resource type="Resource" uid="uid://tcg8jwtwqq2b" path="res://assets/consumables/soup.tres" id="7_fyw4f"]
 [ext_resource type="Texture2D" uid="uid://cokbfjclr2ww3" path="res://assets/player/grab arm.png" id="7_qijt7"]
