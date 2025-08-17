@@ -2,6 +2,9 @@
 class_name StateMachine
 extends Node2D
 
+signal was_disabled
+signal was_enabled
+
 ## Emitted when the StateMachine changes from one state to another.
 signal state_changed(to: State)
 
@@ -26,6 +29,7 @@ func _ready() -> void:
 	for child in get_children():
 		if child is State:
 			_states.append(child)
+			child.initialise(self)
 			child.changed_state.connect(change_state)
 	
 	change_state(_initial_state)
@@ -54,6 +58,12 @@ func change_state(to: State) -> void:
 	if _debug_change_state:
 		print("Changed from %s to %s" % [prev_state_name, to.name])
 
+func request_disable() -> void:
+	was_disabled.emit()
+
+func request_enable() -> void:
+	was_enabled.emit()
+
 func _process(delta: float) -> void:
 	if !_current_state:
 		return
@@ -68,3 +78,5 @@ func _input(event: InputEvent) -> void:
 	if !_current_state:
 		return
 	_current_state.input(event)
+
+

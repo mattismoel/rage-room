@@ -42,14 +42,17 @@ func _on_entry_pressed(entry: EquipmentEntry) -> void:
 func _on_health_changed(new_health: float) -> void:
 	_game_ui.update_health(new_health)
 
-func _on_entry_entered(entry: EquipmentEntry) -> void:
-	if _inventory_component.current_equipment() == null:
+func _on_entry_entered(_entry: EquipmentEntry) -> void:
+	_hand.disable_equipment()
+
+	if _inventory_component.current_equipment() == SMACK_HAND_ENTRY:
 		_hand.hide()
 		_game_ui.cursor.show()
 
 func _on_entry_exited(_entry: EquipmentEntry) -> void:
 	_game_ui.cursor.hide()
 	_hand.show()
+	_hand.enable_equipment()
 
 func _on_entry_equipped(entry: EquipmentEntry) -> void:
 	_hand.set_equipment(entry)
