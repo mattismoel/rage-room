@@ -12,23 +12,23 @@
 [ext_resource type="Resource" uid="uid://r1eajmc151of" path="res://scenes/equipment/entries/spoon.tres" id="5_bt5mj"]
 [ext_resource type="Script" uid="uid://c8f6fbvcun4wt" path="res://scripts/spawner/selectors/weighted_selector.gd" id="6_gee14"]
 [ext_resource type="PackedScene" uid="uid://ic6q7foo7ydh" path="res://scenes/insects/ant/ant.tscn" id="7_u5sy4"]
-[ext_resource type="PackedScene" uid="uid://bxs1nmrkh8j5q" path="res://scenes/targets/soup/soup.tscn" id="8_0tnpc"]
 [ext_resource type="Script" uid="uid://pke0c4qm2rkn" path="res://scripts/spawner/spawn_tick_component.gd" id="8_gee14"]
 [ext_resource type="Texture2D" uid="uid://ddi0wkwb1ocpm" path="res://assets/table.png" id="9_0tnpc"]
 [ext_resource type="Resource" uid="uid://ds5rt67ugbq6o" path="res://scenes/equipment/entries/spray.tres" id="9_bt5mj"]
+[ext_resource type="Resource" uid="uid://duylv5w7sty45" path="res://scenes/equipment/entries/fork.tres" id="9_sgl2t"]
 [ext_resource type="PackedScene" uid="uid://c60qb2i7f4vto" path="res://scenes/insects/spider/spider.tscn" id="10_dinhu"]
 [ext_resource type="Resource" uid="uid://btdhig2x11d8o" path="res://scenes/equipment/entries/small_zapper.tres" id="10_sgl2t"]
 [ext_resource type="Script" uid="uid://dmds87a1jnvh0" path="res://scripts/health_component.gd" id="12_trtic"]
 [ext_resource type="Script" uid="uid://dokle3afjp1y3" path="res://scenes/player/player.gd" id="16_5newe"]
 [ext_resource type="Script" uid="uid://clj4yaht54h7c" path="res://scenes/inventory/inventory_component.gd" id="16_ca42v"]
 [ext_resource type="Script" uid="uid://c3n2s4jlpujkh" path="res://scenes/equipment/equipment_entry.gd" id="17_264po"]
-[ext_resource type="Texture2D" uid="uid://bhqetre23l1v" path="res://assets/lights/soft-light.png" id="17_bhx41"]
-[ext_resource type="Resource" uid="uid://dy1f754kra1gv" path="res://scenes/equipment/entries/bug_zapper.tres" id="18_1kice"]
 [ext_resource type="Resource" uid="uid://crrud54yx74ob" path="res://scenes/equipment/entries/flyswatter.tres" id="19_5newe"]
 [ext_resource type="PackedScene" uid="uid://7ffbbl45ypej" path="res://scenes/mouth/mouth.tscn" id="20_37s47"]
 [ext_resource type="PackedScene" uid="uid://bgxj30mwiqb0w" path="res://scenes/game_ui.tscn" id="23_bt5mj"]
 [ext_resource type="Script" uid="uid://de4c1y632jm02" path="res://scripts/daycycle_canvas_modulate.gd" id="23_pl11u"]
 [ext_resource type="Script" uid="uid://dokmshyx8obwi" path="res://scripts/daycycle-component.gd" id="24_e1j6l"]
+[ext_resource type="PackedScene" uid="uid://dbign8wqcaups" path="res://scenes/targets/soup.tscn" id="26_suyxu"]
+[ext_resource type="PackedScene" uid="uid://1x3wgp6jt8ba" path="res://scenes/targets/olives.tscn" id="27_sgl2t"]
 [ext_resource type="AudioStream" uid="uid://bmlorpyou2ycu" path="res://assets/sounds/restaurant.wav" id="28_sww3w"]
 
 [sub_resource type="Gradient" id="Gradient_bhx41"]
@@ -73,7 +73,7 @@ metadata/_custom_type_script = "uid://bgbi2h521tu0g"
 
 [node name="InventoryComponent" type="Node" parent="."]
 script = ExtResource("16_ca42v")
-_equipment = Array[ExtResource("17_264po")]([ExtResource("5_bt5mj"), ExtResource("19_5newe"), ExtResource("10_sgl2t"), ExtResource("18_1kice"), ExtResource("9_bt5mj")])
+_equipment = Array[ExtResource("17_264po")]([ExtResource("5_bt5mj"), ExtResource("9_sgl2t"), ExtResource("19_5newe"), ExtResource("10_sgl2t"), ExtResource("9_bt5mj")])
 metadata/_custom_type_script = "uid://clj4yaht54h7c"
 
 [node name="DaycycleComponent" type="Node" parent="."]
@@ -84,7 +84,7 @@ _initial_time_of_day = 0.5
 follow_viewport_enabled = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="GameLayer" node_paths=PackedStringArray("_daycycle_component")]
-color = Color(0.816916, 0.816916, 0.836686, 1)
+color = Color(0.583943, 0.583943, 0.62887, 1)
 script = ExtResource("23_pl11u")
 _gradient = SubResource("Gradient_bhx41")
 _daycycle_component = NodePath("../../DaycycleComponent")
@@ -189,15 +189,11 @@ metadata/_custom_type_script = "uid://c8f6fbvcun4wt"
 
 [node name="Targets" type="Node" parent="GameLayer"]
 
-[node name="Soup" parent="GameLayer/Targets" instance=ExtResource("8_0tnpc")]
-light_mask = 0
-position = Vector2(124, 114)
+[node name="Soup" parent="GameLayer/Targets" instance=ExtResource("26_suyxu")]
+position = Vector2(127, 82)
 
-[node name="PointLight2D" type="PointLight2D" parent="GameLayer/Targets/Soup"]
-energy = 0.5
-range_layer_max = 1
-texture = ExtResource("17_bhx41")
-texture_scale = 0.15
+[node name="Olives" parent="GameLayer/Targets" instance=ExtResource("27_sgl2t")]
+position = Vector2(71, 79)
 
 [node name="UI" type="CanvasLayer" parent="."]
 
