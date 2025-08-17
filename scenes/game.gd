@@ -85,6 +85,7 @@ func _on_entry_unequipped() -> void:
 
 func _on_balance_changed(new_balance: float) -> void:
 	_game_ui.update_balance(new_balance)
+	_game_ui.inventory.enable_affordable_slots(_currency_component.balance)
 
 func _on_player_health_depleted() -> void:
 	game_over()
