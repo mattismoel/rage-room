@@ -7,15 +7,10 @@ extends State
 
 func enter() -> void:
 	super()
-	show()
 
 	_animation_player.play("swat")
 	await _animation_player.animation_finished
 	changed_state.emit(_idle_state)
-
-func exit() -> void:
-	super()
-	hide()
 	
 func _kill_intersecting_insects() -> void:
 	var overlapping_areas: Array[Area2D] = _hit_area.get_overlapping_areas()
