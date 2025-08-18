@@ -1,8 +1,6 @@
 class_name Equipment
 extends Node2D
 
-signal was_disabled
-
 @export var _state_machine: StateMachine
 
 ## Emitted whenever the equipment is used.

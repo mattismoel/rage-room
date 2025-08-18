@@ -150,8 +150,6 @@ _hit_area = NodePath("Area2D")
 _animation_player = NodePath("../../AnimationPlayer")
 _audio_player = NodePath("../../AudioStreamPlayer2D")
 _struggle_component = NodePath("../IdleState/StruggleComponent")
-debug_enter = true
-debug_exit = true
 metadata/_custom_type_script = "uid://cjgkt6mw5ow4l"
 
 [node name="SmackSprite" type="Sprite2D" parent="StateMachine/SmackState"]

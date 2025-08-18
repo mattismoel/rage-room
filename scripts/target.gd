@@ -13,7 +13,6 @@ extends Area2D
 @export var _health_component: HealthComponent
 
 func _ready() -> void:
-	print("%s, %s" % [name, _health_component])
 	area_entered.connect(_on_area_entered)
 	_health_component.health_changed.connect(_on_health_changed)
 

@@ -16,6 +16,5 @@ func _ready() -> void:
 func _on_timeout() -> void:
 	_spawn_rate += _spawn_rate_increase_per_spawn
 	_spawn_rate = clamp(_spawn_rate, 0.0, _max_spawn_rate)
-	print("HEY", _spawn_rate)
 	pass
 

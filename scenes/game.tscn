@@ -132,7 +132,6 @@ _spawn_rate_increase_per_spawn = 0.025
 script = ExtResource("4_gee14")
 _container = NodePath(".")
 _entry_selector = NodePath("WeightedSpawnEntrySelector2")
-_debug_spawn = true
 metadata/_custom_type_script = "uid://hxmlfmuavfju"
 metadata/_edit_group_ = true
 

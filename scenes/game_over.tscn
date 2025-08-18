@@ -180,7 +180,6 @@ theme_override_fonts/font = ExtResource("5_v3hpu")
 theme_override_font_sizes/font_size = 16
 text = "Game Over"
 script = ExtResource("6_irg28")
-_rate = 1.5
 metadata/_custom_type_script = "uid://qrki1au3pkxk"
 
 [node name="ButtonContainer" type="VBoxContainer" parent="Content/VBoxContainer"]
