@@ -1,6 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://7ffbbl45ypej"]
+[gd_scene load_steps=6 format=3 uid="uid://7ffbbl45ypej"]
 
 [ext_resource type="Script" uid="uid://d0o0e6vxg4we0" path="res://scenes/mouth/mouth.gd" id="1_8uxi8"]
+[ext_resource type="Script" uid="uid://do5w6ug5c1u2a" path="res://scenes/targets/target_entry.gd" id="2_2cn07"]
+[ext_resource type="Resource" uid="uid://bmxdqxteyuxof" path="res://scenes/targets/bread.tres" id="3_ktdds"]
+[ext_resource type="Resource" uid="uid://bi73gxy1n58xd" path="res://assets/consumables/olives.tres" id="4_ktdds"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p4cbp"]
 radius = 15.0
@@ -8,6 +11,10 @@ height = 52.0
 
 [node name="Mouth" type="Area2D"]
 script = ExtResource("1_8uxi8")
+_callouts = Dictionary[ExtResource("2_2cn07"), String]({
+ExtResource("3_ktdds"): "*crunching*",
+ExtResource("4_ktdds"): "Ugh, I why did i eat these? I hate olives..."
+})
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708

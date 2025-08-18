@@ -41,7 +41,7 @@ func _on_entry_bought(entry: EquipmentEntry) -> void:
 			Globals.said.emit("Hmm... Too expensive..")
 			return
 
-		_game_ui.say("Yes! New equipment!")
+		Globals.said.emit("Yes, i got the %s!" % entry.name)
 
 		_inventory_component.unlock_entry(entry)
 		_game_ui.inventory.unlock_slot(entry)
@@ -75,7 +75,6 @@ func _on_entry_exited(_entry: EquipmentEntry) -> void:
 	_hand.enable_equipment()
 
 func _on_entry_equipped(entry: EquipmentEntry) -> void:
-	# _hand.set_equipment(entry)
 	_hand.show()
 	_game_ui.cursor.hide()
 
