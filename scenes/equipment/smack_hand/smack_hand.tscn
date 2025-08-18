@@ -1,11 +1,11 @@
 [gd_scene load_steps=14 format=3 uid="uid://cvykrvotigoc5"]
 
 [ext_resource type="Script" uid="uid://ca42s16x5547g" path="res://scripts/state_machine/state_machine.gd" id="1_gdlno"]
-[ext_resource type="Script" uid="uid://cng50qi8ac087" path="res://scenes/equipment/equipment.gd" id="1_tgmp8"]
+[ext_resource type="Script" uid="uid://8bnn3fq5xss4" path="res://scenes/equipment/smack_hand/smack_hand.gd" id="1_nbm5f"]
 [ext_resource type="Script" uid="uid://b0mmkvnp2vjq5" path="res://scenes/equipment/smack_hand/idle_state.gd" id="2_r0jqn"]
 [ext_resource type="Script" uid="uid://dowvmhrglkm7v" path="res://scenes/equipment/smack_hand/smack_state.gd" id="3_elhpo"]
 [ext_resource type="Texture2D" uid="uid://btmm8ieofv0nd" path="res://assets/hands.png" id="4_nbm5f"]
-[ext_resource type="Script" uid="uid://bsk71qkeisg5v" path="res://scenes/equipment/smack_hand/transition_state.gd" id="7_nbm5f"]
+[ext_resource type="Script" path="res://scenes/equipment/smack_hand/transition_state.gd" id="7_nbm5f"]
 [ext_resource type="Script" uid="uid://b1xr1cqdvx040" path="res://scripts/struggle_component.gd" id="7_vp4i8"]
 [ext_resource type="AudioStream" uid="uid://bjt56y036gmxq" path="res://assets/sounds/table-slam.wav" id="8_nbm5f"]
 
@@ -116,8 +116,9 @@ _data = {
 &"smack": SubResource("Animation_v4a0k")
 }
 
-[node name="SmackHand" type="Node2D" node_paths=PackedStringArray("_state_machine")]
-script = ExtResource("1_tgmp8")
+[node name="SmackHand" type="Node2D" node_paths=PackedStringArray("_struggle_component", "_state_machine")]
+script = ExtResource("1_nbm5f")
+_struggle_component = NodePath("StateMachine/IdleState/StruggleComponent")
 _state_machine = NodePath("StateMachine")
 
 [node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("_initial_state")]
