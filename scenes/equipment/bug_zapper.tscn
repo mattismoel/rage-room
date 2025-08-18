@@ -1,9 +1,0 @@
-[gd_scene load_steps=0 format=3 uid="uid://cpdgc3oxmohvh"]
-
-[node name="BugZapper" type="Node2D"]
-rotation = -0.553565
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(7.82002, -46.8919)
-rotation = -0.664193
-scale = Vector2(0.169044, 0.169044)
