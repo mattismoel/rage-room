@@ -94,3 +94,14 @@ func say(text: String) -> void:
 
 	_is_talking = false
 	_callout_timer.start()
+
+func set_days(amount: int) -> void:
+	var text: String = "%d " % amount
+
+	if amount == 1:
+		text += "DAY"
+	else:
+		text += "DAYS"
+
+	Globals.said.emit("Ugh... I have been here for %s!" % text)
+	# _days_label.text = text

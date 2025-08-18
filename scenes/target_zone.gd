@@ -5,12 +5,18 @@ func find_target() -> Target:
 	var _targets: Array[Target] = []
 
 	for area in get_overlapping_areas():
-		if area is not Target:
-			continue
+		if area is Target:
+			if area.is_empty(): continue
+			_targets.push_back(area)
 
-		_targets.push_back(area)
 
-	assert(_targets.size() > 0, "No overlapping targets")
+	if _targets.size() <= 0:
+		for area in get_overlapping_areas():
+			if area is Target:
+				_targets.push_back(area)
+
+
+	# assert(_targets.size() > 0, "No overlapping targets")
 
 	var best_target: Target = _targets[0]
 	var lowest_score: float = _calculate_score(_targets[0])

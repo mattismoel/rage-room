@@ -46,6 +46,7 @@ func _ready() -> void:
 		return
 
 	var t := _target_zone.find_target()
+	# if target == null: 
 
 	target(t)
 

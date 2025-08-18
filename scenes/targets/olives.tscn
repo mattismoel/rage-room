@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://1x3wgp6jt8ba"]
+[gd_scene load_steps=5 format=3 uid="uid://1x3wgp6jt8ba"]
 
 [ext_resource type="PackedScene" uid="uid://mumlnje5vclx" path="res://scenes/targets/target.tscn" id="1_vjrxf"]
 [ext_resource type="Texture2D" uid="uid://ctph1gidd206a" path="res://scenes/targets/olives.png" id="2_lr27q"]
 [ext_resource type="Resource" uid="uid://bi73gxy1n58xd" path="res://assets/consumables/olives.tres" id="2_wt17e"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lr27q"]
+radius = 11.0454
 
 [node name="Olives" node_paths=PackedStringArray("_health_component") instance=ExtResource("1_vjrxf")]
 consumable = ExtResource("2_wt17e")
@@ -11,3 +14,6 @@ _health_component = NodePath("HealthComponent")
 [node name="ProgressSprite" parent="." index="0"]
 texture = ExtResource("2_lr27q")
 hframes = 8
+
+[node name="CollisionShape2D" parent="." index="3"]
+shape = SubResource("CircleShape2D_lr27q")

@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://tf2srtac81dx"]
+[gd_scene load_steps=5 format=3 uid="uid://tf2srtac81dx"]
 
 [ext_resource type="PackedScene" uid="uid://mumlnje5vclx" path="res://scenes/targets/target.tscn" id="1_fb7nd"]
 [ext_resource type="Texture2D" uid="uid://dnf8thg6t4301" path="res://scenes/targets/wine.png" id="2_0n2lh"]
 [ext_resource type="Resource" uid="uid://q6g5hl3grsu" path="res://scenes/targets/wine.tres" id="2_uewgn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uewgn"]
+radius = 11.1803
 
 [node name="Target" node_paths=PackedStringArray("_health_component") instance=ExtResource("1_fb7nd")]
 consumable = ExtResource("2_uewgn")
@@ -15,3 +18,6 @@ hframes = 8
 [node name="HealthComponent" parent="." index="1"]
 initial_health = 30.0
 max_health = 30.0
+
+[node name="CollisionShape2D" parent="." index="3"]
+shape = SubResource("CircleShape2D_uewgn")

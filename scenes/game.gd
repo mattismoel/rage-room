@@ -5,6 +5,7 @@ const GAME_OVER_SCENE = preload("uid://buermiek6qti3")
 
 @export var _game_ui: GameUI
 @export var _hand: Hand
+@export var _daycycle_component: DaycycleComponent
 
 @export var _currency_component: CurrencyComponent
 @export var _inventory_component: InventoryComponent
@@ -17,6 +18,7 @@ func _ready() -> void:
 	_player_health_component.health_changed.connect(_on_health_changed)
 	_player_health_component.health_depleted.connect(_on_player_health_depleted)
 
+	_daycycle_component.day_progressed.connect(_on_day_progressed)
 	_game_ui.inventory.set_equipment_entries(inventory_entries)
 	_game_ui.inventory.entry_bought.connect(_on_entry_bought)
 	_game_ui.inventory.entry_pressed.connect(_on_entry_pressed)
@@ -93,4 +95,8 @@ func _on_player_health_depleted() -> void:
 
 func game_over() -> void:
 	get_tree().change_scene_to_packed(GAME_OVER_SCENE)
+	pass
+
+func _on_day_progressed(days: int) -> void:
+	_game_ui.set_days(days)
 	pass
