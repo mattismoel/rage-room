@@ -78,8 +78,8 @@ tracks/2/keys = {
 "times": PackedFloat32Array(1.86667),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [],
-"method": &"start"
+"args": ["Game Over"],
+"method": &"write"
 }]
 }
 tracks/3/type = "method"
@@ -180,6 +180,7 @@ theme_override_fonts/font = ExtResource("5_v3hpu")
 theme_override_font_sizes/font_size = 16
 text = "Game Over"
 script = ExtResource("6_irg28")
+_wpm = 30.0
 metadata/_custom_type_script = "uid://qrki1au3pkxk"
 
 [node name="ButtonContainer" type="VBoxContainer" parent="Content/VBoxContainer"]
