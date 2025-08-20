@@ -95,7 +95,7 @@ _secs_per_day = 80.0
 follow_viewport_enabled = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="GameLayer" node_paths=PackedStringArray("_daycycle_component")]
-color = Color(0.221266, 0.221266, 0.305354, 1)
+color = Color(0.829478, 0.829478, 0.847891, 1)
 script = ExtResource("23_pl11u")
 _gradient = SubResource("Gradient_bhx41")
 _daycycle_component = NodePath("../../DaycycleComponent")
@@ -252,6 +252,6 @@ z_index = 2
 
 [node name="Audio" type="Node" parent="."]
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Audio"]
+[node name="Restaurant" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("28_sww3w")
 autoplay = true
